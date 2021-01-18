@@ -22,9 +22,9 @@ class TodoFragment : Fragment() {
         todoViewModel =
                 ViewModelProvider(this).get(TodoViewModel::class.java)
         val root = inflater.inflate(R.layout.todo_activity, container, false)
-        val textView: TextView = root.findViewById(R.id.todoActivity)
+//        val textView: TextView = root.findViewById(R.id.todoActivity)
         todoViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+//            textView.text = it
         })
         return root
     }
