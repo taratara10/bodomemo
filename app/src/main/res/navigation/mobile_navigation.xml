@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.example.bodomemo.ui.todo.TodoFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/todo_activity" />
+        tools:layout="@layout/fragment_todo" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

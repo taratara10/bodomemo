@@ -36,11 +36,11 @@
         app:layout_constraintVertical_bias=".5">
 
         <TextView
-            android:id="@+id/game_title"
+            android:id="@+id/tv_todo_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="game title"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
