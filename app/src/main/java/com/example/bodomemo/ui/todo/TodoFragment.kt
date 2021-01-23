@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.MainActivity
 import com.example.bodomemo.R
+import kotlinx.android.synthetic.main.fragment_create_todo.*
 import kotlinx.android.synthetic.main.fragment_todo.*
 
 class TodoFragment : Fragment() {
@@ -37,5 +39,13 @@ class TodoFragment : Fragment() {
         })
         return root
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        btn_create_todo.setOnClickListener {
+           findNavController().navigate(R.id.action_navigation_todo_to_navigation_create_todo)
+        }
     }
 }

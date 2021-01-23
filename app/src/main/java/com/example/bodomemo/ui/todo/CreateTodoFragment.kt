@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.notifications.NotificationsViewModel
-import kotlinx.android.synthetic.main.create_todo.*
+import kotlinx.android.synthetic.main.fragment_create_todo.*
 
 class CreateTodoFragment : Fragment() {
     private lateinit var todoViewModel: TodoViewModel
@@ -23,7 +24,7 @@ class CreateTodoFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.create_todo, container, false)
+        return inflater.inflate(R.layout.fragment_create_todo, container, false)
     }
 
     override fun onStart() {
@@ -31,6 +32,7 @@ class CreateTodoFragment : Fragment() {
 
         btn_save_title.setOnClickListener {
             saveTodo()
+
         }
     }
 
@@ -42,6 +44,8 @@ class CreateTodoFragment : Fragment() {
             val id = if (gameEntity != null) gameEntity?.id else null
             val todo = id?.let { GameEntity(id = it, title = et_game_title.text.toString(),todoCheck = 0) }
             if (todo != null) { todoViewModel.saveGame(todo) }
+
+            findNavController().navigate(R.id.action_navigation_create_todo_to_navigation_todo)
         }
     }
 
@@ -49,7 +53,7 @@ class CreateTodoFragment : Fragment() {
      * Validation of EditText 検証
      * */
     private fun validateFields(): Boolean {
-        if (et_game_title.text.isEmpty()) {
+        if (et_game_title.text?.isEmpty() == true) {
             til_game_title.error ="pleaseEnterTitle"
             et_game_title.requestFocus()
             return false
