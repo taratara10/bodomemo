@@ -28,7 +28,7 @@ class TodoAdapter (): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
 
     class TodoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity) {
-            itemView.tv_todo_title.text = "game.title"
+            itemView.tv_todo_title.text = game.title
         }
     }
 

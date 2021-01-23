@@ -13,7 +13,7 @@ import com.example.bodomemo.MainActivity
 import com.example.bodomemo.R
 import kotlinx.android.synthetic.main.fragment_todo.*
 
-class TodoFragment(context: Context) : Fragment() {
+class TodoFragment : Fragment() {
 
     private lateinit var todoViewModel: TodoViewModel
     private lateinit var todoAdapter: TodoAdapter
@@ -31,8 +31,9 @@ class TodoFragment(context: Context) : Fragment() {
 
         //Setting up RecyclerView
         //contextは何を設定すればいい？
-        rv_todo_list.layoutManager = LinearLayoutManager(context)
+        rv_todo_list?.layoutManager = LinearLayoutManager(activity)
         todoAdapter = TodoAdapter()
+        rv_todo_list?.adapter = todoAdapter
 
         todoViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             todoAdapter.setAllGames(it)
