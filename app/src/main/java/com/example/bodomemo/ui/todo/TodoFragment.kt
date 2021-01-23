@@ -1,5 +1,6 @@
 package com.example.bodomemo.ui.todo
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,7 @@ import com.example.bodomemo.MainActivity
 import com.example.bodomemo.R
 import kotlinx.android.synthetic.main.fragment_todo.*
 
-class TodoFragment : Fragment() {
+class TodoFragment(context: Context) : Fragment() {
 
     private lateinit var todoViewModel: TodoViewModel
     private lateinit var todoAdapter: TodoAdapter
@@ -30,7 +31,7 @@ class TodoFragment : Fragment() {
 
         //Setting up RecyclerView
         //contextは何を設定すればいい？
-        rv_todo_list.layoutManager = LinearLayoutManager( )
+        rv_todo_list.layoutManager = LinearLayoutManager(context)
         todoAdapter = TodoAdapter()
 
         todoViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
