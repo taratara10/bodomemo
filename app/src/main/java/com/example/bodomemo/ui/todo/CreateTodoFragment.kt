@@ -24,6 +24,7 @@ class CreateTodoFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
+        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
         return inflater.inflate(R.layout.fragment_create_todo, container, false)
     }
 
@@ -32,8 +33,8 @@ class CreateTodoFragment : Fragment() {
 
         btn_save_title.setOnClickListener {
             saveTodo()
-
         }
+
     }
 
     /**
@@ -41,8 +42,8 @@ class CreateTodoFragment : Fragment() {
      * */
     private fun saveTodo() {
         if (validateFields()) {
-            val id = if (gameEntity != null) gameEntity?.id else null
-            val todo = id?.let { GameEntity(id = it, title = et_game_title.text.toString(),todoCheck = 0) }
+            val id = if (gameEntity != null) gameEntity?.id else 0
+            val todo = id?.let { GameEntity(id = id, title = et_game_title.text.toString(),todoCheck = 0) }
             if (todo != null) { todoViewModel.saveGame(todo) }
 
             findNavController().navigate(R.id.action_navigation_create_todo_to_navigation_todo)
