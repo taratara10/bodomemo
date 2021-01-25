@@ -9,7 +9,7 @@
     android:layout_marginBottom="8dp">
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cb_todo_checked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/cb_todo_checked"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".5">
 
