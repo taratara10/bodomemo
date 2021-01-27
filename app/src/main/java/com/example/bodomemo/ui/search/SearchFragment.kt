@@ -1,4 +1,4 @@
-package com.example.bodomemo.ui.dashboard
+package com.example.bodomemo.ui.search
 
 import android.app.Activity
 import android.os.Bundle
@@ -10,11 +10,11 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bodomemo.R
-import kotlinx.android.synthetic.main.fragment_dashboard.view.*
+import kotlinx.android.synthetic.main.fragment_search.view.*
 
-class DashboardFragment : Fragment() {
+class SearchFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var dashboardViewModel: SearchViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -22,8 +22,8 @@ class DashboardFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+                ViewModelProvider(this).get(SearchViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_search, container, false)
 
     //* Set spinner layout
         val spinner = root.sp_filter_select

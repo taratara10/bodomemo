@@ -7,9 +7,9 @@
         android:title="todo" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_search"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:title="Search" />
 
     <item
         android:id="@+id/navigation_notifications"
