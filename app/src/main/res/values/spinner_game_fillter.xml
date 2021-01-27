@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sp_game_filter">
+        <item>すべて</item>
+        <item>お気に入り</item>
+        <item>評価が高い</item>
+        <item>遊んだ回数</item>
+        <item>まだ遊んでいない</item>
+    </string-array>
+</resources>

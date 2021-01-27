@@ -24,7 +24,6 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
         holder.bind(gameList[position], listener)
     }
 
-//    override fun getItemCount(): Int = gameList.size
     override fun getItemCount(): Int = gameList.size
 
     class TodoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
