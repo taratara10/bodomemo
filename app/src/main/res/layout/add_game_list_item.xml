@@ -29,5 +29,4 @@
             tools:text="ボードゲーム名" />
 
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
