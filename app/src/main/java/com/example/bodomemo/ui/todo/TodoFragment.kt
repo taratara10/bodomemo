@@ -1,27 +1,23 @@
 package com.example.bodomemo.ui.todo
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bodomemo.MainActivity
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
-import kotlinx.android.synthetic.main.fragment_create_todo.*
+import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_todo.*
 import kotlinx.android.synthetic.main.fragment_todo.view.*
 
 class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
 
-    private lateinit var todoViewModel: TodoViewModel
+    private lateinit var gameViewModel: GameViewModel
     private lateinit var todoAdapter: TodoAdapter
 
     override fun onCreateView(
@@ -39,8 +35,8 @@ class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
         todoAdapter = TodoAdapter(this)
         todo_list?.adapter = todoAdapter
 
-        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
-        todoViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
+        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             todoAdapter.setAllGames(it)
         })
         return root
@@ -55,7 +51,7 @@ class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
     }
 
     override fun onCheckBoxClicked(gameEntity: GameEntity) {
-        todoViewModel.updateGame(gameEntity)
+        gameViewModel.updateGame(gameEntity)
     }
 
     override fun onViewClicked(gameEntity: GameEntity) {

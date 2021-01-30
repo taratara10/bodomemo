@@ -7,7 +7,7 @@
     tools:context=".ui.search.SearchFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_game_search"
+        android:id="@+id/tl_search_game"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_game_search"
+            android:id="@+id/et_search_game"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ボードゲーム名"
@@ -31,11 +31,12 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tl_game_search"
+        app:layout_constraintTop_toBottomOf="@+id/tl_search_game"
         tools:listitem="すべて"
          />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search_game_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -43,7 +44,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/sp_filter_select"
-        tools:listitem="@layout/seatch_game_item"/>
+        tools:listitem="@layout/search_game_item"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

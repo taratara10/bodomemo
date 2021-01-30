@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
-import com.example.bodomemo.ui.notifications.NotificationsViewModel
+import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_create_todo.*
 
 class CreateTodoFragment : Fragment() {
-    private lateinit var todoViewModel: TodoViewModel
+    private lateinit var gameViewModel: GameViewModel
     var gameEntity: GameEntity? = null
 
     override fun onCreateView(
@@ -24,7 +22,7 @@ class CreateTodoFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
+        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         return inflater.inflate(R.layout.fragment_create_todo, container, false)
     }
 
@@ -44,7 +42,7 @@ class CreateTodoFragment : Fragment() {
         if (validateFields()) {
             val id = if (gameEntity != null) gameEntity?.id else 0
             val todo = id?.let { GameEntity(id = id, title = et_game_title.text.toString(),todoCheck = false) }
-            if (todo != null) { todoViewModel.saveGame(todo) }
+            if (todo != null) { gameViewModel.saveGame(todo) }
 
             findNavController().navigate(R.id.action_navigation_create_todo_to_navigation_todo)
         }
