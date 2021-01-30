@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.todo_list_item.view.*
 class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
 
     private var gameList :List<GameEntity> = arrayListOf()
+    private var todoGameList: List<GameEntity> = arrayListOf()
     private val listener: TodoEvents = todoEvents
 
 
@@ -21,10 +22,10 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
 
 
     override fun onBindViewHolder(holder: TodoAdapter.TodoViewHolder, position: Int) {
-        holder.bind(gameList[position], listener)
+        holder.bind(todoGameList[position], listener)
     }
 
-    override fun getItemCount(): Int = gameList.size
+    override fun getItemCount(): Int = todoGameList.size
 
     class TodoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: TodoEvents) {
@@ -42,6 +43,17 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
 
     fun setAllGames(gameItems: List<GameEntity>) {
         this.gameList = gameItems
+        this.todoGameList = gameItems
+        notifyDataSetChanged()
+    }
+
+    fun filterTodoGames() {
+        val todoGameList = arrayListOf<GameEntity>()
+        for (row in gameList) {
+            if (row.todoCheck) {
+                todoGameList.add(row)
+            }
+        }
         notifyDataSetChanged()
     }
 
