@@ -36,7 +36,7 @@ class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
         todo_list?.adapter = todoAdapter
 
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-        gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
+        gameViewModel.getTodoList().observe(viewLifecycleOwner, Observer {
             todoAdapter.setAllGames(it)
         })
         return root

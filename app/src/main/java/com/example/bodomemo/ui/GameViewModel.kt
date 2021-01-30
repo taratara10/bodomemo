@@ -9,6 +9,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository : GameRepository = GameRepository(application)
     private val allGameList : LiveData<List<GameEntity>> = repository.getAllGamaList()
+    private val todoList : LiveData<List<GameEntity>> = repository.getTodoList()
 
     fun saveGame(game : GameEntity){
         repository.saveGame(game)
@@ -26,9 +27,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         return allGameList
     }
 
+    fun getTodoList() : LiveData<List<GameEntity>> {
+        return todoList
+    }
 
-//    private val _text = MutableLiveData<String>().apply {
-//        value = "This is home Fragment"
-//    }
-//    val text: LiveData<String> = _text
 }

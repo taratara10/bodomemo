@@ -10,5 +10,5 @@ import androidx.room.PrimaryKey
 data class GameEntity(
         @PrimaryKey(autoGenerate = true) val id: Int,
         @ColumnInfo(name = "title") val title: String = "",
-        @ColumnInfo(name = "todo_check") var todoCheck: Boolean = false,
+        @ColumnInfo(name = "todo_check") var todoCheck: Boolean = true,
 )

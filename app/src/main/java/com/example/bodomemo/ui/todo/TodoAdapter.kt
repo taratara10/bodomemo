@@ -1,8 +1,11 @@
 package com.example.bodomemo.ui.todo
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
@@ -11,7 +14,7 @@ import kotlinx.android.synthetic.main.todo_list_item.view.*
 class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
 
     private var gameList :List<GameEntity> = arrayListOf()
-    private var todoGameList: List<GameEntity> = arrayListOf()
+    private var todoList: List<GameEntity> = arrayListOf()
     private val listener: TodoEvents = todoEvents
 
 
@@ -22,10 +25,10 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
 
 
     override fun onBindViewHolder(holder: TodoAdapter.TodoViewHolder, position: Int) {
-        holder.bind(todoGameList[position], listener)
+        holder.bind(todoList[position], listener)
     }
 
-    override fun getItemCount(): Int = todoGameList.size
+    override fun getItemCount(): Int = todoList.size
 
     class TodoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: TodoEvents) {
@@ -41,21 +44,13 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
         }
     }
 
+
     fun setAllGames(gameItems: List<GameEntity>) {
         this.gameList = gameItems
-        this.todoGameList = gameItems
+        this.todoList = gameItems
         notifyDataSetChanged()
     }
 
-    fun filterTodoGames() {
-        val todoGameList = arrayListOf<GameEntity>()
-        for (row in gameList) {
-            if (row.todoCheck) {
-                todoGameList.add(row)
-            }
-        }
-        notifyDataSetChanged()
-    }
 
     /**
      * RecycleView touch event callbacks
