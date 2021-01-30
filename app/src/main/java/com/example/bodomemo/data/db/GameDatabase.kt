@@ -15,12 +15,6 @@ abstract class GameDatabase: RoomDatabase() {
     companion object {
         private var INSTANCE: GameDatabase? = null
 
-//        val MIGRATION_1_2 = object : Migration(1, 2) {
-//            override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("CREATE TABLE IF NOT EXISTS `gameEntity` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `todo_check` BOOLEAN NOT NULL)")
-//            }
-//        }
-
         fun getInstance(context: Context): GameDatabase? {
             if (INSTANCE == null) {
                 synchronized(GameDatabase::class) {
