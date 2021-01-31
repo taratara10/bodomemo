@@ -12,6 +12,7 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
@@ -72,7 +73,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     }
 
     override fun onViewClicked(gameEntity: GameEntity) {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_navigation_search_to_navigation_games_detail)
     }
 
     interface CustomTextWatcher: TextWatcher {

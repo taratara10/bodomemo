@@ -43,7 +43,6 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     /**
      * Search Filter implementation
-     * performFiltering ->UIスレッドでの呼び出し
      * */
     override fun getFilter(): Filter {
         return object : Filter() {

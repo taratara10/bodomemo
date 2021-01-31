@@ -19,7 +19,11 @@
         android:id="@+id/navigation_search"
         android:name="com.example.bodomemo.ui.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_games_detail"
+            app:destination="@id/navigation_games_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -35,5 +39,15 @@
         <action
             android:id="@+id/action_navigation_create_todo_to_navigation_todo"
             app:destination="@id/navigation_todo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_games_detail"
+        android:name="com.example.bodomemo.ui.search.GamesDetailFragment"
+        android:label="GameDetailFragment"
+        tools:layout="@layout/fragment_games_detail">
+        <action
+            android:id="@+id/action_gameDetailFragment_to_navigation_search"
+            app:destination="@id/navigation_search" />
     </fragment>
 </navigation>
