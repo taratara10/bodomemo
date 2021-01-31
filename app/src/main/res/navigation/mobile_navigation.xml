@@ -21,8 +21,12 @@
         android:label="Search"
         tools:layout="@layout/fragment_search" >
         <action
-            android:id="@+id/action_navigation_search_to_navigation_games_detail"
-            app:destination="@id/navigation_games_detail" />
+            android:id="@+id/action_navigation_search_to_navigation_game_detail"
+            app:destination="@id/navigation_game_detail" />
+        <argument
+            android:name="gameId"
+            app:argType="integer"
+            android:defaultValue="0"/>
     </fragment>
 
     <fragment
@@ -42,10 +46,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_games_detail"
-        android:name="com.example.bodomemo.ui.search.GamesDetailFragment"
+        android:id="@+id/navigation_game_detail"
+        android:name="com.example.bodomemo.ui.search.GameDetailFragment"
         android:label="GameDetailFragment"
-        tools:layout="@layout/fragment_games_detail">
+        tools:layout="@layout/fragment_game_detail">
         <action
             android:id="@+id/action_gameDetailFragment_to_navigation_search"
             app:destination="@id/navigation_search" />

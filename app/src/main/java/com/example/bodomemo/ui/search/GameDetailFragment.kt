@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.bodomemo.R
 import com.example.bodomemo.ui.GameViewModel
 
-class GamesDetailFragment: Fragment() {
+class GameDetailFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
 
     override fun onCreateView(
@@ -19,7 +19,7 @@ class GamesDetailFragment: Fragment() {
     ): View? {
 
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_games_detail, container, false)
+        return inflater.inflate(R.layout.fragment_game_detail, container, false)
     }
 
 }

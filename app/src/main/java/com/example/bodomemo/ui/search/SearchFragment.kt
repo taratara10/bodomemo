@@ -72,8 +72,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         return spinner
     }
 
-    override fun onViewClicked(gameEntity: GameEntity) {
-        findNavController().navigate(R.id.action_navigation_search_to_navigation_games_detail)
+    override fun onViewClicked(gameId: Int) {
+        findNavController().navigate(R.id.action_navigation_search_to_navigation_game_detail)
     }
 
     interface CustomTextWatcher: TextWatcher {

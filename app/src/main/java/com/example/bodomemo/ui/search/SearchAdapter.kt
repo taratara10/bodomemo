@@ -36,7 +36,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
             itemView.search_game_title.text = game.title
 
             itemView.search_game_title.setOnClickListener {
-                listener.onViewClicked(game)
+                listener.onViewClicked(game.id)
             }
         }
     }
@@ -83,7 +83,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
      * RecycleView touch event callbacks
      * */
     interface DetailsEvents {
-        fun onViewClicked(gameEntity: GameEntity)
+        fun onViewClicked(gameId: Int)
     }
 
 }
