@@ -73,7 +73,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     }
 
     override fun onViewClicked(gameId: Int) {
-        findNavController().navigate(R.id.action_navigation_search_to_navigation_game_detail)
+        val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
+        findNavController().navigate(action)
     }
 
     interface CustomTextWatcher: TextWatcher {

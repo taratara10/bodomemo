@@ -31,4 +31,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         return todoList
     }
 
+    fun getGameById(gameId: Int) : LiveData<GameEntity>{
+        return repository.getGameById(gameId)
+    }
+
 }

@@ -25,8 +25,7 @@
             app:destination="@id/navigation_game_detail" />
         <argument
             android:name="gameId"
-            app:argType="integer"
-            android:defaultValue="0"/>
+            app:argType="integer"/>
     </fragment>
 
     <fragment
@@ -53,5 +52,8 @@
         <action
             android:id="@+id/action_gameDetailFragment_to_navigation_search"
             app:destination="@id/navigation_search" />
+        <argument
+            android:name="gameId"
+            app:argType="integer"/>
     </fragment>
 </navigation>

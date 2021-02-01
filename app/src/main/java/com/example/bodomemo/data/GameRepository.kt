@@ -21,6 +21,7 @@ class GameRepository(application: Application) {
         gameDAO = database!!.gameDao()
         allGames = gameDAO.getAllGameList()
         todoList = gameDAO.getTodoList()
+
     }
 
     fun saveGame(game: GameEntity) = runBlocking {
@@ -48,4 +49,10 @@ class GameRepository(application: Application) {
     fun getTodoList():  LiveData<List<GameEntity>> {
         return todoList
     }
+
+    fun getGameById(gameId:Int):  LiveData<GameEntity> {
+        return gameDAO.getGameById(gameId)
+    }
+
+
 }
