@@ -4,8 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
@@ -13,7 +11,6 @@ import kotlinx.android.synthetic.main.todo_list_item.view.*
 
 class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
 
-    private var gameList :List<GameEntity> = arrayListOf()
     private var todoList: List<GameEntity> = arrayListOf()
     private val listener: TodoEvents = todoEvents
 
@@ -46,7 +43,6 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
 
 
     fun setAllGames(gameItems: List<GameEntity>) {
-        this.gameList = gameItems
         this.todoList = gameItems
         notifyDataSetChanged()
     }

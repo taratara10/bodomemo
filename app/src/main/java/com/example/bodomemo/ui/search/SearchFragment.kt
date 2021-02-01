@@ -15,12 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
-import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
-import com.example.bodomemo.ui.todo.TodoAdapter
 import kotlinx.android.synthetic.main.fragment_search.view.*
-import kotlinx.android.synthetic.main.fragment_todo.view.*
-import kotlinx.android.synthetic.main.search_game_item.view.*
 
 class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
@@ -32,18 +28,14 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        gameViewModel =
-                ViewModelProvider(this).get(GameViewModel::class.java)
+        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_search, container, false)
 
         //Setting up RecyclerView
         val search_game_list = root.rv_search_game_list
-
         search_game_list?.layoutManager = LinearLayoutManager(activity)
-        searchAdapter = SearchAdapter(this)
-        search_game_list?.adapter = searchAdapter
+        search_game_list?.adapter = SearchAdapter(this)
 
-        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             searchAdapter.setAllGames(it)
         })
@@ -53,7 +45,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         val spinnerItem = resources.getStringArray(R.array.sp_game_filter)
         activity?.let { setSpinnerItem(it, spinner, spinnerItem) }
 
-        val et_search_game = root.et_search_game
+        val et_search_game = root.et_game_detail_title
         et_search_game.addTextChangedListener(object: CustomTextWatcher{
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 searchAdapter.filter.filter(s)
@@ -73,6 +65,10 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     }
 
     override fun onViewClicked(gameId: Int) {
+<<<<<<< HEAD
+=======
+        val gameId = gameId
+>>>>>>> refs/remotes/origin/master
         val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
         findNavController().navigate(action)
     }
