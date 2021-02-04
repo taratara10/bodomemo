@@ -49,9 +49,9 @@
 
     <fragment
         android:id="@+id/navigation_game_detail"
-        android:name="com.example.bodomemo.ui.search.GameDetailFragment"
+        android:name="com.example.bodomemo.ui.search.GameEditFragment"
         android:label="GameDetailFragment"
-        tools:layout="@layout/fragment_game_detail">
+        tools:layout="@layout/fragment_game_edit">
         <action
             android:id="@+id/action_gameDetailFragment_to_navigation_search"
             app:destination="@id/navigation_search" />

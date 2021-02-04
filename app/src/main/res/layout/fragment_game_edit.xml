@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_game_detail_title"
+            android:id="@+id/et_edit_game_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ボードゲーム名"
@@ -38,8 +38,10 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="24dp" />
 
+
+    <!--  Rating  -->
     <TextView
-        android:id="@+id/tv_rating"
+        android:id="@+id/tv_rating_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -47,9 +49,8 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tl_game_detail_title" />
-
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/rb_edit_rating"
         style="?android:attr/ratingBarStyleIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,11 +59,14 @@
         android:layout_marginStart="32dp"
         android:isIndicator="true"
         android:numStars="5"
-        android:stepSize="0.5"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_rating"
-        app:layout_constraintStart_toEndOf="@+id/tv_rating"
-        app:layout_constraintTop_toTopOf="@+id/tv_rating" />
+        android:stepSize="1"
+        android:rating="0"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_rating_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_rating_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_rating_title" />
 
+
+    <!--  Favorite  -->
     <TextView
         android:id="@+id/tv_favorite"
         android:layout_width="wrap_content"
@@ -70,10 +74,9 @@
         android:layout_marginTop="32dp"
         android:text="お気に入り"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_rating" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tv_rating_title" />
     <CheckBox
-        android:id="@+id/star"
+        android:id="@+id/cb_edit_favorite_checked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -82,8 +85,10 @@
         app:layout_constraintStart_toEndOf="@+id/tv_favorite"
         app:layout_constraintTop_toTopOf="@+id/tv_favorite" />
 
+
+    <!--  Owned  -->
     <TextView
-        android:id="@+id/tv_owned"
+        android:id="@+id/tv_owned_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -91,7 +96,17 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_favorite" />
+    <CheckBox
+        android:id="@+id/cb_edit_owned_checked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_owned_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_owned_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_owned_title" />
 
+
+    <!-- Play time -->
     <TextView
         android:id="@+id/tv_play_time_title"
         android:layout_width="wrap_content"
@@ -100,10 +115,20 @@
         android:text="遊んだ回数"
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_owned" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tv_owned_title" />
     <TextView
-        android:id="@+id/tv_play_time_title2"
+        android:id="@+id/tv_play_time_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="0回"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_play_time_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_play_time_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_play_time_title" />
+
+    <!--  To do  -->
+    <TextView
+        android:id="@+id/tv_edit_todo_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -112,34 +137,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_play_time_title" />
-
     <CheckBox
-        android:id="@+id/cb_owned"
+        android:id="@+id/cb_edit_todo_checked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_owned"
-        app:layout_constraintStart_toEndOf="@+id/tv_owned"
-        app:layout_constraintTop_toTopOf="@+id/tv_owned" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_edit_todo_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_edit_todo_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_edit_todo_title" />
 
-    <CheckBox
-        android:id="@+id/cb_owned2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_play_time_title2"
-        app:layout_constraintStart_toEndOf="@+id/tv_play_time_title2"
-        app:layout_constraintTop_toTopOf="@+id/tv_play_time_title2" />
 
-    <TextView
-        android:id="@+id/tv_play_time_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="0回"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_play_time_title"
-        app:layout_constraintStart_toEndOf="@+id/tv_play_time_title"
-        app:layout_constraintTop_toTopOf="@+id/tv_play_time_title" />
 
 <!--    Toast処理を実装してくれ-->
 
