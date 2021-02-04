@@ -15,6 +15,7 @@ class GameRepository(application: Application) {
     private val allGames:LiveData<List<GameEntity>>
     private val todoList:LiveData<List<GameEntity>>
 
+
     init {
     // Create DB Instance
         val database = GameDatabase.getInstance(application.applicationContext)
@@ -50,9 +51,8 @@ class GameRepository(application: Application) {
         return todoList
     }
 
-    fun getGameById(gameId:Int):  LiveData<GameEntity> {
-        return gameDAO.getGameById(gameId)
+    fun getGameById(gameId:Int): GameEntity  = runBlocking{
+         gameDAO.getGameById(gameId)
     }
-
 
 }

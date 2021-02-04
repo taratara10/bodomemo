@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_todo_to_navigation_create_todo"
             app:destination="@id/navigation_create_todo" />
+        <action
+            android:id="@+id/action_navigation_todo_to_navigation_game_detail"
+            app:destination="@id/navigation_game_detail" />
     </fragment>
 
     <fragment

@@ -34,7 +34,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         //Setting up RecyclerView
         val search_game_list = root.rv_search_game_list
         search_game_list?.layoutManager = LinearLayoutManager(activity)
-        search_game_list?.adapter = SearchAdapter(this)
+        searchAdapter =  SearchAdapter(this)
+        search_game_list?.adapter = searchAdapter
 
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             searchAdapter.setAllGames(it)
@@ -65,10 +66,6 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     }
 
     override fun onViewClicked(gameId: Int) {
-<<<<<<< HEAD
-=======
-        val gameId = gameId
->>>>>>> refs/remotes/origin/master
         val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
         findNavController().navigate(action)
     }
