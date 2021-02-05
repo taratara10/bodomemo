@@ -41,7 +41,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
             searchAdapter.setAllGames(it)
         })
 
-    //* Set spinner layout
+    // Set spinner layout
         val spinner = root.sp_filter_select
         val spinnerItem = resources.getStringArray(R.array.sp_game_filter)
         activity?.let { setSpinnerItem(it, spinner, spinnerItem) }

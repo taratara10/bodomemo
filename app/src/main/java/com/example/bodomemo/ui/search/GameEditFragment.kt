@@ -1,6 +1,8 @@
 package com.example.bodomemo.ui.search
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,19 +30,54 @@ class GameEditFragment: Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_game_edit, container, false)
-        gameTitle = root.et_edit_game_title.text.toString()
+        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
+        val gameTitleEditText = root.et_edit_game_title
+        val todoCheckBox = root.cb_edit_todo_checked
+        val favoriteCheckBox = root.cb_edit_favorite_checked
+        val ownedCheckBox = root.cb_edit_owned_checked
+        val ratingBar = root.rb_edit_rating
 
 //       * set content
         selectedGame = gameViewModel.getGameById(args.gameId)
-        root.et_edit_game_title.setText(selectedGame.title)
-        root.cb_edit_todo_checked.isChecked = selectedGame.todoCheck
-        root.cb_edit_favorite_checked.isChecked = selectedGame.favoriteCheck
-        root.cb_edit_owned_checked.isChecked = selectedGame.ownedCheck
+        gameTitleEditText.setText(selectedGame.title)
+        todoCheckBox.isChecked = selectedGame.todoCheck
+        favoriteCheckBox.isChecked = selectedGame.favoriteCheck
+        ownedCheckBox.isChecked = selectedGame.ownedCheck
+        ratingBar.rating = selectedGame.rating.toFloat()
 
+        gameTitle = gameTitleEditText.text.toString()
 
-        root.rb_edit_rating.setOnRatingBarChangeListener{ ratingBar: RatingBar, fl: Float, b: Boolean ->
+        ratingBar.setOnRatingBarChangeListener { r, rating, fromUser ->
+            selectedGame.rating = rating.toInt()
+            updateGame(selectedGame)            
+        }
+
+        //editText
+        gameTitleEditText.addTextChangedListener(object: CustomTextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                selectedGame.title = s.toString()
+                updateGame(selectedGame)
+            }
+        })
+
+        //favorite
+        favoriteCheckBox.setOnClickListener {
+            selectedGame.favoriteCheck = favoriteCheckBox.isChecked
+            updateGame(selectedGame)
+        }
+
+        //to do
+        todoCheckBox.setOnClickListener {
+            selectedGame.todoCheck = todoCheckBox.isChecked
+            updateGame(selectedGame)
+        }
+
+        //owned
+        ownedCheckBox.setOnClickListener {
+            selectedGame.ownedCheck = ownedCheckBox.isChecked
+            updateGame(selectedGame)
         }
 
 
@@ -48,11 +85,12 @@ class GameEditFragment: Fragment() {
         return root
     }
 
-    fun onCheckBoxClicked(gameEntity: GameEntity) {
-        if (gameTitle.trim().isNotEmpty())
-        gameViewModel.updateGame(gameEntity)
+    fun updateGame(gameEntity: GameEntity) {
+        if (gameTitle.trim().isNotEmpty()) gameViewModel.updateGame(gameEntity)
     }
 
+    interface CustomTextWatcher: TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
 }
-
-//gameTitle onCreateのスコープ外で参照するにはどうする？

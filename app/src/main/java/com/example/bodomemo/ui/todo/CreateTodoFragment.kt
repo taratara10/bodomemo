@@ -41,7 +41,7 @@ class CreateTodoFragment : Fragment() {
     private fun saveTodo() {
         if (validateFields()) {
             val id = if (gameEntity != null) gameEntity?.id else 0
-            val todo = id?.let { GameEntity(id = id, title = et_game_title.text.toString(),todoCheck = false) }
+            val todo = id?.let { GameEntity(id = id, title = et_game_title.text.toString(), todoCheck = false) }
             if (todo != null) { gameViewModel.saveGame(todo) }
 
             findNavController().navigate(R.id.action_navigation_create_todo_to_navigation_todo)
