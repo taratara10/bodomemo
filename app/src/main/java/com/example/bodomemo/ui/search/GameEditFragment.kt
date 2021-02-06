@@ -3,15 +3,15 @@ package com.example.bodomemo.ui.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.EditText
 import android.widget.RatingBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.bodomemo.R
+import com.example.bodomemo.R.id.toolbar_action_delete
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_game_edit.view.*
@@ -29,6 +29,8 @@ class GameEditFragment: Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
+        setHasOptionsMenu(true)
 
         val root = inflater.inflate(R.layout.fragment_game_edit, container, false)
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
@@ -92,5 +94,24 @@ class GameEditFragment: Fragment() {
     interface CustomTextWatcher: TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.game_detail_toolbar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            toolbar_action_delete -> {
+                gameViewModel.deleteGame(selectedGame)
+//                Toast.makeText( activity, "Delete!", Toast.LENGTH_SHORT).show()
+                //todo
+                //navigation back search & Toast
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 }
