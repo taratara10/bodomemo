@@ -18,7 +18,7 @@ interface GameDAO {
     @Query("SELECT * FROM gameEntity ORDER BY id DESC")
     abstract fun getAllGameList(): LiveData<List<GameEntity>>
 
-    @Query("SELECT * FROM gameEntity WHERE todo_check = 0")
+    @Query("SELECT * FROM gameEntity WHERE todo_check = 1")
     abstract fun getTodoList(): LiveData<List<GameEntity>>
 
     @Query("SELECT * FROM gameEntity WHERE id =:gameId")

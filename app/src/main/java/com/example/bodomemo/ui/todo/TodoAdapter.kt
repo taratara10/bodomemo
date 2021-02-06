@@ -30,11 +30,11 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
     class TodoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: TodoEvents) {
             itemView.tv_todo_title.text = game.title
-            itemView.cb_todo_checked.isChecked = game.todoCheck
+            itemView.cb_todo_checked.isChecked = !game.todoCheck
 
 
             itemView.cb_todo_checked.setOnClickListener {
-                val checked = itemView.cb_todo_checked.isChecked
+                val checked:Boolean = !itemView.cb_todo_checked.isChecked
                 game.todoCheck = checked
                 listener.onCheckBoxClicked(game)
             }
