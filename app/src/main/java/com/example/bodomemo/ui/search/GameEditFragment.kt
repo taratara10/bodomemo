@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.bodomemo.R
+import com.example.bodomemo.R.id.month_navigation_fragment_toggle
 import com.example.bodomemo.R.id.toolbar_action_delete
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
@@ -101,17 +102,16 @@ class GameEditFragment: Fragment() {
         inflater.inflate(R.menu.game_detail_toolbar, menu)
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             toolbar_action_delete -> {
                 gameViewModel.deleteGame(selectedGame)
-//                Toast.makeText( activity, "Delete!", Toast.LENGTH_SHORT).show()
-                //todo
-                //navigation back search & Toast
+                parentFragmentManager.popBackStack()
+                Toast.makeText(activity,"削除しました", Toast.LENGTH_SHORT).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-
     }
 }
