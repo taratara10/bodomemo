@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.ui.GameViewModel
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
@@ -41,7 +42,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
             searchAdapter.setAllGames(it)
         })
 
-    // Set spinner layout
+        // Set spinner layout
         val spinner = root.sp_filter_select
         val spinnerItem = resources.getStringArray(R.array.sp_game_filter)
         activity?.let { setSpinnerItem(it, spinner, spinnerItem) }
@@ -52,6 +53,10 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
                 searchAdapter.filter.filter(s)
             }
         })
+
+        root.btn_create_new_game.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_search_to_navigation_create_todo)
+        }
 
 
         return root

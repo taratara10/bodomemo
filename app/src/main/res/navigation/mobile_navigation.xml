@@ -10,12 +10,7 @@
         android:name="com.example.bodomemo.ui.todo.TodoFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_todo" >
-        <action
-            android:id="@+id/action_navigation_todo_to_navigation_create_todo"
-            app:destination="@id/navigation_create_todo" />
-        <action
-            android:id="@+id/action_navigation_todo_to_navigation_game_detail"
-            app:destination="@id/navigation_game_detail" />
+
     </fragment>
 
     <fragment
@@ -26,6 +21,9 @@
         <action
             android:id="@+id/action_navigation_search_to_navigation_game_detail"
             app:destination="@id/navigation_game_detail" />
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_create_todo"
+            app:destination="@id/navigation_create_game" />
         <argument
             android:name="gameId"
             app:argType="integer"/>
@@ -38,13 +36,16 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
-        android:id="@+id/navigation_create_todo"
-        android:name="com.example.bodomemo.ui.todo.CreateTodoFragment"
+        android:id="@+id/navigation_create_game"
+        android:name="com.example.bodomemo.ui.search.CreateNewGameFragment"
         android:label="Create todo"
-        tools:layout="@layout/fragment_create_todo">
+        tools:layout="@layout/fragment_create_new_game">
         <action
-            android:id="@+id/action_navigation_create_todo_to_navigation_todo"
-            app:destination="@id/navigation_todo" />
+            android:id="@+id/action_navigation_create_game_to_navigation_game_detail"
+            app:destination="@id/navigation_game_detail" />
+        <argument
+            android:name="gameId"
+            app:argType="integer"/>
     </fragment>
 
     <fragment

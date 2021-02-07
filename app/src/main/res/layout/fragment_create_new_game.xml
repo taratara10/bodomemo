@@ -8,7 +8,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_game_title"
+        android:id="@+id/til_new_game_title"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_game_title"
+            android:id="@+id/et_new_game_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="ボードゲーム名"
@@ -33,24 +33,23 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_save_title"
+        android:id="@+id/btn_save_game_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="新しく追加"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/til_game_title" />
+        app:layout_constraintTop_toBottomOf="@+id/til_new_game_title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_game_list"
+        android:id="@+id/rv_new_game_search_game_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/btn_save_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_already_created"
         tools:listitem="@layout/add_game_list_item" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -66,5 +65,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="24dp" />
+
+    <TextView
+        android:id="@+id/tv_already_created"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="既にあるゲーム"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_game_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

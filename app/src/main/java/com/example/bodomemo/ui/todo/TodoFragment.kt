@@ -43,12 +43,12 @@ class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        btn_create_todo.setOnClickListener {
-           findNavController().navigate(R.id.action_navigation_todo_to_navigation_create_todo)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        btn_create_todo.setOnClickListener {
+//           findNavController().navigate(R.id.action_navigation_todo_to_navigation_create_todo)
+//        }
+//    }
 
     override fun onCheckBoxClicked(gameEntity: GameEntity) {
         gameViewModel.updateGame(gameEntity)
