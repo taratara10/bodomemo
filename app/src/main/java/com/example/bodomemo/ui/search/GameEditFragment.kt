@@ -18,7 +18,9 @@ class GameEditFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedGame:GameEntity
     private lateinit var gameTitle: String
-    private val args: SearchFragmentArgs by navArgs()
+    private val searchFragmentArgs: SearchFragmentArgs by navArgs()
+    private val createNewGameFragmentArgs: CreateNewGameFragmentArgs by navArgs()
+
 
 
     override fun onCreateView(
@@ -39,7 +41,9 @@ class GameEditFragment: Fragment() {
         val ratingBar = root.rb_edit_rating
 
 //       * set content
-        selectedGame = gameViewModel.getGameById(args.gameId?.toInt())
+
+        val selectedGameId = searchFragmentArgs.gameId?.toInt() ?: createNewGameFragmentArgs.createdNewId?.toInt() ?:throw Error("Game must have a title")
+        selectedGame = gameViewModel.getGameById(selectedGameId)
         gameTitleEditText.setText(selectedGame.title)
         todoCheckBox.isChecked = selectedGame.todoCheck
         favoriteCheckBox.isChecked = selectedGame.favoriteCheck

@@ -10,9 +10,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val repository : GameRepository = GameRepository(application)
     private val allGameList : LiveData<List<GameEntity>> = repository.getAllGamaList()
     private val todoList : LiveData<List<GameEntity>> = repository.getTodoList()
+    var insertedGameId: Long = 0
 
     fun saveGame(game : GameEntity){
-        repository.saveGame(game)
+        insertedGameId = repository.saveGame(game)
     }
 
     fun updateGame(game : GameEntity){

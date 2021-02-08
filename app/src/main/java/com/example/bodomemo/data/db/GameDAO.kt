@@ -7,7 +7,7 @@ import androidx.room.*
 interface GameDAO {
 
     @Insert
-    suspend fun saveGame(gameEntity: GameEntity)
+    suspend fun saveGame(gameEntity: GameEntity): Long
 
     @Delete
     suspend fun deleteGame(gameEntity: GameEntity)

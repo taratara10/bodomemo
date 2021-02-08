@@ -25,10 +25,8 @@ class GameRepository(application: Application) {
 
     }
 
-    fun saveGame(game: GameEntity) = runBlocking {
-        this.launch(Dispatchers.IO) {
-            gameDAO.saveGame(game)
-        }
+    fun saveGame(game: GameEntity): Long = runBlocking {
+         gameDAO.saveGame(game)
     }
 
     fun deleteGame(game: GameEntity) = runBlocking {

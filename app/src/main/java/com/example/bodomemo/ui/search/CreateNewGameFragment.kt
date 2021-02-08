@@ -54,12 +54,13 @@ class CreateNewGameFragment : Fragment() {
      * */
     private fun saveTodo() {
         if (validateFields()) {
-            val id = if (gameEntity != null) gameEntity?.id else 0
-            val todo = id?.let { GameEntity(id = id, title = et_new_game_title.text.toString()) }
-            if (todo != null) { gameViewModel.saveGame(todo) }
+            //一旦id = 0 でautoIncrementで設定
+            val todo =  GameEntity(id = 0, title = et_new_game_title.text.toString())
+            gameViewModel.saveGame(todo)
+            val insertedGameId = gameViewModel.insertedGameId.toString()
 
-//            val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(id!!)
-//            findNavController().navigate(action)
+            val action = CreateNewGameFragmentDirections.actionNavigationCreateGameToNavigationGameDetail(insertedGameId)
+            findNavController().navigate(action)
         }
     }
 
