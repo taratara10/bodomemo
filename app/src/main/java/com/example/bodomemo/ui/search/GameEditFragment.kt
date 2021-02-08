@@ -4,19 +4,15 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import android.widget.EditText
-import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.bodomemo.R
-import com.example.bodomemo.R.id.month_navigation_fragment_toggle
 import com.example.bodomemo.R.id.toolbar_action_delete
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_game_edit.view.*
-import kotlinx.android.synthetic.main.todo_list_item.view.*
 
 class GameEditFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
@@ -43,7 +39,7 @@ class GameEditFragment: Fragment() {
         val ratingBar = root.rb_edit_rating
 
 //       * set content
-        selectedGame = gameViewModel.getGameById(args.gameId)
+        selectedGame = gameViewModel.getGameById(args.gameId?.toInt())
         gameTitleEditText.setText(selectedGame.title)
         todoCheckBox.isChecked = selectedGame.todoCheck
         favoriteCheckBox.isChecked = selectedGame.favoriteCheck

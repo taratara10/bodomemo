@@ -51,7 +51,7 @@ class GameRepository(application: Application) {
         return todoList
     }
 
-    fun getGameById(gameId:Int): GameEntity  = runBlocking{
+    fun getGameById(gameId:Int?): GameEntity  = runBlocking{
          gameDAO.getGameById(gameId)
     }
 

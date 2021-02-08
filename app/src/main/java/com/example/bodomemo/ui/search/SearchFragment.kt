@@ -70,7 +70,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         return spinner
     }
 
-    override fun onViewClicked(gameId: Int) {
+    override fun onViewClicked(gameId: String?) {
         val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
         findNavController().navigate(action)
     }

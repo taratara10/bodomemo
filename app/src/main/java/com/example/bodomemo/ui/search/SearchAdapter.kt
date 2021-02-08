@@ -36,7 +36,8 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
             itemView.search_game_title.text = game.title
 
             itemView.search_game_title.setOnClickListener {
-                listener.onViewClicked(game.id)
+                //safeArgs Intがnullサポートしてないので、stringで渡す
+                listener.onViewClicked(game.id.toString())
             }
         }
     }
@@ -83,7 +84,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
      * RecycleView touch event callbacks
      * */
     interface DetailsEvents {
-        fun onViewClicked(gameId: Int)
+        fun onViewClicked(gameId: String?)
     }
 
 }
