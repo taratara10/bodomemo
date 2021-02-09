@@ -44,7 +44,8 @@
         tools:layout="@layout/fragment_create_new_game">
         <action
             android:id="@+id/action_navigation_create_game_to_navigation_game_detail"
-            app:destination="@id/navigation_game_detail" />
+            app:destination="@id/navigation_game_detail"
+            app:popUpTo="@id/navigation_search"/>
         <argument
             android:name="createdNewId"
             android:defaultValue="@null"

@@ -39,7 +39,9 @@ class GameDetailFragment: Fragment() {
         val favoriteCheckBox = root.cb_edit_favorite_checked
         val ownedCheckBox = root.cb_edit_owned_checked
         val ratingBar = root.rb_edit_rating
+
         //searchFragment、createFragmentのうちnullでないほうの値をセット
+        //todo error処理
         val selectedGameId = searchFragmentArgs.gameId?.toInt() ?: createNewGameFragmentArgs.createdNewId?.toInt()
 
         //  set content
