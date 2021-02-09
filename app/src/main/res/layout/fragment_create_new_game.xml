@@ -23,7 +23,7 @@
             android:id="@+id/et_new_game_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="ボードゲーム名"
+            android:hint="新しいボードゲーム名"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
