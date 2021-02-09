@@ -1,6 +1,8 @@
 package com.example.bodomemo.ui.search
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_search.view.*
 class CreateNewGameFragment : Fragment() {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var checkGameAdapter: CheckGameAdapter
-    var gameEntity: GameEntity? = null
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -39,6 +40,14 @@ class CreateNewGameFragment : Fragment() {
             checkGameAdapter.setAllGames(it)
         })
 
+        //EditText filter recycleView item
+        val et_search_title = root.et_new_game_title
+        et_search_title.addTextChangedListener(object : CustomTextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checkGameAdapter.filter.filter(s)
+            }
+        })
+
         return root
     }
 
@@ -55,10 +64,11 @@ class CreateNewGameFragment : Fragment() {
     private fun saveTodo() {
         if (validateFields()) {
             //一旦id = 0 でautoIncrementで設定
-            val todo =  GameEntity(id = 0, title = et_new_game_title.text.toString())
+            val todo = GameEntity(id = 0, title = et_new_game_title.text.toString())
             gameViewModel.saveGame(todo)
-            val insertedGameId = gameViewModel.insertedGameId.toString()
 
+            //@Insert したidの返り値を渡す
+            val insertedGameId = gameViewModel.insertedGameId.toString()
             val action = CreateNewGameFragmentDirections.actionNavigationCreateGameToNavigationGameDetail(insertedGameId)
             findNavController().navigate(action)
         }
@@ -69,10 +79,15 @@ class CreateNewGameFragment : Fragment() {
      * */
     private fun validateFields(): Boolean {
         if (et_new_game_title.text?.isEmpty() == true) {
-            til_new_game_title.error ="pleaseEnterTitle"
+            til_new_game_title.error = "pleaseEnterTitle"
             et_new_game_title.requestFocus()
             return false
         }
         return true
+    }
+
+    interface CustomTextWatcher : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun afterTextChanged(s: Editable?) {}
     }
 }

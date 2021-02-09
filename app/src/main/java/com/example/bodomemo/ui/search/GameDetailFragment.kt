@@ -14,7 +14,7 @@ import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_game_edit.view.*
 
-class GameEditFragment: Fragment() {
+class GameDetailFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedGame:GameEntity
     private lateinit var gameTitle: String
@@ -39,10 +39,10 @@ class GameEditFragment: Fragment() {
         val favoriteCheckBox = root.cb_edit_favorite_checked
         val ownedCheckBox = root.cb_edit_owned_checked
         val ratingBar = root.rb_edit_rating
+        //searchFragment、createFragmentのうちnullでないほうの値をセット
+        val selectedGameId = searchFragmentArgs.gameId?.toInt() ?: createNewGameFragmentArgs.createdNewId?.toInt()
 
-//       * set content
-
-        val selectedGameId = searchFragmentArgs.gameId?.toInt() ?: createNewGameFragmentArgs.createdNewId?.toInt() ?:throw Error("Game must have a title")
+        //  set content
         selectedGame = gameViewModel.getGameById(selectedGameId)
         gameTitleEditText.setText(selectedGame.title)
         todoCheckBox.isChecked = selectedGame.todoCheck
