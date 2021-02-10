@@ -5,6 +5,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_todo">
 
+<!--  To do  -->
     <fragment
         android:id="@+id/navigation_todo"
         android:name="com.example.bodomemo.ui.todo.TodoFragment"
@@ -13,6 +14,7 @@
 
     </fragment>
 
+<!--  Search  -->
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.bodomemo.ui.search.SearchFragment"
@@ -31,12 +33,14 @@
             app:argType="string"/>
     </fragment>
 
+<!--  3rd  -->
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.bodomemo.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
+<!--  create to do  -->
     <fragment
         android:id="@+id/navigation_create_game"
         android:name="com.example.bodomemo.ui.search.CreateNewGameFragment"
@@ -53,6 +57,7 @@
             app:argType="string"/>
     </fragment>
 
+<!--  game detail  -->
     <fragment
         android:id="@+id/navigation_game_detail"
         android:name="com.example.bodomemo.ui.search.GameDetailFragment"
