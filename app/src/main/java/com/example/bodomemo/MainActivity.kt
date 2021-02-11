@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_todo, R.id.navigation_search, R.id.navigation_notifications))
+
+        if (onBackPressedDispatcher.hasEnabledCallbacks()) {
+            onBackPressedDispatcher.onBackPressed()
+        }
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }

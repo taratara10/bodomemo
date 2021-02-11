@@ -3,10 +3,14 @@ package com.example.bodomemo.ui.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bodomemo.R
 import com.example.bodomemo.R.id.toolbar_action_delete
@@ -85,9 +89,12 @@ class GameDetailFragment: Fragment() {
             updateGame(selectedGame)
         }
 
+        //popBackした際にupdate これをしないと、SearchFragmentのrecycleViewが更新されない
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            gameViewModel.updateGame(selectedGame)
+        }
 
-
-        return root
+            return root
     }
 
     fun updateGame(gameEntity: GameEntity) {
