@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
@@ -46,7 +47,11 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         val spinner = root.sp_filter_select
         val spinnerItem = resources.getStringArray(R.array.sp_game_filter)
         activity?.let { setSpinnerItem(it, spinner, spinnerItem) }
+        //setOnClickListner
+        spinner.onItemSelectedListener =spinnerListener
 
+
+        //検索した際にfilter
         val et_search_game = root.et_game_detail_title
         et_search_game.addTextChangedListener(object: CustomTextWatcher{
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -54,10 +59,10 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
             }
         })
 
+        //fab_Btn -> createNewGameFragment
         root.btn_create_new_game.setOnClickListener{
             findNavController().navigate(R.id.action_navigation_search_to_navigation_create_todo)
         }
-
 
         return root
     }
@@ -79,4 +84,24 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun afterTextChanged(s: Editable?) {}
     }
+
+
+    //Spinner.OnItemSelectedListner
+    private val spinnerListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            when(position){
+                //すべて選択
+                0 -> { searchAdapter.filterAllGame() }
+                //favorite
+                1 -> { searchAdapter.filterFavorite() }
+                //to do
+                2 -> { searchAdapter.filterTodo()}
+                //owned
+                3 -> { searchAdapter.filterOwned() }
+            }
+
+        }
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
+    }
+
 }

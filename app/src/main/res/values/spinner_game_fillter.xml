@@ -3,8 +3,10 @@
     <string-array name="sp_game_filter">
         <item>すべて</item>
         <item>お気に入り</item>
-        <item>評価が高い</item>
-        <item>遊んだ回数</item>
+        <item>やりたいリスト</item>
+        <item>もってる</item>
+        <item>評価が高い順</item>
+        <item>遊んだ回数順</item>
         <item>まだ遊んでいない</item>
     </string-array>
 </resources>

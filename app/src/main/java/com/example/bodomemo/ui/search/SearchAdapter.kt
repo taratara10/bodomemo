@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.search_game_item.view.*
 
 class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
 
+    private var originalGameList: List<GameEntity> = arrayListOf()
     private var gameList :List<GameEntity> = arrayListOf()
     private var filteredGameList: List<GameEntity> = arrayListOf()
     private val listener: DetailsEvents = detailsEvents
@@ -75,10 +76,39 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
 
     fun setAllGames(gameItems: List<GameEntity>) {
-        this.gameList = gameItems
+        this.originalGameList = gameItems
+        this.gameList = originalGameList
         this.filteredGameList = gameItems
         notifyDataSetChanged()
     }
+
+    //すべてのゲーム
+    fun filterAllGame(){
+        filteredGameList = originalGameList
+        notifyDataSetChanged()
+    }
+
+    //filter favorite
+    fun filterFavorite(){
+        gameList = gameList.filter { it.favoriteCheck }
+        filteredGameList = gameList
+        notifyDataSetChanged()
+    }
+
+    //filter owned
+    fun filterOwned(){
+        gameList = gameList.filter { it.ownedCheck }
+        filteredGameList = gameList
+        notifyDataSetChanged()
+    }
+
+    //filter to do
+    fun filterTodo(){
+        gameList = gameList.filter { it.todoCheck }
+        filteredGameList = gameList
+        notifyDataSetChanged()
+    }
+
 
     /**
      * RecycleView touch event callbacks
