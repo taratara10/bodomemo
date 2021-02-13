@@ -1,4 +1,4 @@
-package com.example.bodomemo.ui.search
+package com.example.bodomemo.ui.todo
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,28 +8,36 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
-import kotlinx.android.synthetic.main.search_game_item.view.*
+import kotlinx.android.synthetic.main.todo_list_item.view.*
 
-class CheckGameAdapter(): RecyclerView.Adapter<CheckGameAdapter.SearchViewHolder>(), Filterable {
+class AddTodoAdapter(checkEvents: CheckEvents): RecyclerView.Adapter<AddTodoAdapter.AddTodoViewHolder>(), Filterable {
 
     private var gameList: List<GameEntity> = arrayListOf()
     private var filteredGameList: List<GameEntity> = arrayListOf()
+    private val listener: CheckEvents = checkEvents
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_game_item, parent, false)
-        return SearchViewHolder(view)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddTodoViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.todo_list_item, parent, false)
+        return AddTodoViewHolder(view)
     }
 
-
-    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(filteredGameList[position])
+    override fun onBindViewHolder(holder: AddTodoViewHolder, position: Int) {
+        holder.bind(filteredGameList[position], listener)
     }
+
 
     override fun getItemCount(): Int = filteredGameList.size
 
-    class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(game: GameEntity) {
-            itemView.search_game_title.text = game.title
+    class AddTodoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(game: GameEntity, listener: CheckEvents) {
+            itemView.tv_todo_item_title.text = game.title
+            itemView.cb_todo_checked.isChecked = game.todoCheck
+
+            itemView.cb_todo_checked.setOnClickListener {
+                game.todoCheck = itemView.cb_todo_checked.isChecked
+                listener.onCheckBoxClicked(game)
+            }
         }
     }
 
@@ -70,5 +78,15 @@ class CheckGameAdapter(): RecyclerView.Adapter<CheckGameAdapter.SearchViewHolder
         this.filteredGameList = gameItems
         notifyDataSetChanged()
     }
-    
+
+
+    /**
+     * RecycleView touch event callbacks
+     * */
+    interface CheckEvents {
+        fun onCheckBoxClicked(gameEntity: GameEntity)
+    }
+
+
+
 }

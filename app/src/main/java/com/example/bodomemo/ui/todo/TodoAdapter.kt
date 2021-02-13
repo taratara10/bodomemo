@@ -1,6 +1,5 @@
 package com.example.bodomemo.ui.todo
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +28,8 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
 
     class TodoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: TodoEvents) {
-            itemView.tv_todo_title.text = game.title
+            itemView.tv_todo_item_title.text = game.title
+            //to_do_check = true のものを空のcheckBox(false)で表したい
             itemView.cb_todo_checked.isChecked = !game.todoCheck
 
 
