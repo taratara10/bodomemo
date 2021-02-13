@@ -41,6 +41,8 @@ class AddTodoFragment:Fragment() ,AddTodoAdapter.CheckEvents{
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             addTodoAdapter.setAllGames(it)
+            //checkEventでFilterListがリセットされてしまうので、titleで再度Filterする
+            addTodoAdapter.filter.filter(et_search_game.text)
         })
 
         //検索した際にfilter

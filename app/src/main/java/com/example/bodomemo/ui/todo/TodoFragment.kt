@@ -44,9 +44,7 @@ class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
             findNavController().navigate(R.id.action_navigation_todo_to_navigation_add_todo)
         }
 
-
         return root
-
     }
 
 
