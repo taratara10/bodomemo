@@ -32,6 +32,7 @@ class CreateNewGameFragment : Fragment() {
 
         //Setting up RecyclerView
         val search_game_list = root.rv_new_game_search_game_list
+        search_game_list.setEmptyView(root.create_empty_view)
         search_game_list?.layoutManager = LinearLayoutManager(activity)
         checkGameAdapter = CheckGameAdapter()
         search_game_list?.adapter = checkGameAdapter

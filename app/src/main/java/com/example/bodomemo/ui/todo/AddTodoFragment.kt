@@ -33,7 +33,7 @@ class AddTodoFragment:Fragment() ,AddTodoAdapter.CheckEvents{
 
         //Setting up RecyclerView
         val todo_list = root.rv_add_todo_list
-
+        todo_list.setEmptyView(root.add_todo_empty_view)
         todo_list?.layoutManager = LinearLayoutManager(activity)
         addTodoAdapter = AddTodoAdapter(this)
         todo_list?.adapter = addTodoAdapter

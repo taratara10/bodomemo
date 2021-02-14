@@ -35,6 +35,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
         //Setting up RecyclerView
         val search_game_list = root.rv_search_game_list
+        search_game_list.setEmptyView(root.search_empty_view)
         search_game_list?.layoutManager = LinearLayoutManager(activity)
         searchAdapter =  SearchAdapter(this)
         search_game_list?.adapter = searchAdapter

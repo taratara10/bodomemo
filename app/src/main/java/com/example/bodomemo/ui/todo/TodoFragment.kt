@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
-import kotlinx.android.synthetic.main.fragment_todo.*
 import kotlinx.android.synthetic.main.fragment_todo.view.*
 
 class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
@@ -30,7 +29,7 @@ class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
 
         //Setting up RecyclerView
         val todo_list = root.rv_todo_list
-
+        todo_list.setEmptyView(root.todo_empty_view)
         todo_list?.layoutManager = LinearLayoutManager(activity)
         todoAdapter = TodoAdapter(this)
         todo_list?.adapter = todoAdapter
