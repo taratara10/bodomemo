@@ -10,13 +10,13 @@ import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import kotlinx.android.synthetic.main.search_game_item.view.*
 
-class CheckGameAdapter(): RecyclerView.Adapter<CheckGameAdapter.SearchViewHolder>(), Filterable {
+class SimpleListAdapter(): RecyclerView.Adapter<SimpleListAdapter.SearchViewHolder>(), Filterable {
 
     private var gameList: List<GameEntity> = arrayListOf()
     private var filteredGameList: List<GameEntity> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_game_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.simple_list_item, parent, false)
         return SearchViewHolder(view)
     }
 

@@ -48,12 +48,12 @@
             app:argType="string"/>
     </fragment>
 
-<!--  3rd  -->
+<!--  Play history  -->
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.bodomemo.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_play_history"
+        android:name="com.example.bodomemo.ui.playHistory.PlayHistoryFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_play_history" />
 
 <!--  create new game  -->
     <fragment

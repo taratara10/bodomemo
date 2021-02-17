@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class CreateNewGameFragment : Fragment() {
     private lateinit var gameViewModel: GameViewModel
-    private lateinit var checkGameAdapter: CheckGameAdapter
+    private lateinit var simpleListAdapter: SimpleListAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -34,18 +34,18 @@ class CreateNewGameFragment : Fragment() {
         val search_game_list = root.rv_new_game_search_game_list
         search_game_list.setEmptyView(root.create_empty_view)
         search_game_list?.layoutManager = LinearLayoutManager(activity)
-        checkGameAdapter = CheckGameAdapter()
-        search_game_list?.adapter = checkGameAdapter
+        simpleListAdapter = SimpleListAdapter()
+        search_game_list?.adapter = simpleListAdapter
 
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
-            checkGameAdapter.setAllGames(it)
+            simpleListAdapter.setAllGames(it)
         })
 
         //EditText filter recycleView item
         val et_search_title = root.et_new_game_title
         et_search_title.addTextChangedListener(object : CustomTextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                checkGameAdapter.filter.filter(s)
+                simpleListAdapter.filter.filter(s)
             }
         })
 
