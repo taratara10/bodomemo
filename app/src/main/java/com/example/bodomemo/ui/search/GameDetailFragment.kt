@@ -89,13 +89,16 @@ class GameDetailFragment: Fragment() {
             updateGame(selectedGame)
         }
 
-        //popBackした際にupdate これをしないと、SearchFragmentのrecycleViewが更新されない
+//        //popBackした際にupdate これをしないと、SearchFragmentのrecycleViewが更新されない
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             gameViewModel.updateGame(selectedGame)
-            findNavController().popBackStack()
+//            findNavController().popBackStack()
+            parentFragmentManager.popBackStack()
+
         }
 
-            return root
+
+        return root
     }
 
     fun updateGame(gameEntity: GameEntity) {
