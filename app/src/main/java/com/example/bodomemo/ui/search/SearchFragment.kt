@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,6 +79,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
     override fun onViewClicked(gameId: String?) {
         val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
+        //todo id = null の場合のエラー処理を書く
+        Log.d("gameid","$gameId")
         findNavController().navigate(action)
     }
 
@@ -87,7 +90,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     }
 
 
-    //Spinner.OnItemSelectedListner
+    //Spinner.OnItemSelectedListener
     private val spinnerListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             when(position){

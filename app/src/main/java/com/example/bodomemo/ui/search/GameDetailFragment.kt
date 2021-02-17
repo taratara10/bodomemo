@@ -92,6 +92,7 @@ class GameDetailFragment: Fragment() {
         //popBackした際にupdate これをしないと、SearchFragmentのrecycleViewが更新されない
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             gameViewModel.updateGame(selectedGame)
+            findNavController().popBackStack()
         }
 
             return root
