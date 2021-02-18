@@ -68,25 +68,21 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
         return root
     }
+    //ここまでonCreate
 
+
+    override fun onViewClicked(gameId: String?) {
+        if (gameId != null){
+            val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
+            findNavController().navigate(action)
+        }
+    }
 
     private fun setSpinnerItem(activity: Activity, spinner: Spinner, item: Array<String>): Spinner {
         val adapter = ArrayAdapter(activity, android.R.layout.simple_spinner_dropdown_item, item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
         return spinner
-    }
-
-    override fun onViewClicked(gameId: String?) {
-        val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
-        //todo id = null の場合のエラー処理を書く
-        Log.d("gameid","$gameId")
-        findNavController().navigate(action)
-    }
-
-    interface CustomTextWatcher: TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun afterTextChanged(s: Editable?) {}
     }
 
 
@@ -106,6 +102,11 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
         }
         override fun onNothingSelected(parent: AdapterView<*>?) {}
+    }
+
+    interface CustomTextWatcher: TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun afterTextChanged(s: Editable?) {}
     }
 
 }

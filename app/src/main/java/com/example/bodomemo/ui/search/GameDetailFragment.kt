@@ -45,8 +45,9 @@ class GameDetailFragment: Fragment() {
         val ratingBar = root.rb_edit_rating
 
         //searchFragment、createFragmentのうちnullでないほうの値をセット
-        //todo error処理
-        val selectedGameId = searchFragmentArgs.gameId?.toInt() ?: createNewGameFragmentArgs.createdNewId?.toInt()
+        val selectedGameId = searchFragmentArgs.gameId?.toInt()
+                ?: createNewGameFragmentArgs.createdNewId?.toInt()
+                ?: throw Exception("cannot get gameId")
 
         //  set content
         selectedGame = gameViewModel.getGameById(selectedGameId)
@@ -89,14 +90,10 @@ class GameDetailFragment: Fragment() {
             updateGame(selectedGame)
         }
 
-//        //popBackした際にupdate これをしないと、SearchFragmentのrecycleViewが更新されない
+        //戻るボタンでsearchFragmentへ戻る
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            gameViewModel.updateGame(selectedGame)
-//            findNavController().popBackStack()
-            parentFragmentManager.popBackStack()
-
+            findNavController().navigate(R.id.action_gameDetailFragment_to_navigation_search)
         }
-
 
         return root
     }
