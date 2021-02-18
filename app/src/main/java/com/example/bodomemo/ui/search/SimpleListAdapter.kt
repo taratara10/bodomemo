@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import kotlinx.android.synthetic.main.search_game_item.view.*
+import kotlinx.android.synthetic.main.simple_list_item.view.*
 
 class SimpleListAdapter(): RecyclerView.Adapter<SimpleListAdapter.SearchViewHolder>(), Filterable {
 
@@ -29,7 +30,7 @@ class SimpleListAdapter(): RecyclerView.Adapter<SimpleListAdapter.SearchViewHold
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity) {
-            itemView.search_game_title.text = game.title
+            itemView.simple_list_game_title.text = game.title
         }
     }
 
