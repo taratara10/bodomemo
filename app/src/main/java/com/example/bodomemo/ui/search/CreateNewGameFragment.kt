@@ -65,7 +65,7 @@ class CreateNewGameFragment : Fragment() {
     private fun saveTodo() {
         if (validateFields()) {
             //一旦id = 0 でautoIncrementで設定
-            val todo = GameEntity(id = 0, title = et_new_game_title.text.toString())
+            val todo = GameEntity(gameId = 0, title = et_new_game_title.text.toString())
             gameViewModel.saveGame(todo)
 
             //@Insert したidの返り値を渡す

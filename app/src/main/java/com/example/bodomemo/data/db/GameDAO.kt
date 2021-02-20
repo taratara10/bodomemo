@@ -15,13 +15,13 @@ interface GameDAO {
     @Update
     suspend fun updateGame(gameEntity: GameEntity)
 
-    @Query("SELECT * FROM gameEntity ORDER BY id DESC")
+    @Query("SELECT * FROM gameEntity ORDER BY gameId DESC")
     abstract fun getAllGameList(): LiveData<List<GameEntity>>
 
     @Query("SELECT * FROM gameEntity WHERE todo_check = 1")
     abstract fun getTodoList(): LiveData<List<GameEntity>>
 
-    @Query("SELECT * FROM gameEntity WHERE id =:gameId")
+    @Query("SELECT * FROM gameEntity WHERE gameId =:gameId")
     suspend fun getGameById(gameId:Int?): GameEntity
 
 }

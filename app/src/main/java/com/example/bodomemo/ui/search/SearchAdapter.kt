@@ -38,7 +38,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
             itemView.search_adapter.setOnClickListener {
                 //safeArgs Intがnullサポートしてないので、stringで渡す
-                listener.onViewClicked(game.id.toString())
+                listener.onViewClicked(game.gameId.toString())
             }
         }
     }

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [GameEntity::class], version = 3)
+@Database(entities = [GameEntity::class], version = 4)
 abstract class GameDatabase: RoomDatabase() {
 
     abstract fun gameDao(): GameDAO
@@ -21,6 +21,7 @@ abstract class GameDatabase: RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(context,
                             GameDatabase::class.java,
                             "game_db")
+                            .fallbackToDestructiveMigration()
                             .build()
                 }
             }
