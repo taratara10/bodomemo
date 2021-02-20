@@ -48,12 +48,6 @@
             app:argType="string"/>
     </fragment>
 
-<!--  Play history  -->
-    <fragment
-        android:id="@+id/navigation_play_history"
-        android:name="com.example.bodomemo.ui.playHistory.PlayHistoryFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_play_history" />
 
 <!--  create new game  -->
     <fragment
@@ -92,4 +86,42 @@
             app:nullable="true"
             app:argType="string"/>
     </fragment>
+
+
+
+    <!--
+        Play history
+        -->
+    <fragment
+        android:id="@+id/navigation_play_history"
+        android:name="com.example.bodomemo.ui.playHistory.PlayHistoryFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_play_history" >
+        <action
+            android:id="@+id/action_navigation_play_history_to_navigation_create_play_history"
+            app:destination="@id/navigation_create_play_history" />
+        <action
+            android:id="@+id/action_navigation_play_history_to_navigation_play_history_detail"
+            app:destination="@id/navigation_play_history_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_create_play_history"
+        android:name="com.example.bodomemo.ui.playHistory.CreatePlayHistoryFragment"
+        tools:layout="@layout/fragment_create_new_play_history">
+        <action
+            android:id="@+id/action_navigation_create_play_history_to_navigation_play_history_detail"
+            app:destination="@id/navigation_play_history_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_play_history_detail"
+        android:name="com.example.bodomemo.ui.playHistory.PlayHistoryDetailFragment"
+        tools:layout="@layout/fragment_play_history_detail">
+        <action
+            android:id="@+id/action_navigation_play_history_detail_to_navigation_play_history"
+            app:destination="@id/navigation_play_history" />
+    </fragment>
+
+
 </navigation>
