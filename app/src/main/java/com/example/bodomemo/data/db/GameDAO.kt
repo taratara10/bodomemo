@@ -6,6 +6,7 @@ import androidx.room.*
 @Dao
 interface GameDAO {
 
+    //GameList
     @Insert
     suspend fun saveGame(gameEntity: GameEntity): Long
 
@@ -23,5 +24,24 @@ interface GameDAO {
 
     @Query("SELECT * FROM gameEntity WHERE gameId =:gameId")
     suspend fun getGameById(gameId:Int?): GameEntity
+
+
+    //PlayHistory
+    @Insert
+    suspend fun savePlayHistory(playHistoryEntity: PlayHistoryEntity): Long
+
+    @Delete
+    suspend fun deletePlayHistory(playHistoryEntity: PlayHistoryEntity)
+
+    @Update
+    suspend fun updatePlayHistory(playHistoryEntity: PlayHistoryEntity)
+
+    @Query("SELECT * FROM playHistoryEntity ORDER BY playHistoryId DESC")
+    abstract fun getAllPlayHistory(): LiveData<List<PlayHistoryEntity>>
+
+
+
+
+
 
 }
