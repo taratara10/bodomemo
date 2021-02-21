@@ -16,7 +16,6 @@ import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.view.*
-import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class CreateNewGameFragment : Fragment() {
     private lateinit var gameViewModel: GameViewModel
@@ -42,7 +41,7 @@ class CreateNewGameFragment : Fragment() {
         })
 
         //EditText filter recycleView item
-        val et_search_title = root.et_new_game_title
+        val et_search_title = root.et_new_play_history_title
         et_search_title.addTextChangedListener(object : CustomTextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 simpleListAdapter.filter.filter(s)
@@ -55,18 +54,15 @@ class CreateNewGameFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         btn_save_game_title.setOnClickListener {
-            saveTodo()
+            saveGame()
         }
     }
 
-    /**
-     * Sends the updated information back to calling Activity
-     * */
-    private fun saveTodo() {
+    private fun saveGame() {
         if (validateFields()) {
             //一旦id = 0 でautoIncrementで設定
-            val todo = GameEntity(gameId = 0, title = et_new_game_title.text.toString())
-            gameViewModel.saveGame(todo)
+            val newGame = GameEntity(gameId = 0, title = et_new_play_history_title.text.toString())
+            gameViewModel.saveGame(newGame)
 
             //@Insert したidの返り値を渡す
             val insertedGameId = gameViewModel.insertedGameId.toString()
@@ -79,9 +75,9 @@ class CreateNewGameFragment : Fragment() {
      * Validation of EditText 検証
      * */
     private fun validateFields(): Boolean {
-        if (et_new_game_title.text?.isEmpty() == true) {
-            til_new_game_title.error = "pleaseEnterTitle"
-            et_new_game_title.requestFocus()
+        if (et_new_play_history_title.text?.isEmpty() == true) {
+            til_new_play_history_title.error = "pleaseEnterTitle"
+            et_new_play_history_title.requestFocus()
             return false
         }
         return true

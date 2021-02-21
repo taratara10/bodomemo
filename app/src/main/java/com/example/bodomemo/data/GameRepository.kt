@@ -78,7 +78,7 @@ class GameRepository(application: Application) {
         gameDAO.updatePlayHistory(record)
     }
 
-    fun getAllPlayHistory(record: PlayHistoryEntity): LiveData<List<PlayHistoryEntity>>{
+    fun getAllPlayHistory(): LiveData<List<PlayHistoryEntity>>{
         return allPlayHistory
     }
 }

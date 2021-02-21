@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_new_game_title"
+        android:id="@+id/til_new_play_history_title"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_new_game_title"
+            android:id="@+id/et_new_play_history_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="タイトル、遊んだ場所"
@@ -72,6 +72,6 @@
         android:layout_marginTop="24dp"
         android:text="遊んだ日付"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/til_new_game_title" />
+        app:layout_constraintTop_toBottomOf="@+id/til_new_play_history_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
