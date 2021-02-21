@@ -85,6 +85,9 @@
             android:defaultValue="@null"
             app:nullable="true"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_navigation_game_detail_to_navigation_play_history_detail"
+            app:destination="@id/navigation_play_history_detail" />
     </fragment>
 
 
@@ -121,6 +124,21 @@
         <action
             android:id="@+id/action_navigation_play_history_detail_to_navigation_play_history"
             app:destination="@id/navigation_play_history" />
+        <action
+            android:id="@+id/action_navigation_play_history_detail_to_navigation_game_detail"
+            app:destination="@id/navigation_game_detail" />
+        <action
+            android:id="@+id/action_navigation_play_history_detail_to_navigation_play_history_add_game"
+            app:destination="@id/navigation_play_history_add_game" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_play_history_add_game"
+        android:name="com.example.bodomemo.ui.playHistory.PlayHistoryAddGameFragment"
+        tools:layout="@layout/fragment_play_history_add_game">
+        <action
+            android:id="@+id/action_navigation_play_history_add_game_to_navigation_play_history_detail"
+            app:destination="@id/navigation_play_history_detail" />
     </fragment>
 
 
