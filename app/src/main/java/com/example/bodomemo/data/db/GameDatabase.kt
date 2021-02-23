@@ -29,3 +29,26 @@ abstract class GameDatabase: RoomDatabase() {
     }
 
 }
+
+//@Database(entities = [PlayHistoryEntity::class], version = 2)
+//abstract class PlayHistoryDatabase: RoomDatabase() {
+//
+//    abstract fun gameDao(): GameDAO
+//
+//    companion object {
+//        private var INSTANCE: PlayHistoryDatabase? = null
+//
+//        fun getInstance(context: Context): PlayHistoryDatabase? {
+//            if (INSTANCE == null) {
+//                synchronized(PlayHistoryDatabase::class) {
+//                    INSTANCE = Room.databaseBuilder(context,
+//                            PlayHistoryDatabase::class.java,
+//                            "play_history_db")
+//                            .build()
+//                }
+//            }
+//            return INSTANCE
+//        }
+//    }
+//
+//}

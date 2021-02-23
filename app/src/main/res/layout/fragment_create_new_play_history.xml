@@ -48,7 +48,7 @@
         app:layout_constraintGuide_end="24dp" />
 
     <CalendarView
-        android:id="@+id/cv_create_play_history"
+        android:id="@+id/cv_play_history_calendar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -63,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/cv_create_play_history" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_play_history_calendar" />
 
     <TextView
         android:id="@+id/tv_playhistory_date"

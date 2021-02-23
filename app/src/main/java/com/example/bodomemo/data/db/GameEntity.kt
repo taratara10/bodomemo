@@ -17,7 +17,7 @@ data class GameEntity(
 data class PlayHistoryEntity(
         @PrimaryKey(autoGenerate = true) val playHistoryId: Int,
         @ColumnInfo(name = "title") var title: String = "",
-        @ColumnInfo(name = "date") var date: String,
+        @ColumnInfo(name = "date") var date: Long,
 )
 
 
