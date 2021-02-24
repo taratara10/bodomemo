@@ -2,31 +2,27 @@ package com.example.bodomemo.data
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.bodomemo.data.db.GameDAO
-import com.example.bodomemo.data.db.GameDatabase
-import com.example.bodomemo.data.db.GameEntity
-import com.example.bodomemo.data.db.PlayHistoryEntity
+import com.example.bodomemo.data.db.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class GameRepository(application: Application) {
 
-    private val gameDAO: GameDAO
+    private val gameDao: GameDao
     private val allGames:LiveData<List<GameEntity>>
     private val todoList:LiveData<List<GameEntity>>
-
     private val allPlayHistory:LiveData<List<PlayHistoryEntity>>
 
 
     init {
     // Create DB Instance
         val database = GameDatabase.getInstance(application.applicationContext)
-        gameDAO = database!!.gameDao()
-        allGames = gameDAO.getAllGameList()
-        todoList = gameDAO.getTodoList()
+        gameDao = database.gameDao()
+        allGames = gameDao.getAllGameList()
+        todoList = gameDao.getTodoList()
 
-        allPlayHistory = gameDAO.getAllPlayHistory()
+        allPlayHistory = gameDao.getAllPlayHistory()
 
     }
 

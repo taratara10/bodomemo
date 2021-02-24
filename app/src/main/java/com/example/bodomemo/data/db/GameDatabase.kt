@@ -7,48 +7,27 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [GameEntity::class], version = 4)
+@Database(entities = [GameEntity::class,
+        PlayHistoryEntity::class,
+        PlayHistoryAndGameCrossReference::class],
+        version = 5)
 abstract class GameDatabase: RoomDatabase() {
 
-    abstract fun gameDao(): GameDAO
+    abstract fun gameDao(): GameDao
 
     companion object {
+        @Volatile
         private var INSTANCE: GameDatabase? = null
 
-        fun getInstance(context: Context): GameDatabase? {
-            if (INSTANCE == null) {
-                synchronized(GameDatabase::class) {
+        fun getInstance(context: Context) {
+                synchronized(this) {
                     INSTANCE = Room.databaseBuilder(context,
                             GameDatabase::class.java,
                             "game_db")
-                            .build()
+                            .fallbackToDestructiveMigration()
+                            .build().also { INSTANCE = it }
                 }
-            }
-            return INSTANCE
         }
     }
 
 }
-
-//@Database(entities = [PlayHistoryEntity::class], version = 2)
-//abstract class PlayHistoryDatabase: RoomDatabase() {
-//
-//    abstract fun gameDao(): GameDAO
-//
-//    companion object {
-//        private var INSTANCE: PlayHistoryDatabase? = null
-//
-//        fun getInstance(context: Context): PlayHistoryDatabase? {
-//            if (INSTANCE == null) {
-//                synchronized(PlayHistoryDatabase::class) {
-//                    INSTANCE = Room.databaseBuilder(context,
-//                            PlayHistoryDatabase::class.java,
-//                            "play_history_db")
-//                            .build()
-//                }
-//            }
-//            return INSTANCE
-//        }
-//    }
-//
-//}
