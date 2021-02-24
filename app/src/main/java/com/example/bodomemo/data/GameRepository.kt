@@ -18,7 +18,7 @@ class GameRepository(application: Application) {
     init {
     // Create DB Instance
         val database = GameDatabase.getInstance(application.applicationContext)
-        gameDao = database.gameDao()
+        gameDao = database!!.gameDao()
         allGames = gameDao.getAllGameList()
         todoList = gameDao.getTodoList()
 
@@ -31,18 +31,18 @@ class GameRepository(application: Application) {
      * */
 
     fun saveGame(game: GameEntity): Long = runBlocking {
-         gameDAO.saveGame(game)
+         gameDao.saveGame(game)
     }
 
     fun deleteGame(game: GameEntity) = runBlocking {
         this.launch(Dispatchers.IO) {
-            gameDAO.deleteGame(game)
+            gameDao.deleteGame(game)
         }
     }
 
     fun updateGame(game: GameEntity) = runBlocking {
         this.launch(Dispatchers.IO) {
-            gameDAO.updateGame(game)
+            gameDao.updateGame(game)
         }
     }
 
@@ -55,7 +55,7 @@ class GameRepository(application: Application) {
     }
 
     fun getGameById(gameId:Int?): GameEntity  = runBlocking{
-         gameDAO.getGameById(gameId)
+         gameDao.getGameById(gameId)
     }
 
     /**
@@ -63,15 +63,15 @@ class GameRepository(application: Application) {
      * */
 
     fun savePlayHistory(record: PlayHistoryEntity): Long = runBlocking {
-        gameDAO.savePlayHistory(record)
+        gameDao.savePlayHistory(record)
     }
 
     fun deletePlayHistory(record: PlayHistoryEntity) = runBlocking {
-        gameDAO.deletePlayHistory(record)
+        gameDao.deletePlayHistory(record)
     }
 
     fun updatePlayHistory(record: PlayHistoryEntity) = runBlocking {
-        gameDAO.updatePlayHistory(record)
+        gameDao.updatePlayHistory(record)
     }
 
     fun getAllPlayHistory(): LiveData<List<PlayHistoryEntity>>{

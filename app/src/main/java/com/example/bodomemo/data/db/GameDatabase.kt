@@ -8,9 +8,9 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(entities = [GameEntity::class,
-        PlayHistoryEntity::class,
-        PlayHistoryAndGameCrossReference::class],
-        version = 5)
+                    PlayHistoryEntity::class,
+                    PlayHistoryAndGameCrossReference::class],
+                    version = 5)
 abstract class GameDatabase: RoomDatabase() {
 
     abstract fun gameDao(): GameDao
@@ -19,14 +19,16 @@ abstract class GameDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: GameDatabase? = null
 
-        fun getInstance(context: Context) {
-                synchronized(this) {
+        fun getInstance(context: Context): GameDatabase? {
+            if (INSTANCE == null){
+                synchronized(GameDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context,
                             GameDatabase::class.java,
                             "game_db")
-                            .fallbackToDestructiveMigration()
-                            .build().also { INSTANCE = it }
+                            .build()
                 }
+            }
+            return INSTANCE
         }
     }
 

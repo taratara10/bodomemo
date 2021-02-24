@@ -25,17 +25,17 @@ interface GameDao {
     @Query("SELECT * FROM gameEntity WHERE gameId =:gameId")
     suspend fun getGameById(gameId:Int?): GameEntity
 
-//    @Insert
-//    suspend fun savePlayHistory(playHistoryEntity: PlayHistoryEntity): Long
-//
-//    @Delete
-//    suspend fun deletePlayHistory(playHistoryEntity: PlayHistoryEntity)
-//
-//    @Update
-//    suspend fun updatePlayHistory(playHistoryEntity: PlayHistoryEntity)
-//
-//    @Query("SELECT * FROM playHistoryEntity ORDER BY playHistoryId DESC")
-//    abstract fun getAllPlayHistory(): LiveData<List<PlayHistoryEntity>>
+    @Insert
+    suspend fun savePlayHistory(playHistoryEntity: PlayHistoryEntity): Long
+
+    @Delete
+    suspend fun deletePlayHistory(playHistoryEntity: PlayHistoryEntity)
+
+    @Update
+    suspend fun updatePlayHistory(playHistoryEntity: PlayHistoryEntity)
+
+    @Query("SELECT * FROM playHistoryEntity ORDER BY playHistoryId DESC")
+    abstract fun getAllPlayHistory(): LiveData<List<PlayHistoryEntity>>
 
 
 
