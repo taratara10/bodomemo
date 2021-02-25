@@ -26,7 +26,7 @@ data class PlayHistoryEntity(
         primaryKeys = ["playHistoryId","gameId"])
 data class PlayHistoryAndGameCrossReference(
         val playHistoryId: Int,
-        val gameId: Int
+        val gameId: Int,
 )
 
 data class PlayHistoryWithGames(

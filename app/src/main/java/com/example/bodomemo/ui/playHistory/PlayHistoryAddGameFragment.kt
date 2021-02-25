@@ -51,7 +51,8 @@ class PlayHistoryAddGameFragment: Fragment() {
 
     private val calendarListener = object : CalendarView.OnDateChangeListener{
         override fun onSelectedDayChange(view: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
-            playHistoryDate = view.date //long
+            //update Date. Gets the selected date in milliseconds.
+            playHistoryDate = view.date
 
         }
 
@@ -60,7 +61,6 @@ class PlayHistoryAddGameFragment: Fragment() {
     private fun savePlayHistory() {
         if (validateFields()) {
             //一旦id = 0 でautoIncrementで設定
-                //todo add date
             val newPlayHistory = PlayHistoryEntity(playHistoryId = 0, title = et_new_play_history_title.text.toString(),date = playHistoryDate )
             playHistoryViewModel.savePlayHistory(newPlayHistory)
 

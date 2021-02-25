@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_todo, R.id.navigation_search, R.id.navigation_notifications))
+                R.id.navigation_todo, R.id.navigation_search, R.id.navigation_play_history))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         //トップレベルのFragmentを設定
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_todo, R.id.navigation_search, R.id.navigation_notifications))
+                R.id.navigation_todo, R.id.navigation_search, R.id.navigation_play_history))
 
         //Fragmentのコールバックがあればそれを実行する
         if (onBackPressedDispatcher.hasEnabledCallbacks()) {
