@@ -51,6 +51,7 @@ class CreateNewPlayHistoryFragment: Fragment() {
             //update Date. Gets the selected date in milliseconds.
             playHistoryDate = view.date
 
+
         }
 
     }
@@ -74,9 +75,9 @@ class CreateNewPlayHistoryFragment: Fragment() {
      * Validation of EditText
      * */
     private fun validateFields(): Boolean {
-        if (et_new_game_title.text?.isEmpty() == true) {
-            til_new_game_title.error = "pleaseEnterTitle"
-            et_new_game_title.requestFocus()
+        if (et_new_play_history_title.text?.isEmpty() == true) {
+            til_new_play_history_title.error = "pleaseEnterTitle"
+            et_new_play_history_title.requestFocus()
             return false
         }
         return true
