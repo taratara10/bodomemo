@@ -41,7 +41,7 @@ class CreateNewGameFragment : Fragment() {
         })
 
         //EditText filter recycleView item
-        val et_search_title = root.et_new_play_history_title
+        val et_search_title = root.et_new_game_title
         et_search_title.addTextChangedListener(object : CustomTextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 simpleListAdapter.filter.filter(s)
@@ -61,7 +61,7 @@ class CreateNewGameFragment : Fragment() {
     private fun saveGame() {
         if (validateFields()) {
             //一旦id = 0 でautoIncrementで設定
-            val newGame = GameEntity(gameId = 0, title = et_new_play_history_title.text.toString())
+            val newGame = GameEntity(gameId = 0, title = et_new_game_title.text.toString())
             gameViewModel.saveGame(newGame)
 
             //@Insert したidの返り値を渡す
@@ -75,9 +75,9 @@ class CreateNewGameFragment : Fragment() {
      * Validation of EditText 検証
      * */
     private fun validateFields(): Boolean {
-        if (et_new_play_history_title.text?.isEmpty() == true) {
-            til_new_play_history_title.error = "pleaseEnterTitle"
-            et_new_play_history_title.requestFocus()
+        if (et_new_game_title.text?.isEmpty() == true) {
+            til_new_game_title.error = "pleaseEnterTitle"
+            et_new_game_title.requestFocus()
             return false
         }
         return true
