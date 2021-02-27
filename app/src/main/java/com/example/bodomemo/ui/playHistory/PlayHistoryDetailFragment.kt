@@ -34,7 +34,7 @@ class PlayHistoryDetailFragment:Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_play_history, container, false)
+        val root = inflater.inflate(R.layout.fragment_play_history_detail, container, false)
 
         val titleEditText = root.et_play_title_detail
 
@@ -47,8 +47,8 @@ class PlayHistoryDetailFragment:Fragment() {
         playHistoryDate = selectedPlayHistory.date.toInt()
 
         //setup layout
-        titleEditText.setText(selectedPlayHistory.title)
-        et_play_date_select_detail.setText(playHistoryDate.toString())
+        titleEditText.setText(selectedPlayHistory.title.toString())
+        root.et_play_date_select_detail.setText(playHistoryDate.toString())
 
 
         //editText
