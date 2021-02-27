@@ -48,15 +48,13 @@ class CreateNewGameFragment : Fragment() {
             }
         })
 
+        root.btn_save_game_title.setOnClickListener {
+            saveGame()
+        }
+
         return root
     }
 
-    override fun onStart() {
-        super.onStart()
-        btn_save_game_title.setOnClickListener {
-            saveGame()
-        }
-    }
 
     private fun saveGame() {
         if (validateFields()) {

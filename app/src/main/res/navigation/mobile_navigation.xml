@@ -85,9 +85,6 @@
             android:defaultValue="@null"
             app:nullable="true"
             app:argType="string"/>
-        <action
-            android:id="@+id/action_navigation_game_detail_to_navigation_play_history_detail"
-            app:destination="@id/navigation_play_history_detail" />
     </fragment>
 
 
@@ -106,6 +103,11 @@
         <action
             android:id="@+id/action_navigation_play_history_to_navigation_play_history_detail"
             app:destination="@id/navigation_play_history_detail" />
+        <argument
+            android:name="playHistoryId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
     <fragment
@@ -115,6 +117,11 @@
         <action
             android:id="@+id/action_navigation_create_play_history_to_navigation_play_history_detail"
             app:destination="@id/navigation_play_history_detail" />
+        <argument
+            android:name="createdPlayHistoryId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
     <fragment
@@ -130,6 +137,16 @@
         <action
             android:id="@+id/action_navigation_play_history_detail_to_navigation_play_history_add_game"
             app:destination="@id/navigation_play_history_add_game" />
+        <argument
+            android:name="playHistoryId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
+        <argument
+            android:name="createdPlayHistoryId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
     <fragment

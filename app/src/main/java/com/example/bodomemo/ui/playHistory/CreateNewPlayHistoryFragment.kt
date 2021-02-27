@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.PlayHistoryViewModel
+import com.example.bodomemo.ui.search.CreateNewGameFragmentDirections
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_play_history.*
 import kotlinx.android.synthetic.main.fragment_create_new_play_history.view.*
@@ -32,18 +34,14 @@ class CreateNewPlayHistoryFragment: Fragment() {
         calendarView.date = playHistoryDate
         calendarView.setOnDateChangeListener(calendarListener)
 
+        root.btn_save_play_history.setOnClickListener {
+            savePlayHistory()
+        }
 
 
         return root
     }
 
-
-    override fun onStart() {
-        super.onStart()
-        btn_save_play_history.setOnClickListener {
-            savePlayHistory()
-        }
-    }
 
 
     private val calendarListener = object : CalendarView.OnDateChangeListener{
@@ -63,11 +61,11 @@ class CreateNewPlayHistoryFragment: Fragment() {
             playHistoryViewModel.savePlayHistory(newPlayHistory)
 
             //@Insert したidの返り値を渡す
-            val insertedGameId = playHistoryViewModel.insertedPlayHistoryId.toString()
+            val insertedPlayHistoryId = playHistoryViewModel.insertedPlayHistoryId.toString()
 
             //todo add Direction
-            // val action =
-            //findNavController().navigate(action)
+             val action = CreateNewPlayHistoryFragmentDirections.actionNavigationCreatePlayHistoryToNavigationPlayHistoryDetail(insertedPlayHistoryId)
+            findNavController().navigate(action)
         }
     }
 

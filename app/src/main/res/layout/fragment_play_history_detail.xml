@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--  title  -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_play_title"
+        android:id="@+id/tl_play_title_detail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -15,11 +16,31 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_play_title"
+            android:id="@+id/et_play_title_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ゲーム会名、遊んだ場所"
             android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--  date select  -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_play_date_select"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tl_play_title_detail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_play_date_select_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="遊んだ日付"
+            android:inputType="text" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -30,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tl_play_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tl_play_title_detail" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -51,10 +72,11 @@
         android:id="@+id/search_empty_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rv_play_game_list"
         app:layout_constraintStart_toStartOf="@+id/rv_play_game_list"
-        app:layout_constraintTop_toBottomOf="@+id/tl_play_title">
+        app:layout_constraintTop_toBottomOf="@+id/til_play_date_select">
 
         <TextView
             android:id="@+id/tv_search_empty"
@@ -65,6 +87,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

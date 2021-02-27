@@ -21,7 +21,6 @@ class GameRepository(application: Application) {
         gameDao = database!!.gameDao()
         allGames = gameDao.getAllGameList()
         todoList = gameDao.getTodoList()
-
         allPlayHistory = gameDao.getAllPlayHistory()
 
     }

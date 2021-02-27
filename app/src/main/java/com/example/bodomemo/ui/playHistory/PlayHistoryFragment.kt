@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.ui.PlayHistoryViewModel
+import com.example.bodomemo.ui.search.SearchFragmentDirections
 import kotlinx.android.synthetic.main.fragment_play_history.view.*
 
 class PlayHistoryFragment : Fragment(), PlayHistoryAdapter.DetailsEvents {
@@ -47,6 +48,9 @@ class PlayHistoryFragment : Fragment(), PlayHistoryAdapter.DetailsEvents {
     }
 
     override fun onViewClicked(playHistoryId: String?) {
-        TODO("Not yet implemented")
+        if (playHistoryId != null){
+            val action = PlayHistoryFragmentDirections.actionNavigationPlayHistoryToNavigationPlayHistoryDetail(playHistoryId)
+            findNavController().navigate(action)
+        }
     }
 }
