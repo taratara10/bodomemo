@@ -28,5 +28,8 @@ class PlayHistoryViewModel(application: Application) : AndroidViewModel(applicat
         return allPlayHistory
     }
 
+    fun getPlayHistoryById(playHistoryId: Int?): PlayHistoryEntity{
+        return repository.getPlayHistoryById(playHistoryId)
+    }
 
 }

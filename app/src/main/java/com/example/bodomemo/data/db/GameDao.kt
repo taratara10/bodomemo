@@ -37,6 +37,8 @@ interface GameDao {
     @Query("SELECT * FROM playHistoryEntity ORDER BY playHistoryId DESC")
     abstract fun getAllPlayHistory(): LiveData<List<PlayHistoryEntity>>
 
+    @Query("SELECT * FROM playHistoryEntity WHERE playHistoryId = :playHistoryId")
+    suspend fun getPlayHistoryById(playHistoryId:Int?): PlayHistoryEntity
 
 
 }

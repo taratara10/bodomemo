@@ -76,4 +76,7 @@ class GameRepository(application: Application) {
     fun getAllPlayHistory(): LiveData<List<PlayHistoryEntity>>{
         return allPlayHistory
     }
+    fun getPlayHistoryById(playHistoryId: Int?): PlayHistoryEntity = runBlocking {
+        gameDao.getPlayHistoryById(playHistoryId)
+    }
 }
