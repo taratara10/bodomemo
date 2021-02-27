@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 class PlayHistoryAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<PlayHistoryAdapter.PlayHistoryViewHolder>() {
 
     private var playList :List<PlayHistoryEntity> = arrayListOf()
-    private val listener: PlayHistoryAdapter.DetailsEvents = detailsEvents
+    private val listener: DetailsEvents = detailsEvents
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayHistoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.play_history_list_item, parent, false)
@@ -44,7 +44,7 @@ class PlayHistoryAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<Pl
     }
 
     fun setAllPlayList(playList: List<PlayHistoryEntity>) {
-        this.playList
+        this.playList = playList
         notifyDataSetChanged()
     }
 

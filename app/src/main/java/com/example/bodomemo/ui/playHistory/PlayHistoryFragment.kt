@@ -32,8 +32,9 @@ class PlayHistoryFragment : Fragment(), PlayHistoryAdapter.DetailsEvents {
         //setting up recyclerView
         val play_list = root.rv_play_history
         play_list.setEmptyView(root.play_history_empty_view)
-        play_list.layoutManager = LinearLayoutManager(activity)
+        play_list?.layoutManager = LinearLayoutManager(activity)
         playHistoryAdapter = PlayHistoryAdapter(this)
+        play_list.adapter = playHistoryAdapter
 
         playHistoryViewModel.getAllPlayHistory().observe(viewLifecycleOwner, {
             playHistoryAdapter.setAllPlayList(it)
