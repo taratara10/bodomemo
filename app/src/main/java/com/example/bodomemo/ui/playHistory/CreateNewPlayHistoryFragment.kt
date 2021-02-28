@@ -38,20 +38,13 @@ class CreateNewPlayHistoryFragment: Fragment() {
             savePlayHistory()
         }
 
-
         return root
     }
 
 
 
-    private val calendarListener = object : CalendarView.OnDateChangeListener{
-        override fun onSelectedDayChange(view: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
-            //update Date. Gets the selected date in milliseconds.
-            playHistoryDate = view.date
-
-
-        }
-
+    private val calendarListener = CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
+        playHistoryDate = view.date
     }
 
     private fun savePlayHistory() {
