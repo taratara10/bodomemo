@@ -12,7 +12,6 @@ class PlayHistoryViewModel(application: Application) : AndroidViewModel(applicat
     private val repository : GameRepository = GameRepository(application)
     private val allPlayHistory : LiveData<List<PlayHistoryEntity>> = repository.getAllPlayHistory()
     var insertedPlayHistoryId: Long = 0
-    var playHistoryDate: MutableLiveData<Long> = MutableLiveData()
 
     fun savePlayHistory(playHistory: PlayHistoryEntity){
         insertedPlayHistoryId = repository.savePlayHistory(playHistory)

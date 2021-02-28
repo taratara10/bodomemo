@@ -85,11 +85,12 @@ class PlayHistoryDetailFragment:Fragment() {
 
         val datePickerDialog = DatePickerDialog(
                 requireActivity(),
-                DatePickerDialog.OnDateSetListener { view, y, m, d ->
+                { view, y, m, d ->
                     calender.set(y,m,d)
                     playHistoryDate = calender.timeInMillis.toInt()
-
-                },year,month,day)
+                },
+                year,month,day
+                )
         datePickerDialog.show()
     }
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,7 @@ class CreateNewPlayHistoryFragment: Fragment() {
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private var playHistoryDate = System.currentTimeMillis()
+    private lateinit var editTextDate:EditText
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -32,10 +34,8 @@ class CreateNewPlayHistoryFragment: Fragment() {
     ): View? {
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_create_new_play_history, container, false)
-        playHistoryViewModel.playHistoryDate.observe(viewLifecycleOwner,{
-            playHistoryViewModel.playHistoryDate.postValue(System.currentTimeMillis())
-            playHistoryDate = it
-        })
+
+        editTextDate = root.et_create_play_date
 
         //calendarView setting
         val calendarView = root.cv_play_history_calendar
@@ -43,22 +43,17 @@ class CreateNewPlayHistoryFragment: Fragment() {
         calendarView.setOnDateChangeListener(calendarListener)
         root.et_create_play_date.setText(convertMilliSecToDate(playHistoryDate))
 
-
-        root.btn_save_play_history.setOnClickListener {
-            savePlayHistory()
-        }
-
-
+        root.btn_save_play_history.setOnClickListener {savePlayHistory()}
 
         return root
     }
 
+    //
     private val calendarListener = CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
         val dateString = "${year}/${month}/${dayOfMonth}"
         playHistoryDate = convertDateToMilliSec(dateString)
-        Log.d("calendar", "${dateString}:${playHistoryDate}")
+        editTextDate.setText(dateString)
     }
-
 
 
     private fun savePlayHistory() {
@@ -66,12 +61,9 @@ class CreateNewPlayHistoryFragment: Fragment() {
             //一旦id = 0 でautoIncrementで設定
             val newPlayHistory = PlayHistoryEntity(playHistoryId = 0, title = et_new_play_history_title.text.toString(),date = playHistoryDate )
             playHistoryViewModel.savePlayHistory(newPlayHistory)
-
             //@Insert したidの返り値を渡す
             val insertedPlayHistoryId = playHistoryViewModel.insertedPlayHistoryId.toString()
-
-            //todo add Direction
-             val action = CreateNewPlayHistoryFragmentDirections.actionNavigationCreatePlayHistoryToNavigationPlayHistoryDetail(insertedPlayHistoryId)
+            val action = CreateNewPlayHistoryFragmentDirections.actionNavigationCreatePlayHistoryToNavigationPlayHistoryDetail(insertedPlayHistoryId)
             findNavController().navigate(action)
         }
     }
