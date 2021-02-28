@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -22,38 +23,33 @@ class PlayHistoryDetailFragment:Fragment() {
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
-    private lateinit var playHistoryTitle: String
+
     private val playHistoryFragmentArgs: PlayHistoryFragmentArgs by navArgs()
     private val createNewPlayHistoryFragmentArgs: CreateNewPlayHistoryFragmentArgs by navArgs()
 
-    private var playHistoryDate = 0
+    private lateinit var dateEditText: EditText
+    private lateinit var playHistoryTitle: String
+    private var playHistoryDate: Long = 0
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_play_history_detail, container, false)
-
-        val titleEditText = root.et_play_title_detail
+        playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
 
         //navArgsのうちnullでないほうの値をセット
         val selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
                 ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
                 ?: throw Exception("cannot get playHistoryId")
-
         selectedPlayHistory = playHistoryViewModel.getPlayHistoryById(selectedPlayHistoryId)
+
+
+        //title editText
         playHistoryTitle = selectedPlayHistory.title
-        //Longのままなので日付へ　function 作成
-        playHistoryDate = selectedPlayHistory.date.toInt()
-
-        //setup layout
+        val titleEditText = root.et_play_title_detail
         titleEditText.setText(playHistoryTitle)
-        root.et_play_date_select_detail.setText(playHistoryDate.toString())
-
-
-        //editText
         titleEditText.addTextChangedListener(object :CustomTextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 selectedPlayHistory.title = s.toString()
@@ -61,8 +57,13 @@ class PlayHistoryDetailFragment:Fragment() {
             }
         })
 
+        //Date EditText
+        playHistoryDate = selectedPlayHistory.date
+        dateEditText = root.et_play_date_select_detail
+        dateEditText.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
+
         //DatePick
-        root.et_play_date_select_detail.setOnClickListener{
+        dateEditText.setOnClickListener{
             showDatePicker()
         }
 
@@ -76,7 +77,6 @@ class PlayHistoryDetailFragment:Fragment() {
 
 
     private fun showDatePicker() {
-        //todo milliSeconds -> Calender convert
         val calender = Calendar.getInstance()
         calender.timeInMillis = selectedPlayHistory.date
         val year = calender.get(Calendar.YEAR)
@@ -86,8 +86,12 @@ class PlayHistoryDetailFragment:Fragment() {
         val datePickerDialog = DatePickerDialog(
                 requireActivity(),
                 { view, y, m, d ->
+                    //playHistoryDate:Long を更新して、EditTextの表示も更新
                     calender.set(y,m,d)
-                    playHistoryDate = calender.timeInMillis.toInt()
+                    playHistoryDate = calender.timeInMillis
+                    selectedPlayHistory.date = playHistoryDate
+                    dateEditText.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
+                    updatePlayHistory(selectedPlayHistory)
                 },
                 year,month,day
                 )

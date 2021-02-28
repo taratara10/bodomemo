@@ -41,7 +41,7 @@ class CreateNewPlayHistoryFragment: Fragment() {
         val calendarView = root.cv_play_history_calendar
         calendarView.date = playHistoryDate
         calendarView.setOnDateChangeListener(calendarListener)
-        root.et_create_play_date.setText(convertMilliSecToDate(playHistoryDate))
+        root.et_create_play_date.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
 
         root.btn_save_play_history.setOnClickListener {savePlayHistory()}
 
@@ -51,7 +51,7 @@ class CreateNewPlayHistoryFragment: Fragment() {
     //
     private val calendarListener = CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
         val dateString = "${year}/${month+1}/${dayOfMonth}"
-        playHistoryDate = convertDateToMilliSec(dateString)
+        playHistoryDate = playHistoryViewModel.convertDateToMilliSec(dateString)
         editTextDate.setText(dateString)
     }
 
@@ -83,18 +83,4 @@ class CreateNewPlayHistoryFragment: Fragment() {
         return true
     }
 
-    //yyyy/MM/dd -> MilliSec
-    fun convertDateToMilliSec(date: String): Long {
-        val dataFormat = SimpleDateFormat("yyyy/MM/dd")
-        val parsedDate = dataFormat.parse(date)
-        return parsedDate.time
-    }
-
-    //MilliSec -> yyyy/MM/dd
-    fun convertMilliSecToDate(milliSec: Long): String{
-        val calender = Calendar.getInstance()
-        calender.timeInMillis = milliSec
-        val dataFormat = SimpleDateFormat("yyyy/MM/dd")
-        return dataFormat.format(calender.time)
-    }
 }
