@@ -44,10 +44,12 @@ class PlayHistoryDetailFragment:Fragment() {
                 ?: throw Exception("cannot get playHistoryId")
 
         selectedPlayHistory = playHistoryViewModel.getPlayHistoryById(selectedPlayHistoryId)
+        playHistoryTitle = selectedPlayHistory.title
+        //Longのままなので日付へ　function 作成
         playHistoryDate = selectedPlayHistory.date.toInt()
 
         //setup layout
-        titleEditText.setText(selectedPlayHistory.title.toString())
+        titleEditText.setText(playHistoryTitle)
         root.et_play_date_select_detail.setText(playHistoryDate.toString())
 
 
