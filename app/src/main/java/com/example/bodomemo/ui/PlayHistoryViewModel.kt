@@ -3,6 +3,7 @@ package com.example.bodomemo.ui
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.bodomemo.data.GameRepository
 import com.example.bodomemo.data.db.PlayHistoryEntity
 
@@ -11,6 +12,7 @@ class PlayHistoryViewModel(application: Application) : AndroidViewModel(applicat
     private val repository : GameRepository = GameRepository(application)
     private val allPlayHistory : LiveData<List<PlayHistoryEntity>> = repository.getAllPlayHistory()
     var insertedPlayHistoryId: Long = 0
+    var playHistoryDate: MutableLiveData<Long> = MutableLiveData()
 
     fun savePlayHistory(playHistory: PlayHistoryEntity){
         insertedPlayHistoryId = repository.savePlayHistory(playHistory)

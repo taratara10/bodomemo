@@ -1,6 +1,7 @@
 package com.example.bodomemo.ui.playHistory
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +16,14 @@ import com.example.bodomemo.ui.search.CreateNewGameFragmentDirections
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_play_history.*
 import kotlinx.android.synthetic.main.fragment_create_new_play_history.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.properties.Delegates
 
 class CreateNewPlayHistoryFragment: Fragment() {
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
-    private var playHistoryDate: Long = System.currentTimeMillis()
+    private var playHistoryDate = System.currentTimeMillis()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -28,24 +32,34 @@ class CreateNewPlayHistoryFragment: Fragment() {
     ): View? {
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_create_new_play_history, container, false)
+        playHistoryViewModel.playHistoryDate.observe(viewLifecycleOwner,{
+            playHistoryViewModel.playHistoryDate.postValue(System.currentTimeMillis())
+            playHistoryDate = it
+        })
 
         //calendarView setting
         val calendarView = root.cv_play_history_calendar
         calendarView.date = playHistoryDate
         calendarView.setOnDateChangeListener(calendarListener)
+        root.et_create_play_date.setText(convertMilliSecToDate(playHistoryDate))
+
 
         root.btn_save_play_history.setOnClickListener {
             savePlayHistory()
         }
 
+
+
         return root
     }
 
-
-
     private val calendarListener = CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
-        playHistoryDate = view.date
+        val dateString = "${year}/${month}/${dayOfMonth}"
+        playHistoryDate = convertDateToMilliSec(dateString)
+        Log.d("calendar", "${dateString}:${playHistoryDate}")
     }
+
+
 
     private fun savePlayHistory() {
         if (validateFields()) {
@@ -72,5 +86,20 @@ class CreateNewPlayHistoryFragment: Fragment() {
             return false
         }
         return true
+    }
+
+    //yyyy/MM/dd -> MilliSec
+    fun convertDateToMilliSec(date: String): Long {
+        val dataFormat = SimpleDateFormat("yyyy/MM/dd")
+        val parsedDate = dataFormat.parse(date)
+        return parsedDate.time
+    }
+
+    //MilliSec -> yyyy/MM/dd
+    fun convertMilliSecToDate(milliSec: Long): String{
+        val calender = Calendar.getInstance()
+        calender.timeInMillis = milliSec
+        val dataFormat = SimpleDateFormat("yyyy/MM/dd")
+        return dataFormat.format(calender.time)
     }
 }
