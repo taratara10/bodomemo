@@ -25,7 +25,6 @@ class CreateNewPlayHistoryFragment: Fragment() {
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private var playHistoryDate = System.currentTimeMillis()
-    private lateinit var editTextDate:EditText
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -35,24 +34,21 @@ class CreateNewPlayHistoryFragment: Fragment() {
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_create_new_play_history, container, false)
 
-        editTextDate = root.et_create_play_date
-
         //calendarView setting
         val calendarView = root.cv_play_history_calendar
         calendarView.date = playHistoryDate
         calendarView.setOnDateChangeListener(calendarListener)
         root.et_create_play_date.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
-
         root.btn_save_play_history.setOnClickListener {savePlayHistory()}
 
         return root
     }
 
-    //
+
     private val calendarListener = CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
         val dateString = "${year}/${month+1}/${dayOfMonth}"
         playHistoryDate = playHistoryViewModel.convertDateToMilliSec(dateString)
-        editTextDate.setText(dateString)
+        et_create_play_date.setText(dateString)
     }
 
 
@@ -61,6 +57,7 @@ class CreateNewPlayHistoryFragment: Fragment() {
             //一旦id = 0 でautoIncrementで設定
             val newPlayHistory = PlayHistoryEntity(playHistoryId = 0, title = et_new_play_history_title.text.toString(),date = playHistoryDate )
             playHistoryViewModel.savePlayHistory(newPlayHistory)
+
             //@Insert したidの返り値を渡す
             val insertedPlayHistoryId = playHistoryViewModel.insertedPlayHistoryId.toString()
             val action = CreateNewPlayHistoryFragmentDirections.actionNavigationCreatePlayHistoryToNavigationPlayHistoryDetail(insertedPlayHistoryId)
