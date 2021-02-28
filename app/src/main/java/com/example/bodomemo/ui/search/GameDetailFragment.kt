@@ -3,20 +3,21 @@ package com.example.bodomemo.ui.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bodomemo.R
 import com.example.bodomemo.R.id.toolbar_action_delete
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
-import kotlinx.android.synthetic.main.fragment_game_edit.view.*
+import kotlinx.android.synthetic.main.fragment_create_new_game.*
+import kotlinx.android.synthetic.main.fragment_game_detail.*
+import kotlinx.android.synthetic.main.fragment_game_detail.*
+import kotlinx.android.synthetic.main.fragment_game_detail.view.*
 
 class GameDetailFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
@@ -35,10 +36,10 @@ class GameDetailFragment: Fragment() {
 
         setHasOptionsMenu(true)
 
-        val root = inflater.inflate(R.layout.fragment_game_edit, container, false)
+        val root = inflater.inflate(R.layout.fragment_game_detail, container, false)
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        val gameTitleEditText = root.et_edit_game_title
+        val gameTitleEditText = root.et_game_title_detail
         val todoCheckBox = root.cb_edit_todo_checked
         val favoriteCheckBox = root.cb_edit_favorite_checked
         val ownedCheckBox = root.cb_edit_owned_checked
@@ -123,5 +124,14 @@ class GameDetailFragment: Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun validateFields(): Boolean {
+        if (et_game_title_detail.text?.isEmpty() == true) {
+            til_game_title_detail.error = "pleaseEnterTitle"
+            et_game_title_detail.requestFocus()
+            return false
+        }
+        return true
     }
 }
