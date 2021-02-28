@@ -15,6 +15,7 @@ import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.PlayHistoryViewModel
+import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.view.*
 import java.util.*
@@ -28,7 +29,6 @@ class PlayHistoryDetailFragment:Fragment() {
     private val createNewPlayHistoryFragmentArgs: CreateNewPlayHistoryFragmentArgs by navArgs()
 
     private lateinit var dateEditText: EditText
-    private lateinit var playHistoryTitle: String
     private var playHistoryDate: Long = 0
 
     override fun onCreateView(
@@ -47,13 +47,14 @@ class PlayHistoryDetailFragment:Fragment() {
 
 
         //title editText
-        playHistoryTitle = selectedPlayHistory.title
         val titleEditText = root.et_play_title_detail
-        titleEditText.setText(playHistoryTitle)
+        titleEditText.setText(selectedPlayHistory.title)
         titleEditText.addTextChangedListener(object :CustomTextWatcher{
             override fun afterTextChanged(s: Editable?) {
-                selectedPlayHistory.title = s.toString()
-                updatePlayHistory(selectedPlayHistory)
+                if (validateFields()){
+                    selectedPlayHistory.title = s.toString()
+                    updatePlayHistory(selectedPlayHistory)
+                }
             }
         })
 
@@ -99,7 +100,16 @@ class PlayHistoryDetailFragment:Fragment() {
     }
 
     fun updatePlayHistory(playHistoryEntity: PlayHistoryEntity) {
-        if (playHistoryTitle.trim().isNotEmpty()) playHistoryViewModel.updatePlayHistory(playHistoryEntity)
+        if (validateFields()) playHistoryViewModel.updatePlayHistory(playHistoryEntity)
+    }
+
+    private fun validateFields(): Boolean {
+        if (et_play_title_detail.text?.isEmpty() == true) {
+            til_play_title_detail.error = "pleaseEnterTitle"
+            et_play_title_detail.requestFocus()
+            return false
+        }
+        return true
     }
 
     interface CustomTextWatcher: TextWatcher {
