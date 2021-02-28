@@ -24,11 +24,9 @@ class PlayHistoryDetailFragment:Fragment() {
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
-
     private val playHistoryFragmentArgs: PlayHistoryFragmentArgs by navArgs()
     private val createNewPlayHistoryFragmentArgs: CreateNewPlayHistoryFragmentArgs by navArgs()
 
-    private lateinit var dateEditText: EditText
     private var playHistoryDate: Long = 0
 
     override fun onCreateView(
@@ -60,19 +58,12 @@ class PlayHistoryDetailFragment:Fragment() {
 
         //Date EditText
         playHistoryDate = selectedPlayHistory.date
-        dateEditText = root.et_play_date_select_detail
+        val dateEditText = root.et_play_date_select_detail
         dateEditText.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
-
-        //DatePick
-        dateEditText.setOnClickListener{
-            showDatePicker()
-        }
-
+        dateEditText.setOnClickListener{ showDatePicker() }
 
         return root
     }
-
-
 
 
 
@@ -91,7 +82,7 @@ class PlayHistoryDetailFragment:Fragment() {
                     calender.set(y,m,d)
                     playHistoryDate = calender.timeInMillis
                     selectedPlayHistory.date = playHistoryDate
-                    dateEditText.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
+                    et_play_date_select_detail.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
                     updatePlayHistory(selectedPlayHistory)
                 },
                 year,month,day
