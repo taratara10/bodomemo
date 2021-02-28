@@ -16,7 +16,7 @@ interface GameDao {
     @Update
     suspend fun updateGame(gameEntity: GameEntity)
 
-    @Query("SELECT * FROM gameEntity ORDER BY gameId DESC")
+    @Query("SELECT * FROM gameEntity ORDER BY title DESC")
     abstract fun getAllGameList(): LiveData<List<GameEntity>>
 
     @Query("SELECT * FROM gameEntity WHERE todo_check = 1")
@@ -34,7 +34,7 @@ interface GameDao {
     @Update
     suspend fun updatePlayHistory(playHistoryEntity: PlayHistoryEntity)
 
-    @Query("SELECT * FROM playHistoryEntity ORDER BY playHistoryId DESC")
+    @Query("SELECT * FROM playHistoryEntity ORDER BY date DESC")
     abstract fun getAllPlayHistory(): LiveData<List<PlayHistoryEntity>>
 
     @Query("SELECT * FROM playHistoryEntity WHERE playHistoryId = :playHistoryId")
