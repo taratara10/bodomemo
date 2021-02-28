@@ -14,15 +14,12 @@ import com.example.bodomemo.R
 import com.example.bodomemo.R.id.toolbar_action_delete
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
-import kotlinx.android.synthetic.main.fragment_create_new_game.*
-import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_game_detail.view.*
 
 class GameDetailFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedGame:GameEntity
-    private lateinit var gameTitle: String
     private val searchFragmentArgs: SearchFragmentArgs by navArgs()
     private val createNewGameFragmentArgs: CreateNewGameFragmentArgs by navArgs()
 
@@ -58,8 +55,6 @@ class GameDetailFragment: Fragment() {
         ownedCheckBox.isChecked = selectedGame.ownedCheck
         ratingBar.rating = selectedGame.rating.toFloat()
 
-        gameTitle = gameTitleEditText.text.toString()
-
         ratingBar.setOnRatingBarChangeListener { r, rating, fromUser ->
             selectedGame.rating = rating.toInt()
             updateGame(selectedGame)            
@@ -68,8 +63,10 @@ class GameDetailFragment: Fragment() {
         //editText
         gameTitleEditText.addTextChangedListener(object: CustomTextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if (validateFields()){
                 selectedGame.title = s.toString()
                 updateGame(selectedGame)
+                }
             }
         })
 
@@ -99,9 +96,7 @@ class GameDetailFragment: Fragment() {
         return root
     }
 
-    fun updateGame(gameEntity: GameEntity) {
-        if (gameTitle.trim().isNotEmpty()) gameViewModel.updateGame(gameEntity)
-    }
+
 
     interface CustomTextWatcher: TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -124,6 +119,10 @@ class GameDetailFragment: Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun updateGame(gameEntity: GameEntity) {
+        if (validateFields()) gameViewModel.updateGame(gameEntity)
     }
 
     private fun validateFields(): Boolean {
