@@ -50,7 +50,7 @@ class CreateNewPlayHistoryFragment: Fragment() {
 
     //
     private val calendarListener = CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
-        val dateString = "${year}/${month}/${dayOfMonth}"
+        val dateString = "${year}/${month+1}/${dayOfMonth}"
         playHistoryDate = convertDateToMilliSec(dateString)
         editTextDate.setText(dateString)
     }
@@ -65,6 +65,9 @@ class CreateNewPlayHistoryFragment: Fragment() {
             val insertedPlayHistoryId = playHistoryViewModel.insertedPlayHistoryId.toString()
             val action = CreateNewPlayHistoryFragmentDirections.actionNavigationCreatePlayHistoryToNavigationPlayHistoryDetail(insertedPlayHistoryId)
             findNavController().navigate(action)
+
+            //todo 追加したあと、popBackで戻りたくない
+
         }
     }
 
