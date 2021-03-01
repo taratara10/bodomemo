@@ -115,6 +115,7 @@ class GameDetailFragment: Fragment() {
         }
     }
 
+
     fun updateGame(gameEntity: GameEntity) {
         if (validateFields()) gameViewModel.updateGame(gameEntity)
     }
