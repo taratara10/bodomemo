@@ -91,11 +91,6 @@ class GameDetailFragment: Fragment() {
         return root
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateGame(selectedGame)
-    }
-
 
     interface CustomTextWatcher: TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

@@ -49,7 +49,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         val spinner = root.sp_filter_select
         val spinnerItem = resources.getStringArray(R.array.sp_game_filter)
         activity?.let { setSpinnerItem(it, spinner, spinnerItem) }
-        //setOnClickListner
+        //setOnClickListener
         spinner.onItemSelectedListener =spinnerListener
 
 
@@ -69,6 +69,13 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         return root
     }
     //ここまでonCreate
+
+
+    //画面遷移時にrecyclerViewを更新する　1回filter通さないと表示してくれない
+    override fun onResume() {
+        super.onResume()
+        searchAdapter.filter.filter("")
+    }
 
 
     override fun onViewClicked(gameId: String?) {
