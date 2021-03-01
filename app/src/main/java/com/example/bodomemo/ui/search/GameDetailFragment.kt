@@ -89,6 +89,7 @@ class GameDetailFragment: Fragment() {
         }
 
         //戻るボタンでsearchFragmentへ戻る
+        //todo ←戻るが効いて無くない？
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_gameDetailFragment_to_navigation_search)
         }
