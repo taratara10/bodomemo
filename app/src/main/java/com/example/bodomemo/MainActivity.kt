@@ -12,15 +12,22 @@ import kotlinx.android.synthetic.main.todo_list_item.*
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
 
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_todo, R.id.navigation_search, R.id.navigation_play_history))
+
+        //actionbar(toolbar)の表示
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        //set up bottom navigation
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setupWithNavController(navController)
 
 

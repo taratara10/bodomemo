@@ -95,7 +95,7 @@
     <fragment
         android:id="@+id/navigation_play_history"
         android:name="com.example.bodomemo.ui.playHistory.PlayHistoryFragment"
-        android:label="@string/title_notifications"
+        android:label="PlayHistory"
         tools:layout="@layout/fragment_play_history" >
         <action
             android:id="@+id/action_navigation_play_history_to_navigation_create_play_history"
