@@ -11,10 +11,11 @@ import com.example.bodomemo.data.db.GameEntity
 import kotlinx.android.synthetic.main.search_game_item.view.*
 import kotlinx.android.synthetic.main.simple_list_item.view.*
 
-class SimpleListAdapter(): RecyclerView.Adapter<SimpleListAdapter.SearchViewHolder>(), Filterable {
+class SimpleListAdapter(gameAddEvents: GameAddEvents): RecyclerView.Adapter<SimpleListAdapter.SearchViewHolder>(), Filterable {
 
     private var gameList: List<GameEntity> = arrayListOf()
     private var filteredGameList: List<GameEntity> = arrayListOf()
+    private val listener: GameAddEvents = gameAddEvents
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.simple_list_item, parent, false)
@@ -23,14 +24,17 @@ class SimpleListAdapter(): RecyclerView.Adapter<SimpleListAdapter.SearchViewHold
 
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(filteredGameList[position])
+        holder.bind(filteredGameList[position], listener)
     }
 
     override fun getItemCount(): Int = filteredGameList.size
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(game: GameEntity) {
+        fun bind(game: GameEntity, listener: GameAddEvents) {
             itemView.simple_list_game_title.text = game.title
+            itemView.simple_list_adapter.setOnClickListener {
+                listener.onViewClicked(game.gameId.toString())
+            }
         }
     }
 
@@ -71,5 +75,11 @@ class SimpleListAdapter(): RecyclerView.Adapter<SimpleListAdapter.SearchViewHold
         this.filteredGameList = gameItems
         notifyDataSetChanged()
     }
-    
+
+    /**
+     * RecycleView touch event callbacks
+     * */
+    interface GameAddEvents {
+        fun onViewClicked(gameId: String?)
+    }
 }
