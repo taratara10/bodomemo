@@ -4,10 +4,9 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -34,6 +33,9 @@ class PlayHistoryDetailFragment:Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
+        setHasOptionsMenu(true)
+
         val root = inflater.inflate(R.layout.fragment_play_history_detail, container, false)
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
 
@@ -89,6 +91,24 @@ class PlayHistoryDetailFragment:Fragment() {
                 )
         datePickerDialog.show()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.detail_toolbar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.toolbar_action_delete -> {
+                playHistoryViewModel.deletePlayHistory(selectedPlayHistory)
+                parentFragmentManager.popBackStack()
+                Toast.makeText(activity,"削除しました", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     fun updatePlayHistory(playHistoryEntity: PlayHistoryEntity) {
         if (validateFields()) playHistoryViewModel.updatePlayHistory(playHistoryEntity)

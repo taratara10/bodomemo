@@ -99,7 +99,7 @@ class GameDetailFragment: Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.game_detail_toolbar, menu)
+        inflater.inflate(R.menu.detail_toolbar, menu)
     }
 
 
