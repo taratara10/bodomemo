@@ -25,6 +25,8 @@ interface GameDao {
     @Query("SELECT * FROM gameEntity WHERE gameId =:gameId")
     suspend fun getGameById(gameId:Int?): GameEntity
 
+    //***
+    //PlayHistory
     @Insert
     suspend fun savePlayHistory(playHistoryEntity: PlayHistoryEntity): Long
 
@@ -39,6 +41,10 @@ interface GameDao {
 
     @Query("SELECT * FROM playHistoryEntity WHERE playHistoryId = :playHistoryId")
     suspend fun getPlayHistoryById(playHistoryId:Int?): PlayHistoryEntity
+
+    //PlayAndGameCrossRef
+    @Insert
+    suspend fun savePlayedGame(playHistoryAndGameCrossReference:  PlayAndGameCrossRef): Long
 
 
 }

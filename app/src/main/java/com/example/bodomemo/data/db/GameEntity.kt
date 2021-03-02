@@ -24,7 +24,7 @@ data class PlayHistoryEntity(
 
 @Entity(tableName = "playAndGameCrossRef",
         primaryKeys = ["playHistoryId","gameId"])
-data class PlayHistoryAndGameCrossReference(
+data class PlayAndGameCrossRef(
         val playHistoryId: Int,
         val gameId: Int,
 )
@@ -34,7 +34,7 @@ data class PlayHistoryWithGames(
         @Relation(
                 parentColumn = "playHistoryId",
                 entityColumn = "gameId",
-                associateBy = Junction(PlayHistoryAndGameCrossReference::class)
+                associateBy = Junction( PlayAndGameCrossRef::class)
         )
         val gameList: List<GameEntity>
 )
@@ -44,7 +44,7 @@ data class GamesWithPlayHistory(
         @Relation(
                 parentColumn = "gameId",
                 entityColumn = "playHistoryId",
-                associateBy = Junction(PlayHistoryAndGameCrossReference::class)
+                associateBy = Junction( PlayAndGameCrossRef::class)
         )
         val playHistoryList: List<PlayHistoryEntity>
 )
