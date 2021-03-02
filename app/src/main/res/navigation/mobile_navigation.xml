@@ -72,9 +72,6 @@
         android:name="com.example.bodomemo.ui.search.GameDetailFragment"
         android:label="GameDetailFragment"
         tools:layout="@layout/fragment_game_detail">
-        <action
-            android:id="@+id/action_gameDetailFragment_to_navigation_search"
-            app:destination="@id/navigation_search" />
         <argument
             android:name="gameId"
             android:defaultValue="@null"
@@ -129,9 +126,6 @@
         android:id="@+id/navigation_play_history_detail"
         android:name="com.example.bodomemo.ui.playHistory.PlayHistoryDetailFragment"
         tools:layout="@layout/fragment_play_history_detail">
-        <action
-            android:id="@+id/action_navigation_play_history_detail_to_navigation_play_history"
-            app:destination="@id/navigation_play_history" />
         <action
             android:id="@+id/action_navigation_play_history_detail_to_navigation_game_detail"
             app:destination="@id/navigation_game_detail" />
