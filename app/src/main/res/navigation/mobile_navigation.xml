@@ -116,7 +116,8 @@
         tools:layout="@layout/fragment_create_new_play_history">
         <action
             android:id="@+id/action_navigation_create_play_history_to_navigation_play_history_detail"
-            app:destination="@id/navigation_play_history_detail" />
+            app:destination="@id/navigation_play_history_detail"
+            app:popUpTo="@+id/navigation_play_history"/>
         <argument
             android:name="createdPlayHistoryId"
             android:defaultValue="@null"
