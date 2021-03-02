@@ -1,5 +1,8 @@
 package com.example.bodomemo.ui.playHistory
 
-class PlayHistoryAddGameFragment{
+import androidx.fragment.app.Fragment
+
+class PlayHistoryAddGameFragment: Fragment(){
+
 
 }

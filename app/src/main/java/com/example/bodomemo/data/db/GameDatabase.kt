@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 @Database(entities = [GameEntity::class,
                     PlayHistoryEntity::class,
                     PlayHistoryAndGameCrossReference::class],
-                    version = 5)
+                    version = 6)
 abstract class GameDatabase: RoomDatabase() {
 
     abstract fun gameDao(): GameDao

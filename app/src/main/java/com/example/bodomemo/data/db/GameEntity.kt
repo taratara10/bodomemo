@@ -22,7 +22,7 @@ data class PlayHistoryEntity(
 
 
 
-@Entity(tableName = "playHistoryAndGameCrossReference",
+@Entity(tableName = "playAndGameCrossRef",
         primaryKeys = ["playHistoryId","gameId"])
 data class PlayHistoryAndGameCrossReference(
         val playHistoryId: Int,
