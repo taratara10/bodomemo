@@ -35,10 +35,10 @@ class AddTodoFragment:Fragment() ,AddTodoAdapter.CheckEvents{
 
         //Setting up RecyclerView
         val todo_list = root.rv_add_todo_list
-        todo_list.setEmptyView(root.add_todo_empty_view)
-        todo_list?.layoutManager = LinearLayoutManager(activity)
         addTodoAdapter = AddTodoAdapter(this)
-        todo_list?.adapter = addTodoAdapter
+        todo_list.setEmptyView(root.add_todo_empty_view)
+        todo_list.layoutManager = LinearLayoutManager(activity)
+        todo_list.adapter = addTodoAdapter
 
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
@@ -47,9 +47,9 @@ class AddTodoFragment:Fragment() ,AddTodoAdapter.CheckEvents{
             addTodoAdapter.filter.filter(et_search_game.text)
         })
 
-        //検索した際にfilter
+        //Search filter
         et_search_game = root.et_search_game_title_todo
-        et_search_game.addTextChangedListener(object: AddTodoFragment.CustomTextWatcher {
+        et_search_game.addTextChangedListener(object: CustomTextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 addTodoAdapter.filter.filter(s)
             }
