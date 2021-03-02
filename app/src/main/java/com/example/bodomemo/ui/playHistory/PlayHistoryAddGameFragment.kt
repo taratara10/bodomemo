@@ -51,7 +51,7 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
         })
 
         //Search filter
-        et_play_history_add_game_title.addTextChangedListener(object: CustomTextWatcher {
+        root.et_play_history_add_game_title.addTextChangedListener(object: CustomTextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 simpleListAdapter.filter.filter(s)
             }

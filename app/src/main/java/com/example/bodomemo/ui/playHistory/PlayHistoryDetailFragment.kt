@@ -5,16 +5,15 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bodomemo.R
-import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.PlayHistoryViewModel
-import kotlinx.android.synthetic.main.fragment_game_detail.*
+import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.view.*
 import java.util.*
@@ -63,6 +62,14 @@ class PlayHistoryDetailFragment:Fragment() {
         val dateEditText = root.et_play_date_select_detail
         dateEditText.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
         dateEditText.setOnClickListener{ showDatePicker() }
+
+        //add game
+        root.btn_play_history_add_game_tentative.setOnClickListener {
+            val action = PlayHistoryDetailFragmentDirections
+                    .actionNavigationPlayHistoryDetailToNavigationPlayHistoryAddGame(selectedPlayHistoryId.toString())
+            findNavController().navigate(action)
+
+        }
 
         return root
     }

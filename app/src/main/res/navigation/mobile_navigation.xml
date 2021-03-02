@@ -151,6 +151,11 @@
         <action
             android:id="@+id/action_navigation_play_history_add_game_to_navigation_play_history_detail"
             app:destination="@id/navigation_play_history_detail" />
+        <argument
+            android:name="playHistoryId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
 
