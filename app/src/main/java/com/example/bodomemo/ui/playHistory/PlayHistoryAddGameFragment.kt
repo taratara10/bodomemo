@@ -22,7 +22,7 @@ import com.example.bodomemo.ui.todo.AddTodoFragment
 import kotlinx.android.synthetic.main.fragment_play_history_add_game.*
 import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 
-class PlayHistoryAddGameFragment: Fragment(){
+class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
     private lateinit var playAndGameCrossRefViewModel: PlayAndGameCrossRefViewModel
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
@@ -41,7 +41,7 @@ class PlayHistoryAddGameFragment: Fragment(){
 
         //setting up recyclerView
         val game_list = root.rv_play_history_add_game_list
-        simpleListAdapter = SimpleListAdapter()
+        simpleListAdapter = SimpleListAdapter(this)
         game_list.setEmptyView(root.play_history_add_game_empty_view)
         game_list.layoutManager = LinearLayoutManager(activity)
         game_list.adapter = simpleListAdapter
@@ -67,6 +67,11 @@ class PlayHistoryAddGameFragment: Fragment(){
     interface CustomTextWatcher: TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun afterTextChanged(s: Editable?) {}
+    }
+
+    //recyclerView item click events
+    override fun onViewClicked(gameId: String?) {
+        TODO("Not yet implemented")
     }
 
 }

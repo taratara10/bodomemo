@@ -17,7 +17,7 @@ import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.view.*
 
-class CreateNewGameFragment : Fragment() {
+class CreateNewGameFragment : Fragment(), SimpleListAdapter.GameAddEvents {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var simpleListAdapter: SimpleListAdapter
 
@@ -33,7 +33,7 @@ class CreateNewGameFragment : Fragment() {
         val search_game_list = root.rv_new_game_search_game_list
         search_game_list.setEmptyView(root.create_empty_view)
         search_game_list?.layoutManager = LinearLayoutManager(activity)
-        simpleListAdapter = SimpleListAdapter()
+        simpleListAdapter = SimpleListAdapter(this)
         search_game_list?.adapter = simpleListAdapter
 
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
@@ -85,4 +85,10 @@ class CreateNewGameFragment : Fragment() {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun afterTextChanged(s: Editable?) {}
     }
+
+    override fun onViewClicked(gameId: String?) {
+        //No Events
+    }
+
+
 }
