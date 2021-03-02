@@ -79,4 +79,16 @@ class GameRepository(application: Application) {
     fun getPlayHistoryById(playHistoryId: Int?): PlayHistoryEntity = runBlocking {
         gameDao.getPlayHistoryById(playHistoryId)
     }
+
+    /**
+     * playAndGameCrossRef
+     * */
+
+    fun savePlayedGame(ref: PlayAndGameCrossRef): Long = runBlocking{
+        gameDao.savePlayedGame(ref)
+    }
+
+    fun deletePlayedGame(ref: PlayAndGameCrossRef) = runBlocking{
+        gameDao.deletePlayedGame(ref)
+    }
 }

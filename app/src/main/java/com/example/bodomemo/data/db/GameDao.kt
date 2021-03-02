@@ -44,7 +44,10 @@ interface GameDao {
 
     //PlayAndGameCrossRef
     @Insert
-    suspend fun savePlayedGame(playHistoryAndGameCrossReference:  PlayAndGameCrossRef): Long
+    suspend fun savePlayedGame(playAndGameCrossRef:  PlayAndGameCrossRef): Long
+
+    @Delete
+    suspend fun deletePlayedGame(playAndGameCrossRef: PlayAndGameCrossRef)
 
 
 }
