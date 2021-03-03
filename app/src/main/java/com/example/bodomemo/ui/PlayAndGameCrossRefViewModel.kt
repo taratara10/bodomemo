@@ -9,12 +9,12 @@ class PlayAndGameCrossRefViewModel(application: Application) : AndroidViewModel(
 
     private val repository : GameRepository = GameRepository(application)
 
-    fun savePlayedGame(game: PlayAndGameCrossRef) {
-        repository.savePlayedGame(game)
+    fun savePlayedGame(crossRef: PlayAndGameCrossRef) {
+        repository.savePlayedGame(crossRef)
     }
 
-    fun deletePlayedGame(game: PlayAndGameCrossRef){
-        repository.deletePlayedGame(game)
+    fun deletePlayedGame(crossRef: PlayAndGameCrossRef){
+        repository.deletePlayedGame(crossRef)
     }
 
 }
