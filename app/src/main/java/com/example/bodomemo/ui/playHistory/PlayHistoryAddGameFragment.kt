@@ -74,6 +74,7 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
     }
 
     //recyclerView item click events
+    //CrossRefにINSERTして、playHistoryIdを渡す
     override fun onViewClicked(gameId: String?) {
         if(gameId != null) {
             val newReference = PlayAndGameCrossRef(
@@ -82,7 +83,9 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
                     )
             playAndGameCrossRefViewModel.savePlayedGame(newReference)
         }
-        parentFragmentManager.popBackStack()
+        val action = PlayHistoryAddGameFragmentDirections
+                .actionNavigationPlayHistoryAddGameToNavigationPlayHistoryDetail(playHistoryDetailFragmentArgs.playHistoryId.toString())
+        findNavController().navigate(action)
     }
 
 }

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -17,13 +18,16 @@ import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.view.*
 import java.util.*
+import kotlin.properties.Delegates
 
 class PlayHistoryDetailFragment:Fragment() {
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
+    private var selectedPlayHistoryId by Delegates.notNull<Int>()
     private val playHistoryFragmentArgs: PlayHistoryFragmentArgs by navArgs()
     private val createNewPlayHistoryFragmentArgs: CreateNewPlayHistoryFragmentArgs by navArgs()
+    private val playHistoryAddGameFragmentArgs: PlayHistoryAddGameFragmentArgs by navArgs()
 
     private var playHistoryDate: Long = 0
 
@@ -39,8 +43,9 @@ class PlayHistoryDetailFragment:Fragment() {
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
 
         //navArgsのうちnullでないほうの値をセット
-        val selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
+        selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
                 ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
+                ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
                 ?: throw Exception("cannot get playHistoryId")
         selectedPlayHistory = playHistoryViewModel.getPlayHistoryById(selectedPlayHistoryId)
 
@@ -74,6 +79,14 @@ class PlayHistoryDetailFragment:Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
+                ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
+                        ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
+                        ?: throw Exception("cannot get playHistoryId")
+        Log.d("resume","${selectedPlayHistory}")
+    }
 
 
 
