@@ -96,7 +96,7 @@ class GameRepository(application: Application) {
      * playWithGames
      * */
 
-    fun getPlayedGameById(playHistoryId: Int?): LiveData<List<PlayHistoryWithGames>> = runBlocking {
+    fun getPlayedGameById(playHistoryId: Int?): LiveData<PlayHistoryWithGames> = runBlocking {
         gameDao.getPlayedGameById(playHistoryId)
     }
 }

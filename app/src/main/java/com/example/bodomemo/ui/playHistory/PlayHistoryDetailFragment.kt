@@ -61,7 +61,7 @@ class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
         recyclerView.adapter = simpleListAdapter
 
         playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{
-            simpleListAdapter.setAllGames(it)
+            simpleListAdapter.setAllGames(it.gameList)
         })
 
 

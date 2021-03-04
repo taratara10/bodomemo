@@ -59,7 +59,7 @@ interface GameDao {
      **/
     @Transaction
     @Query("SELECT * FROM playHistoryEntity WHERE playHistoryId = :playHistoryId")
-    fun getPlayedGameById(playHistoryId:Int?): LiveData<List<PlayHistoryWithGames>>
+    fun getPlayedGameById(playHistoryId:Int?): LiveData<PlayHistoryWithGames>
 
 
 

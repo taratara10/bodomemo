@@ -37,7 +37,7 @@ class PlayHistoryViewModel(application: Application) : AndroidViewModel(applicat
     }
 
 
-    fun getPlayedGameById(playHistoryId: Int?): LiveData<List<PlayHistoryWithGames>>{
+    fun getPlayedGameById(playHistoryId: Int?): LiveData<PlayHistoryWithGames>{
         return repository.getPlayedGameById(playHistoryId)
     }
 
