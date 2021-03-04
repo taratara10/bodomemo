@@ -84,7 +84,7 @@ class GameRepository(application: Application) {
      * playAndGameCrossRef
      * */
 
-    fun savePlayedGame(ref: PlayAndGameCrossRef): Long = runBlocking{
+    fun savePlayedGame(ref: PlayAndGameCrossRef) = runBlocking{
         gameDao.savePlayedGame(ref)
     }
 

@@ -43,8 +43,8 @@ interface GameDao {
     suspend fun getPlayHistoryById(playHistoryId:Int?): PlayHistoryEntity
 
     //PlayAndGameCrossRef
-    @Insert
-    suspend fun savePlayedGame(playAndGameCrossRef:  PlayAndGameCrossRef): Long
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun savePlayedGame(playAndGameCrossRef:  PlayAndGameCrossRef)
 
     @Delete
     suspend fun deletePlayedGame(playAndGameCrossRef: PlayAndGameCrossRef)
