@@ -4,7 +4,6 @@ import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.ui.GameViewModel
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
@@ -36,7 +34,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
         //Setting up RecyclerView
         val search_game_list = root.rv_search_game_list
-        search_game_list.setEmptyView(root.search_empty_view)
+        search_game_list.setEmptyView(root.play_history_detail_empty_view)
         search_game_list?.layoutManager = LinearLayoutManager(activity)
         searchAdapter =  SearchAdapter(this)
         search_game_list?.adapter = searchAdapter

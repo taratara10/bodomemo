@@ -75,7 +75,7 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_empty_view"
+        android:id="@+id/play_history_detail_empty_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

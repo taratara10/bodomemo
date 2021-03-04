@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.bodomemo.data.GameRepository
 import com.example.bodomemo.data.db.PlayHistoryEntity
+import com.example.bodomemo.data.db.PlayHistoryWithGames
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,6 +34,11 @@ class PlayHistoryViewModel(application: Application) : AndroidViewModel(applicat
 
     fun getPlayHistoryById(playHistoryId: Int?): PlayHistoryEntity{
         return repository.getPlayHistoryById(playHistoryId)
+    }
+
+
+    fun getPlayedGameById(playHistoryId: Int?): LiveData<List<PlayHistoryWithGames>>{
+        return repository.getPlayedGameById(playHistoryId)
     }
 
 

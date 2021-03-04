@@ -46,13 +46,13 @@
 
 
     <com.example.bodomemo.EmptyRecyclerView
-        android:id="@+id/rv_play_game_list"
+        android:id="@+id/rv_played_game_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/til_play_title_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/til_play_date_select" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -70,13 +70,13 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_empty_view"
+        android:id="@+id/play_history_detail_empty_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rv_play_game_list"
-        app:layout_constraintStart_toStartOf="@+id/rv_play_game_list"
+        app:layout_constraintEnd_toEndOf="@+id/rv_played_game_list"
+        app:layout_constraintStart_toStartOf="@+id/rv_played_game_list"
         app:layout_constraintTop_toBottomOf="@+id/til_play_date_select">
 
         <TextView

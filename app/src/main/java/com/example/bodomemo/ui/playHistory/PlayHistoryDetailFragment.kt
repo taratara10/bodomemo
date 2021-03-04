@@ -11,19 +11,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.PlayHistoryViewModel
+import com.example.bodomemo.ui.search.SimpleListAdapter
 import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.view.*
 import java.util.*
 import kotlin.properties.Delegates
 
-class PlayHistoryDetailFragment:Fragment() {
+class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
+    private lateinit var simpleListAdapter: SimpleListAdapter
     private var selectedPlayHistoryId by Delegates.notNull<Int>()
     private val playHistoryFragmentArgs: PlayHistoryFragmentArgs by navArgs()
     private val createNewPlayHistoryFragmentArgs: CreateNewPlayHistoryFragmentArgs by navArgs()
@@ -48,6 +51,19 @@ class PlayHistoryDetailFragment:Fragment() {
                 ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
                 ?: throw Exception("cannot get playHistoryId")
         selectedPlayHistory = playHistoryViewModel.getPlayHistoryById(selectedPlayHistoryId)
+
+
+        //recyclerView
+        val recyclerView = root.rv_played_game_list
+        simpleListAdapter = SimpleListAdapter(this)
+        recyclerView.setEmptyView(root.play_history_detail_empty_view)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.adapter = simpleListAdapter
+
+        playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{
+            simpleListAdapter.setAllGames(it)
+        })
+
 
 
         //title editText
@@ -146,6 +162,10 @@ class PlayHistoryDetailFragment:Fragment() {
     interface CustomTextWatcher: TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
+
+    override fun onViewClicked(gameId: String?) {
+        TODO("Not yet implemented")
     }
 
 }

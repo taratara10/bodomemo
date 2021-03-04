@@ -6,7 +6,9 @@ import androidx.room.*
 @Dao
 interface GameDao {
 
-    //GameList
+    /**
+     * GameEntity
+     **/
     @Insert
     suspend fun saveGame(gameEntity: GameEntity): Long
 
@@ -25,8 +27,9 @@ interface GameDao {
     @Query("SELECT * FROM gameEntity WHERE gameId =:gameId")
     suspend fun getGameById(gameId:Int?): GameEntity
 
-    //***
-    //PlayHistory
+    /**
+     * PlayHistory
+     **/
     @Insert
     suspend fun savePlayHistory(playHistoryEntity: PlayHistoryEntity): Long
 
@@ -42,12 +45,27 @@ interface GameDao {
     @Query("SELECT * FROM playHistoryEntity WHERE playHistoryId = :playHistoryId")
     suspend fun getPlayHistoryById(playHistoryId:Int?): PlayHistoryEntity
 
-    //PlayAndGameCrossRef
+    /**
+     * playAndGameCrossRef
+     **/
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun savePlayedGame(playAndGameCrossRef:  PlayAndGameCrossRef)
 
     @Delete
     suspend fun deletePlayedGame(playAndGameCrossRef: PlayAndGameCrossRef)
+
+    /**
+     * PlayWithGame
+     **/
+    @Transaction
+    @Query("SELECT * FROM playHistoryEntity WHERE playHistoryId = :playHistoryId")
+    fun getPlayedGameById(playHistoryId:Int?): LiveData<List<PlayHistoryWithGames>>
+
+
+
+
+
+
 
 
 }

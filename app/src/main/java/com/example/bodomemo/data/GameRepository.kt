@@ -26,7 +26,7 @@ class GameRepository(application: Application) {
     }
 
     /**
-     * Game List
+     * GameEntity
      * */
 
     fun saveGame(game: GameEntity): Long = runBlocking {
@@ -90,5 +90,13 @@ class GameRepository(application: Application) {
 
     fun deletePlayedGame(ref: PlayAndGameCrossRef) = runBlocking{
         gameDao.deletePlayedGame(ref)
+    }
+
+    /**
+     * playWithGames
+     * */
+
+    fun getPlayedGameById(playHistoryId: Int?): LiveData<List<PlayHistoryWithGames>> = runBlocking {
+        gameDao.getPlayedGameById(playHistoryId)
     }
 }
