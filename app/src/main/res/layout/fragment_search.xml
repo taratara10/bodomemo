@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/sp_filter_select"
-        tools:listitem="@layout/search_game_item"/>
+        tools:listitem="@layout/search_game_item" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

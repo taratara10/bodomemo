@@ -63,8 +63,6 @@ class CreateNewPlayHistoryFragment: Fragment() {
             val action = CreateNewPlayHistoryFragmentDirections.actionNavigationCreatePlayHistoryToNavigationPlayHistoryDetail(insertedPlayHistoryId)
             findNavController().navigate(action)
 
-            //todo 追加したあと、popBackで戻りたくない
-
         }
     }
 
