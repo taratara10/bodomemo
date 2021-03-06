@@ -78,6 +78,7 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
     override fun onViewClicked(gameId: String?) {
         if(gameId != null) {
             val newReference = PlayAndGameCrossRef(
+                    referenceId = 0,
                     playHistoryId = playHistoryDetailFragmentArgs.playHistoryId!!.toInt(),
                     gameId = gameId.toInt()
                     )
