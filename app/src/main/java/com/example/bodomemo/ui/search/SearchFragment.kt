@@ -39,8 +39,12 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         searchAdapter =  SearchAdapter(this)
         search_game_list?.adapter = searchAdapter
 
+        //set LiveData
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             searchAdapter.setAllGames(it)
+
+            //画面遷移時にrecyclerViewを更新する　1回filter通さないと表示してくれない
+            searchAdapter.filter.filter("")
         })
 
         // Set spinner layout
@@ -69,11 +73,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     //ここまでonCreate
 
 
-    //画面遷移時にrecyclerViewを更新する　1回filter通さないと表示してくれない
-    override fun onResume() {
-        super.onResume()
-        searchAdapter.filter.filter("")
-    }
+
 
 
     override fun onViewClicked(gameId: String?) {
