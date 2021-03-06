@@ -85,7 +85,7 @@ class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
         dateEditText.setOnClickListener{ showDatePicker() }
 
         //add game
-        root.btn_play_history_add_game_tentative.setOnClickListener {
+        root.play_history_detail_add_game.setOnClickListener {
             val action = PlayHistoryDetailFragmentDirections
                     .actionNavigationPlayHistoryDetailToNavigationPlayHistoryAddGame(selectedPlayHistoryId.toString())
             findNavController().navigate(action)

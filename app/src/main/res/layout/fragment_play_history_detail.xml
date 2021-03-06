@@ -44,15 +44,18 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+<!--  empty View  -->
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/play_history_detail_empty_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rv_played_game_list"
-        app:layout_constraintStart_toStartOf="@+id/rv_played_game_list"
-        app:layout_constraintTop_toTopOf="@+id/rv_played_game_list">
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/play_history_detail_add_game">
 
         <TextView
             android:id="@+id/tv_search_empty"
@@ -64,16 +67,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.example.bodomemo.EmptyRecyclerView
+        android:id="@+id/rv_played_game_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/play_history_detail_add_game" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/play_history_detail_add_game"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/shape_rounded_corner"
+        android:background="@drawable/shape_rounded_corner_add"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -102,18 +113,7 @@
             app:layout_constraintTop_toTopOf="@+id/simple_list_game_title"
             app:srcCompat="@drawable/ic_baseline_add_24" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.example.bodomemo.EmptyRecyclerView
-        android:id="@+id/rv_played_game_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/play_history_detail_add_game" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -128,20 +128,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="24dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_play_history_add_game_tentative"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9"
-        app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
