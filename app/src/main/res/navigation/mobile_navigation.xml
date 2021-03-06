@@ -150,7 +150,9 @@
         tools:layout="@layout/fragment_play_history_add_game">
         <action
             android:id="@+id/action_navigation_play_history_add_game_to_navigation_play_history_detail"
-            app:destination="@id/navigation_play_history_detail" />
+            app:destination="@id/navigation_play_history_detail"
+            app:popUpTo="@id/navigation_play_history_detail"
+            app:popUpToInclusive="true"/>
         <argument
             android:name="playHistoryId"
             android:defaultValue="@null"
