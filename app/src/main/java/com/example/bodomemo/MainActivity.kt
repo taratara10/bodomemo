@@ -34,17 +34,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-
-        //トップレベルのFragmentを設定
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_todo, R.id.navigation_search, R.id.navigation_play_history))
-
         //Fragmentのコールバックがあればそれを実行する
         if (onBackPressedDispatcher.hasEnabledCallbacks()) {
             onBackPressedDispatcher.onBackPressed()
         }
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        return true
     }
 }

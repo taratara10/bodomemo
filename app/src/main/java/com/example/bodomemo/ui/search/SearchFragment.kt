@@ -73,10 +73,6 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     }
     //ここまでonCreate
 
-
-
-
-
     override fun onViewClicked(gameId: String?) {
         if (gameId != null){
             val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
