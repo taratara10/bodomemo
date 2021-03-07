@@ -65,6 +65,11 @@
             android:defaultValue="@null"
             app:nullable="true"
             app:argType="string"/>
+        <argument
+            android:name="gameId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
 <!--  game detail  -->

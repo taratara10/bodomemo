@@ -46,6 +46,7 @@ class GameDetailFragment: Fragment() {
         //searchFragment、createFragmentのうちnullでないほうの値をセット
         val selectedGameId = searchFragmentArgs.gameId?.toInt()
                 ?: createNewGameFragmentArgs.createdNewId?.toInt()
+                ?: createNewGameFragmentArgs.gameId?.toInt()
                 ?: throw Exception("cannot get gameId")
 
         //  set content

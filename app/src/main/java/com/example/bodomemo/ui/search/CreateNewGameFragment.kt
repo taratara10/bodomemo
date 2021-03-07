@@ -17,9 +17,9 @@ import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.view.*
 
-class CreateNewGameFragment : Fragment(), SimpleListAdapter.GameAddEvents {
+class CreateNewGameFragment : Fragment(), SearchAdapter.DetailsEvents {
     private lateinit var gameViewModel: GameViewModel
-    private lateinit var simpleListAdapter: SimpleListAdapter
+    private lateinit var searchAdapter: SearchAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -33,18 +33,18 @@ class CreateNewGameFragment : Fragment(), SimpleListAdapter.GameAddEvents {
         val search_game_list = root.rv_new_game_search_game_list
         search_game_list.setEmptyView(root.create_empty_view)
         search_game_list?.layoutManager = LinearLayoutManager(activity)
-        simpleListAdapter = SimpleListAdapter(this)
-        search_game_list?.adapter = simpleListAdapter
+        searchAdapter =  SearchAdapter(this)
+        search_game_list?.adapter = searchAdapter
 
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
-            simpleListAdapter.setAllGames(it)
+            searchAdapter.setAllGames(it)
         })
 
         //EditText filter recycleView item
         val et_search_title = root.et_new_game_title
         et_search_title.addTextChangedListener(object : CustomTextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                simpleListAdapter.filter.filter(s)
+                searchAdapter.filter.filter(s)
             }
         })
 
@@ -87,7 +87,10 @@ class CreateNewGameFragment : Fragment(), SimpleListAdapter.GameAddEvents {
     }
 
     override fun onViewClicked(gameId: String?) {
-        //No Events
+        if (gameId != null){
+            val action = CreateNewGameFragmentDirections.actionNavigationCreateGameToNavigationGameDetail(gameId)
+            findNavController().navigate(action)
+        }
     }
 
 
