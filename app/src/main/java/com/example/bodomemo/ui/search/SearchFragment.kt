@@ -96,10 +96,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
                 0 -> { searchAdapter.filterAllGame() }
                 //favorite
                 1 -> { searchAdapter.filterFavorite() }
-                //to do
-                2 -> { searchAdapter.filterTodo()}
                 //owned
-                3 -> { searchAdapter.filterOwned() }
+                2 -> { searchAdapter.filterOwned() }
             }
 
         }

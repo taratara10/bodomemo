@@ -102,13 +102,6 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
         notifyDataSetChanged()
     }
 
-    //filter to do
-    fun filterTodo(){
-        gameList = gameList.filter { it.todoCheck }
-        filteredGameList = gameList
-        notifyDataSetChanged()
-    }
-
 
     /**
      * RecycleView touch event callbacks
