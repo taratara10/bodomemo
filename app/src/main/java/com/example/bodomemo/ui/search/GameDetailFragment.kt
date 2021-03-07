@@ -3,6 +3,7 @@ package com.example.bodomemo.ui.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -107,7 +108,7 @@ class GameDetailFragment: Fragment() {
         return when (item.itemId) {
             toolbar_action_delete -> {
                 gameViewModel.deleteGame(selectedGame)
-                parentFragmentManager.popBackStack()
+                findNavController().popBackStack()
                 Toast.makeText(activity,"削除しました", Toast.LENGTH_SHORT).show()
                 true
             }

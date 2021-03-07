@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +66,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
         //fab_Btn -> createNewGameFragment
         root.btn_create_new_game.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_search_to_navigation_create_todo)
+            findNavController().navigate(R.id.action_navigation_search_to_navigation_create_game)
         }
 
         return root

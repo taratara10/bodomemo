@@ -137,7 +137,7 @@ class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
         return when (item.itemId) {
             R.id.toolbar_action_delete -> {
                 playHistoryViewModel.deletePlayHistory(selectedPlayHistory)
-                parentFragmentManager.popBackStack()
+                findNavController().popBackStack()
                 Toast.makeText(activity,"削除しました", Toast.LENGTH_SHORT).show()
                 true
             }
