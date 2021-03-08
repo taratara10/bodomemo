@@ -88,20 +88,26 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
         notifyDataSetChanged()
     }
 
-    //filter favorite
+    //お気に入り
     fun filterFavorite(){
-        gameList = gameList.filter { it.favoriteCheck }
+        gameList = originalGameList.filter { it.favoriteCheck }
         filteredGameList = gameList
         notifyDataSetChanged()
     }
 
-    //filter owned
+    //持ってる
     fun filterOwned(){
-        gameList = gameList.filter { it.ownedCheck }
+        gameList = originalGameList.filter { it.ownedCheck }
         filteredGameList = gameList
         notifyDataSetChanged()
     }
 
+    //評価準
+    fun filterRating(){
+        gameList = originalGameList.sortedByDescending { it.rating }
+        filteredGameList = gameList
+        notifyDataSetChanged()
+    }
 
     /**
      * RecycleView touch event callbacks

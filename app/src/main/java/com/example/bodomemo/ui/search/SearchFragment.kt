@@ -98,6 +98,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
                 1 -> { searchAdapter.filterFavorite() }
                 //owned
                 2 -> { searchAdapter.filterOwned() }
+                //rating
+                3 -> { searchAdapter.filterRating()}
             }
 
         }
