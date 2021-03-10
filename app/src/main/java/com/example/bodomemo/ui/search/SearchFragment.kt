@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.ui.GameViewModel
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
@@ -71,7 +72,6 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
         return root
     }
-    //ここまでonCreate
 
     override fun onViewClicked(gameId: String?) {
         if (gameId != null){
@@ -101,6 +101,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
                 //rating
                 3 -> { searchAdapter.filterRating()}
             }
+            //検索フィールドを毎回空にする
+            et_game_detail_title.setText("")
 
         }
         override fun onNothingSelected(parent: AdapterView<*>?) {}

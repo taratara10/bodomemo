@@ -84,6 +84,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     //すべてのゲーム
     fun filterAllGame(){
+        gameList = originalGameList
         filteredGameList = originalGameList
         notifyDataSetChanged()
     }
