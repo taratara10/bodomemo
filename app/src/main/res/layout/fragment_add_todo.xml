@@ -6,17 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <com.example.bodomemo.EmptyRecyclerView
-        android:id="@+id/rv_add_todo_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tl_search_game_title_todo"
-        tools:listitem="@layout/todo_list_item"/>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tl_search_game_title_todo"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -49,6 +38,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" />
 
+
+    <com.example.bodomemo.EmptyRecyclerView
+        android:id="@+id/rv_add_todo_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tl_search_game_title_todo"
+        tools:listitem="@layout/todo_list_item" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/add_todo_empty_view"

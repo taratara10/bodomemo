@@ -51,4 +51,6 @@ class PlayHistoryAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<Pl
     interface DetailsEvents {
         fun onViewClicked(playHistoryId: String?)
     }
+
+
 }
