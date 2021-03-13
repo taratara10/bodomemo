@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
-                android:hint="ゲーム会名、遊んだ場所"
+                android:hint="memo"
                 android:inputType="textMultiLine|textFilter" />
         </com.google.android.material.textfield.TextInputLayout>
 
