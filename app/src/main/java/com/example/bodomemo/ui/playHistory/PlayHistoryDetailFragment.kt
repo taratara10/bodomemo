@@ -92,6 +92,19 @@ class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
 
         }
 
+        //memo
+        val memoEditText = root.et_play_history_detail_memo
+        memoEditText.setText(selectedPlayHistory.memo)
+        memoEditText.addTextChangedListener(object :CustomTextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                if (validateFields()){
+                    selectedPlayHistory.memo = s.toString()
+                    updatePlayHistory(selectedPlayHistory)
+                }
+            }
+        })
+
+
         return root
     }
 

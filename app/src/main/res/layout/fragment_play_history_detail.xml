@@ -53,7 +53,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/play_history_detail_empty_view"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             app:layout_constraintBottom_toTopOf="@+id/til_play_history_detail_memo"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline"
@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
-                android:hint="memo"
+                android:hint="メモ"
                 android:inputType="textMultiLine|textFilter" />
         </com.google.android.material.textfield.TextInputLayout>
 
