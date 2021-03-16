@@ -8,13 +8,13 @@ import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import kotlinx.android.synthetic.main.todo_list_item.view.*
 
-class DragTodoAdapter(todoEvents: TodoAdapter.TodoEvents): DragDropSwipeAdapter<String, DragTodoAdapter.TodoViewHolder>() {
+class DragTodoAdapter(todoEvents: TodoEvents): DragDropSwipeAdapter<String, DragTodoAdapter.TodoViewHolder>() {
     private var todoList: List<GameEntity> = arrayListOf()
-    private val listener: TodoAdapter.TodoEvents = todoEvents
+    private val listener: TodoEvents = todoEvents
 
 
     class TodoViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
-        fun bind(game: GameEntity, listener: TodoAdapter.TodoEvents) {
+        fun bind(game: GameEntity, listener: TodoEvents) {
             itemView.tv_todo_item_title.text = game.title
             //to_do_check = true のものを空のcheckBox(false)で表したい
             itemView.cb_todo_checked.isChecked = !game.todoCheck

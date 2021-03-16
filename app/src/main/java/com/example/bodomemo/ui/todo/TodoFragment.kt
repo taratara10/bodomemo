@@ -16,10 +16,10 @@ import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_todo.view.*
 
-class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
+class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
 
     private lateinit var gameViewModel: GameViewModel
-    private lateinit var todoAdapter: TodoAdapter
+    private lateinit var dragTodoAdapter: DragTodoAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -30,15 +30,15 @@ class TodoFragment : Fragment(), TodoAdapter.TodoEvents {
         val root = inflater.inflate(R.layout.fragment_todo, container, false)
 
         //Setting up RecyclerView
-        val todo_list = root.rv_todo_list
-        todo_list.setEmptyView(root.todo_empty_view)
-        todo_list?.layoutManager = LinearLayoutManager(activity)
-        todoAdapter = TodoAdapter(this)
-        todo_list?.adapter = todoAdapter
+        val todo_list = root.rv_drag_todo_list
+//        todo_list.setEmptyView(root.todo_empty_view)
+        todo_list.layoutManager = LinearLayoutManager(activity)
+        dragTodoAdapter = DragTodoAdapter(this)
+        todo_list?.adapter = dragTodoAdapter
 
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         gameViewModel.getTodoList().observe(viewLifecycleOwner, Observer {
-            todoAdapter.setAllGames(it)
+            dragTodoAdapter.setAllGames(it)
         })
 
         root.btn_create_todo.setOnClickListener {
