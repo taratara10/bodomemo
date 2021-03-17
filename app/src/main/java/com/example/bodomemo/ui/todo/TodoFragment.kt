@@ -30,8 +30,8 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         val root = inflater.inflate(R.layout.fragment_todo, container, false)
 
         //Setting up RecyclerView
-        val todo_list = root.rv_drag_todo_list
 //        todo_list.setEmptyView(root.todo_empty_view)
+        val todo_list = root.rv_drag_todo_list
         todo_list.layoutManager = LinearLayoutManager(activity)
         dragTodoAdapter = DragTodoAdapter(this)
         todo_list?.adapter = dragTodoAdapter
@@ -54,7 +54,4 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         gameViewModel.updateGame(gameEntity)
     }
 
-    override fun onViewClicked(gameEntity: GameEntity) {
-        TODO("Not yet implemented")
-    }
 }

@@ -13,19 +13,6 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
     private var todoList: List<GameEntity> = arrayListOf()
     private val listener: TodoEvents = todoEvents
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.todo_list_item, parent, false)
-        return TodoViewHolder(view)
-    }
-
-
-    override fun onBindViewHolder(holder: TodoAdapter.TodoViewHolder, position: Int) {
-        holder.bind(todoList[position], listener)
-    }
-
-    override fun getItemCount(): Int = todoList.size
-
     class TodoViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: TodoEvents) {
             itemView.tv_todo_item_title.text = game.title
@@ -40,6 +27,19 @@ class TodoAdapter (todoEvents: TodoEvents): RecyclerView.Adapter<TodoAdapter.Tod
             }
         }
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.todo_list_item, parent, false)
+        return TodoViewHolder(view)
+    }
+
+
+    override fun onBindViewHolder(holder: TodoAdapter.TodoViewHolder, position: Int) {
+        holder.bind(todoList[position], listener)
+    }
+
+    override fun getItemCount(): Int = todoList.size
+
 
 
     fun setAllGames(gameItems: List<GameEntity>) {
