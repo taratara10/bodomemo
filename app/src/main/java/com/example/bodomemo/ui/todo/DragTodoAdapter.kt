@@ -1,19 +1,19 @@
 package com.example.bodomemo.ui.todo
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
+import com.ernestoyaquello.dragdropswiperecyclerview.util.DragDropSwipeDiffCallback
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import kotlinx.android.synthetic.main.todo_list_item.view.*
 
-class DragTodoAdapter(todoEvents: TodoEvents): DragDropSwipeAdapter<String, DragTodoAdapter.DragTodoViewHolder>() {
-    private var todoList: List<GameEntity> = arrayListOf()
+class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEvents): DragDropSwipeAdapter<GameEntity, DragTodoAdapter.DragTodoViewHolder>(dataSet) {
     private val listener: TodoEvents = todoEvents
-
 
     class DragTodoViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: TodoEvents) {
@@ -33,21 +33,15 @@ class DragTodoAdapter(todoEvents: TodoEvents): DragDropSwipeAdapter<String, Drag
 
     override fun getViewHolder(itemLayout: View) = DragTodoViewHolder(itemLayout)
 
-    override fun onBindViewHolder(item: String, holder: DragTodoViewHolder, position: Int) {
+    override fun onBindViewHolder(item: GameEntity, holder: DragTodoViewHolder, position: Int) {
         // Here we update the contents of the view holder's views to reflect the item's data
-        holder.bind(todoList[position], listener)
+        holder.bind(item, listener)
     }
 
-    override fun getViewToTouchToStartDraggingItem(item: String, holder: DragTodoViewHolder, position: Int): View? {
+    override fun getViewToTouchToStartDraggingItem(item: GameEntity, holder: DragTodoViewHolder, position: Int): View? {
         // We return the view holder's view on which the user has to touch to drag the item
         return holder.itemView
     }
-
-    fun setAllGames(gameItems: List<GameEntity>) {
-        this.todoList = gameItems
-        notifyDataSetChanged()
-    }
-
 
     /**
      * RecycleView touch event callbacks

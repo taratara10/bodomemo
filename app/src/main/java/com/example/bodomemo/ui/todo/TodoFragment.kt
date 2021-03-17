@@ -30,15 +30,17 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         val root = inflater.inflate(R.layout.fragment_todo, container, false)
 
         //Setting up RecyclerView
+        //lateinit出来ないので、一旦emptyListでadapter初期化する
+
 //        todo_list.setEmptyView(root.todo_empty_view)
         val todo_list = root.rv_drag_todo_list
         todo_list.layoutManager = LinearLayoutManager(activity)
-        dragTodoAdapter = DragTodoAdapter(this)
+        dragTodoAdapter = DragTodoAdapter(emptyList(), this)
         todo_list?.adapter = dragTodoAdapter
 
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         gameViewModel.getTodoList().observe(viewLifecycleOwner, Observer {
-            dragTodoAdapter.setAllGames(it)
+            todo_list.adapter = DragTodoAdapter(it, this)
         })
 
         root.btn_create_todo.setOnClickListener {
@@ -52,6 +54,7 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
 
     override fun onCheckBoxClicked(gameEntity: GameEntity) {
         gameViewModel.updateGame(gameEntity)
+
     }
 
 }
