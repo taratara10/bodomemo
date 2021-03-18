@@ -33,8 +33,8 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         //Setting up RecyclerView
         //lateinit出来ないので、一旦emptyListでadapter初期化する
 
-//        todo_list.setEmptyView(root.todo_empty_view)
         val todo_list = root.rv_drag_todo_list
+        val todo_empty_view = root.todo_empty_view
         todo_list.layoutManager = LinearLayoutManager(activity)
         dragTodoAdapter = DragTodoAdapter(emptyList(), this)
         todo_list.adapter = dragTodoAdapter
@@ -44,8 +44,16 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         todo_list.disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
 
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-        gameViewModel.getTodoList().observe(viewLifecycleOwner, Observer {
-            todo_list.adapter = DragTodoAdapter(it, this)
+        gameViewModel.getTodoList().observe(viewLifecycleOwner, Observer { todoList ->
+            //set dataSet
+            todo_list.adapter = DragTodoAdapter(todoList, this)
+
+            //Switch EmptyView
+            if (todoList.isNotEmpty()){
+                todo_empty_view.visibility = View.GONE
+            }else{
+                todo_empty_view.visibility = View.VISIBLE
+            }
         })
 
         root.btn_create_todo.setOnClickListener {
