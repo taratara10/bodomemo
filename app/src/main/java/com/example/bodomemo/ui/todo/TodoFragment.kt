@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
@@ -37,11 +36,7 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         val todo_empty_view = root.todo_empty_view
         todo_list.layoutManager = LinearLayoutManager(activity)
         dragTodoAdapter = DragTodoAdapter(emptyList(), this)
-        todo_list.adapter = dragTodoAdapter
-
-        todo_list.orientation = DragDropSwipeRecyclerView.ListOrientation.VERTICAL_LIST_WITH_VERTICAL_DRAGGING
-        todo_list.disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
-        todo_list.disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
+        todo_list?.adapter = dragTodoAdapter
 
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         gameViewModel.getTodoList().observe(viewLifecycleOwner, Observer { todoList ->
