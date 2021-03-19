@@ -11,7 +11,7 @@ class GameRepository(application: Application) {
 
     private val gameDao: GameDao
     private val allGames:LiveData<List<GameEntity>>
-    private val todoList:LiveData<List<GameEntity>>
+    private val todoList:LiveData<MutableList<GameEntity>>
     private val allPlayHistory:LiveData<List<PlayHistoryEntity>>
 
 
@@ -49,7 +49,7 @@ class GameRepository(application: Application) {
         return allGames
     }
 
-    fun getTodoList():  LiveData<List<GameEntity>> {
+    fun getTodoList():  LiveData<MutableList<GameEntity>> {
         return todoList
     }
 

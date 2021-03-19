@@ -17,12 +17,15 @@ import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_todo.view.*
+import java.util.*
+import java.util.Collections.swap
 
 class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
 
     private lateinit var gameViewModel: GameViewModel
     private lateinit var dragTodoAdapter: DragTodoAdapter
-    private lateinit var allTodoList: List<GameEntity>
+    private lateinit var allTodoList: MutableList<GameEntity>
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -54,6 +57,7 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
             }else{
                 todo_empty_view.visibility = View.VISIBLE
             }
+
         })
 
         root.btn_create_todo.setOnClickListener {
@@ -69,14 +73,16 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         gameViewModel.updateGame(gameEntity)
     }
 
-    override fun updatePosition(initialPosition: Int, finalPosition: Int) {
-        val todoList = gameViewModel.getTodoList()
-        val newPositionGameEntity: GameEntity? = todoList.value?.get(initialPosition)
+    override fun updatePosition(initialPosition: Int, finalPosition: Int, item: GameEntity) {
 
-        allTodoList.forEach{ todo ->
-            var position:Int = 1
-            todo.rating = position
-            gameViewModel.updateGame(todo)
+        var position = 1
+        //change entity position
+        allTodoList.removeAt(initialPosition)
+        allTodoList.add(finalPosition, item)
+
+        allTodoList.forEach{ gameEntity ->
+            gameEntity.todoPosition = position
+            gameViewModel.updateGame(gameEntity)
             position ++
         }
     }
