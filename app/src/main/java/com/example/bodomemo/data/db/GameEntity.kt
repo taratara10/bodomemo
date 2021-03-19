@@ -11,6 +11,7 @@ data class GameEntity(
         @ColumnInfo(name = "todo_check") var todoCheck: Boolean = false,
         @ColumnInfo(name = "owned_check") var ownedCheck: Boolean = false,
         @ColumnInfo(name = "favorite_check") var favoriteCheck: Boolean = false,
+        @ColumnInfo(name = "todo_position") var todoPosition: Int = 0
 )
 
 @Entity(tableName = "playHistoryEntity")

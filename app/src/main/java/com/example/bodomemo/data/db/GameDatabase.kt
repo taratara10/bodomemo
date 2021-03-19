@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 @Database(entities = [GameEntity::class,
                     PlayHistoryEntity::class,
                     PlayAndGameCrossRef::class],
-                    version = 8)
+                    version = 10)
 abstract class GameDatabase: RoomDatabase() {
 
     abstract fun gameDao(): GameDao
@@ -24,7 +24,7 @@ abstract class GameDatabase: RoomDatabase() {
                 synchronized(GameDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context,
                             GameDatabase::class.java,
-                            "game_db")
+                            "game_db").fallbackToDestructiveMigration()
                             .build()
                 }
             }
