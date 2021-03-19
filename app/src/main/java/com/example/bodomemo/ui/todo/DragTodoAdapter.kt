@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
 import com.ernestoyaquello.dragdropswiperecyclerview.util.DragDropSwipeDiffCallback
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
@@ -43,10 +44,20 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
         return holder.itemView
     }
 
+     val onItemDragListener = object : OnItemDragListener<GameEntity> {
+        override fun onItemDragged(previousPosition: Int, newPosition: Int, item: GameEntity) {  }
+
+        override fun onItemDropped(initialPosition: Int, finalPosition: Int, item: GameEntity) {
+            // Handle action of item dropped
+
+        }
+    }
+
     /**
      * RecycleView touch event callbacks
      * */
     interface TodoEvents {
         fun onCheckBoxClicked(gameEntity: GameEntity)
+        fun updatePosition(initialPosition: Int, finalPosition: Int)
     }
 }
