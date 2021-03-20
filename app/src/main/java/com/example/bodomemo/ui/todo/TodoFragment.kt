@@ -34,22 +34,15 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_todo, container, false)
+        val rv_todo = root.rv_drag_todo_list
+        val todo_empty_view = root.todo_empty_view
 
         //Setting up RecyclerView
-        //lateinit出来ないので、一旦emptyListでadapter初期化する
-
-        val todo_list_view = root.rv_drag_todo_list
-        val todo_empty_view = root.todo_empty_view
-        todo_list_view.layoutManager = LinearLayoutManager(activity)
-        dragTodoAdapter = DragTodoAdapter(emptyList(), this)
-        todo_list_view?.adapter = dragTodoAdapter
-        todo_list_view.dragListener = dragTodoAdapter.onItemDragListener
-
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         gameViewModel.getTodoList().observe(viewLifecycleOwner, Observer { todoList ->
             //set dataSet
             allTodoList = todoList
-            todo_list_view.adapter = DragTodoAdapter(todoList, this)
+            rv_todo.adapter = DragTodoAdapter(todoList, this)
 
             //Switch EmptyView
             if (todoList.isNotEmpty()){
@@ -59,7 +52,12 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
             }
 
         })
+        dragTodoAdapter = DragTodoAdapter(emptyList(), this)
+        rv_todo.layoutManager = LinearLayoutManager(activity)
+        rv_todo?.adapter = dragTodoAdapter
+        rv_todo.dragListener = dragTodoAdapter.onItemDragListener
 
+        //add to do btn
         root.btn_create_todo.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_todo_to_navigation_add_todo)
         }

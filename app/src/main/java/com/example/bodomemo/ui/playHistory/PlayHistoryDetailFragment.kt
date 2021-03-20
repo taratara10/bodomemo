@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
+import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.PlayHistoryViewModel
 import com.example.bodomemo.ui.search.SimpleListAdapter
@@ -22,47 +23,58 @@ import kotlinx.android.synthetic.main.fragment_play_history_detail.view.*
 import java.util.*
 import kotlin.properties.Delegates
 
-class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
+class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvents {
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
-    private lateinit var simpleListAdapter: SimpleListAdapter
+    private lateinit var dragPlayedGameAdapter: DragPlayedGameAdapter
     private var selectedPlayHistoryId by Delegates.notNull<Int>()
     private val playHistoryFragmentArgs: PlayHistoryFragmentArgs by navArgs()
     private val createNewPlayHistoryFragmentArgs: CreateNewPlayHistoryFragmentArgs by navArgs()
     private val playHistoryAddGameFragmentArgs: PlayHistoryAddGameFragmentArgs by navArgs()
 
+    private lateinit var allPlayedGameList: List<GameEntity>
     private var playHistoryDate: Long = 0
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         setHasOptionsMenu(true)
 
         val root = inflater.inflate(R.layout.fragment_play_history_detail, container, false)
-        playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
+        val rv_played_game = root.rv_played_game_list
 
         //navArgsのうちnullでないほうの値をセット
         selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
-                ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
-                ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
-                ?: throw Exception("cannot get playHistoryId")
+            ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
+                    ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
+                    ?: throw Exception("cannot get playHistoryId")
         selectedPlayHistory = playHistoryViewModel.getPlayHistoryById(selectedPlayHistoryId)
 
 
         //recyclerView
-        val recyclerView = root.rv_played_game_list
-        simpleListAdapter = SimpleListAdapter(this)
-        recyclerView.setEmptyView(root.play_history_detail_empty_view)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = simpleListAdapter
+        playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
+        playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{ playWithGames ->
+            //set dataSet
+            allPlayedGameList = playWithGames.gameList
+            rv_played_game.adapter = DragPlayedGameAdapter(allPlayedGameList,this)
 
-        playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{
-            simpleListAdapter.setAllGames(it.gameList)
+            //Switch EmptyView
+            if (playWithGames.gameList.isNotEmpty()){
+                root.play_history_detail_empty_view.visibility = View.GONE
+            }else{
+                root.play_history_detail_empty_view.visibility = View.VISIBLE
+            }
         })
+
+
+        dragPlayedGameAdapter = DragPlayedGameAdapter(allPlayedGameList,this)
+        rv_played_game.layoutManager = LinearLayoutManager(activity)
+        rv_played_game.adapter = dragPlayedGameAdapter
+
 
 
 
@@ -87,7 +99,7 @@ class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
         //add game
         root.play_history_detail_add_game.setOnClickListener {
             val action = PlayHistoryDetailFragmentDirections
-                    .actionNavigationPlayHistoryDetailToNavigationPlayHistoryAddGame(selectedPlayHistoryId.toString())
+                .actionNavigationPlayHistoryDetailToNavigationPlayHistoryAddGame(selectedPlayHistoryId.toString())
             findNavController().navigate(action)
 
         }
@@ -111,9 +123,9 @@ class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
     override fun onResume() {
         super.onResume()
         selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
-                ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
-                        ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
-                        ?: throw Exception("cannot get playHistoryId")
+            ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
+                    ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
+                    ?: throw Exception("cannot get playHistoryId")
         Log.d("resume","${selectedPlayHistory}")
     }
 
@@ -127,17 +139,17 @@ class PlayHistoryDetailFragment:Fragment(),SimpleListAdapter.GameAddEvents {
         val day = calender.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
-                requireActivity(),
-                { view, y, m, d ->
-                    //playHistoryDate:Long を更新して、EditTextの表示も更新
-                    calender.set(y,m,d)
-                    playHistoryDate = calender.timeInMillis
-                    selectedPlayHistory.date = playHistoryDate
-                    et_play_date_select_detail.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
-                    updatePlayHistory(selectedPlayHistory)
-                },
-                year,month,day
-                )
+            requireActivity(),
+            { view, y, m, d ->
+                //playHistoryDate:Long を更新して、EditTextの表示も更新
+                calender.set(y,m,d)
+                playHistoryDate = calender.timeInMillis
+                selectedPlayHistory.date = playHistoryDate
+                et_play_date_select_detail.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
+                updatePlayHistory(selectedPlayHistory)
+            },
+            year,month,day
+        )
         datePickerDialog.show()
     }
 
