@@ -11,6 +11,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
 import com.ernestoyaquello.dragdropswiperecyclerview.util.DragDropSwipeDiffCallback
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.ui.playHistory.DragPlayedGameAdapter
 import kotlinx.android.synthetic.main.todo_list_item.view.*
 
 class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEvents)
@@ -33,6 +34,10 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DragTodoViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.todo_list_item, parent, false)
+        return DragTodoViewHolder(view)
+    }
 
     override fun getViewHolder(itemLayout: View) = DragTodoViewHolder(itemLayout)
 

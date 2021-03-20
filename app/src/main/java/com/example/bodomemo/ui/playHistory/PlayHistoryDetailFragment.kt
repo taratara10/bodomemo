@@ -47,6 +47,7 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         val root = inflater.inflate(R.layout.fragment_play_history_detail, container, false)
         val rv_played_game = root.rv_played_game_list
 
+        playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
         //navArgsのうちnullでないほうの値をセット
         selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
             ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
@@ -56,7 +57,7 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
 
         //recyclerView
-        playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
+
         playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{ playWithGames ->
             //set dataSet
             allPlayedGameList = playWithGames.gameList
@@ -71,9 +72,10 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         })
 
 
-        dragPlayedGameAdapter = DragPlayedGameAdapter(allPlayedGameList,this)
+        dragPlayedGameAdapter = DragPlayedGameAdapter(emptyList(),this)
         rv_played_game.layoutManager = LinearLayoutManager(activity)
         rv_played_game.adapter = dragPlayedGameAdapter
+//        rv_played_game.dragListener = dragPlayedGameAdapter
 
 
 

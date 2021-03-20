@@ -1,12 +1,16 @@
 package com.example.bodomemo.ui.playHistory
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
+import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.ui.playHistory.DragPlayedGameAdapter.PlayedGameViewHolder
 import kotlinx.android.synthetic.main.simple_list_item.view.*
 
 class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetailEvents: GameDetailEvents)
-        : DragDropSwipeAdapter<GameEntity, DragPlayedGameAdapter.PlayedGameViewHolder>(dataSet) {
+        : DragDropSwipeAdapter<GameEntity, PlayedGameViewHolder>(dataSet) {
 
     private val listener :GameDetailEvents = gameDetailEvents
 
@@ -19,6 +23,11 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayedGameViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.simple_list_item, parent, false)
+        return PlayedGameViewHolder(view)
+    }
+
     override fun getViewHolder(itemLayout: View) = PlayedGameViewHolder(itemLayout)
 
     override fun onBindViewHolder(item: GameEntity, holder: PlayedGameViewHolder, position: Int) {
@@ -28,7 +37,7 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
 
     override fun getViewToTouchToStartDraggingItem(item: GameEntity,viewHolder: PlayedGameViewHolder,position: Int
     ): View? {
-        TODO("Not yet implemented")
+        return viewHolder.itemView
     }
 
     interface GameDetailEvents {
