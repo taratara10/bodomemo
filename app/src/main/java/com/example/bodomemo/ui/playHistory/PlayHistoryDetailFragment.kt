@@ -28,13 +28,14 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
-    private lateinit var dragPlayedGameAdapter: DragPlayedGameAdapter
+    private lateinit var allPlayedGameList: List<GameEntity>
     private var selectedPlayHistoryId by Delegates.notNull<Int>()
+
     private val playHistoryFragmentArgs: PlayHistoryFragmentArgs by navArgs()
     private val createNewPlayHistoryFragmentArgs: CreateNewPlayHistoryFragmentArgs by navArgs()
     private val playHistoryAddGameFragmentArgs: PlayHistoryAddGameFragmentArgs by navArgs()
 
-    private lateinit var allPlayedGameList: List<GameEntity>
+    private var dragPlayedGameAdapter = DragPlayedGameAdapter(emptyList(),this)
     private var playHistoryDate: Long = 0
 
     override fun onCreateView(
@@ -57,7 +58,6 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         selectedPlayHistory = playHistoryViewModel.getPlayHistoryById(selectedPlayHistoryId)
 
 
-        //recyclerView
 
         playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{ playWithGames ->
             //set dataSet
@@ -72,15 +72,18 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
             }
         })
 
-        //todo alsoでまとめる
 
+        //recyclerView
         dragPlayedGameAdapter = DragPlayedGameAdapter(emptyList(),this)
-        rv_played_game.layoutManager = LinearLayoutManager(activity)
-        rv_played_game.adapter = dragPlayedGameAdapter
-        rv_played_game.orientation = DragDropSwipeRecyclerView.ListOrientation.VERTICAL_LIST_WITH_VERTICAL_DRAGGING
-        rv_played_game.disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
-        rv_played_game.disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.DOWN)
-        rv_played_game.disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.UP)
+        rv_played_game.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = dragPlayedGameAdapter
+            orientation = DragDropSwipeRecyclerView.ListOrientation.VERTICAL_LIST_WITH_VERTICAL_DRAGGING
+            disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
+            disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.DOWN)
+            disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.UP)
+
+        }
 
 
 
@@ -99,9 +102,10 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
         //Date EditText
         playHistoryDate = selectedPlayHistory.date
-        val dateEditText = root.et_play_date_select_detail
-        dateEditText.setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
-        dateEditText.setOnClickListener{ showDatePicker() }
+        root.et_play_date_select_detail.apply {
+            setText(playHistoryViewModel.convertMilliSecToDate(playHistoryDate))
+            setOnClickListener{ showDatePicker() }
+        }
 
         //add game
         root.play_history_detail_add_game.setOnClickListener {
