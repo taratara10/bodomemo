@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.data.db.PlayHistoryEntity
@@ -71,11 +72,15 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
             }
         })
 
+        //todo alsoでまとめる
 
         dragPlayedGameAdapter = DragPlayedGameAdapter(emptyList(),this)
         rv_played_game.layoutManager = LinearLayoutManager(activity)
         rv_played_game.adapter = dragPlayedGameAdapter
-//        rv_played_game.dragListener = dragPlayedGameAdapter
+        rv_played_game.orientation = DragDropSwipeRecyclerView.ListOrientation.VERTICAL_LIST_WITH_VERTICAL_DRAGGING
+        rv_played_game.disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
+        rv_played_game.disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.DOWN)
+        rv_played_game.disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.UP)
 
 
 
