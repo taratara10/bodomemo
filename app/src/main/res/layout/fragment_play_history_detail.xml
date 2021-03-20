@@ -72,7 +72,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--  recyclerView  -->
-        <com.example.bodomemo.EmptyRecyclerView
+            <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
             android:id="@+id/rv_played_game_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -81,6 +81,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/play_history_detail_add_game" />
+
     <!--  addGameAdapter View  -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/play_history_detail_add_game"
@@ -118,23 +119,25 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 <!--  memo   -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_play_history_detail_memo"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/guideline">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_play_history_detail_memo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/play_history_detail_empty_view">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_play_history_detail_memo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="top"
-                android:hint="メモ"
-                android:inputType="textMultiLine|textFilter" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_play_history_detail_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:hint="メモ"
+                    android:inputType="textMultiLine|textFilter" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
