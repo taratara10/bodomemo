@@ -13,7 +13,9 @@ import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import kotlinx.android.synthetic.main.todo_list_item.view.*
 
-class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEvents): DragDropSwipeAdapter<GameEntity, DragTodoAdapter.DragTodoViewHolder>(dataSet) {
+class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEvents)
+        : DragDropSwipeAdapter<GameEntity, DragTodoAdapter.DragTodoViewHolder>(dataSet) {
+
     private val listener: TodoEvents = todoEvents
 
     class DragTodoViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
