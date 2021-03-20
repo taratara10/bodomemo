@@ -37,17 +37,18 @@ class GameDetailFragment: Fragment() {
         val root = inflater.inflate(R.layout.fragment_game_detail, container, false)
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
+        //searchFragment、createFragmentのうちnullでないほうの値をセット
+        val selectedGameId = searchFragmentArgs.gameId?.toInt()
+                ?: createNewGameFragmentArgs.createdNewId?.toInt()
+                ?: createNewGameFragmentArgs.gameId?.toInt()
+                ?: throw Exception("cannot get gameId")
+
         val gameTitleEditText = root.et_game_title_detail
         val todoCheckBox = root.cb_edit_todo_checked
         val favoriteCheckBox = root.cb_edit_favorite_checked
         val ownedCheckBox = root.cb_edit_owned_checked
         val ratingBar = root.rb_edit_rating
 
-        //searchFragment、createFragmentのうちnullでないほうの値をセット
-        val selectedGameId = searchFragmentArgs.gameId?.toInt()
-                ?: createNewGameFragmentArgs.createdNewId?.toInt()
-                ?: createNewGameFragmentArgs.gameId?.toInt()
-                ?: throw Exception("cannot get gameId")
 
         //  set content
         selectedGame = gameViewModel.getGameById(selectedGameId)
