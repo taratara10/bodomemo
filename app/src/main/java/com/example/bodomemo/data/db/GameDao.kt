@@ -55,7 +55,7 @@ interface GameDao {
 //    suspend fun deletePlayedGame(playAndGameCrossRef: PlayAndGameCrossRef)
 
     @Query("DELETE FROM playAndGameCrossRef WHERE playHistoryId = :playHistoryId")
-    suspend fun deletePlayedGame(playHistoryId: Int?)
+    suspend fun deleteAllPlayedGameById(playHistoryId: Int?)
 
 
 

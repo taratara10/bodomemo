@@ -88,8 +88,8 @@ class GameRepository(application: Application) {
         gameDao.savePlayedGame(ref)
     }
 
-    fun deletePlayedGame(playHistoryId: Int?) = runBlocking{
-        gameDao.deletePlayedGame(playHistoryId)
+    fun deleteAllPlayedGameById(playHistoryId: Int?) = runBlocking{
+        gameDao.deleteAllPlayedGameById(playHistoryId)
     }
 
     /**

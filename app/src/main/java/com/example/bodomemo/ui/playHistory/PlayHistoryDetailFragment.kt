@@ -16,6 +16,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.data.db.PlayHistoryEntity
+import com.example.bodomemo.ui.PlayAndGameCrossRefViewModel
 import com.example.bodomemo.ui.PlayHistoryViewModel
 import com.example.bodomemo.ui.search.SimpleListAdapter
 import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
@@ -26,6 +27,7 @@ import kotlin.properties.Delegates
 
 class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvents {
 
+    private lateinit var playAndGameCrossRefViewModel: PlayAndGameCrossRefViewModel
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
     private lateinit var allPlayedGameList: MutableList<GameEntity>
@@ -50,13 +52,14 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         val rv_played_game = root.rv_played_game_list
 
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
+        playAndGameCrossRefViewModel = ViewModelProvider(this).get(PlayAndGameCrossRefViewModel::class.java)
+
         //navArgsのうちnullでないほうの値をセット
         selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
             ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
                     ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
                     ?: throw Exception("cannot get playHistoryId")
         selectedPlayHistory = playHistoryViewModel.getPlayHistoryById(selectedPlayHistoryId)
-
 
 
         playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{ playWithGames ->
@@ -205,8 +208,10 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
     }
 
     override fun onViewSwiped(position:Int) {
+
         val updatePlayedGameList = allPlayedGameList.removeAt(position)
 
+        playAndGameCrossRefViewModel.deleteAllPlayedGameById()
 
 
 
