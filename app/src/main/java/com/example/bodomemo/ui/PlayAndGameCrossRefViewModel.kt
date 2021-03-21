@@ -15,8 +15,8 @@ class PlayAndGameCrossRefViewModel(application: Application) : AndroidViewModel(
         repository.savePlayedGame(crossRef)
     }
 
-    fun deletePlayedGame(crossRef: PlayAndGameCrossRef){
-        repository.deletePlayedGame(crossRef)
+    fun deletePlayedGame(playHistoryId:Int){
+        repository.deletePlayedGame(playHistoryId)
     }
 
 }

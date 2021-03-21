@@ -28,7 +28,7 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
     private lateinit var playHistoryViewModel: PlayHistoryViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
-    private lateinit var allPlayedGameList: List<GameEntity>
+    private lateinit var allPlayedGameList: MutableList<GameEntity>
     private var selectedPlayHistoryId by Delegates.notNull<Int>()
 
     private val playHistoryFragmentArgs: PlayHistoryFragmentArgs by navArgs()
@@ -61,7 +61,7 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
         playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{ playWithGames ->
             //set dataSet
-            allPlayedGameList = playWithGames.gameList
+            allPlayedGameList = playWithGames.gameList as MutableList<GameEntity>
             rv_played_game.adapter = DragPlayedGameAdapter(allPlayedGameList,this)
 
             //Switch EmptyView
@@ -202,6 +202,19 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
     override fun onViewClicked(gameId: String?) {
         TODO("Not yet implemented")
+    }
+
+    override fun onViewSwiped(position:Int) {
+        val updatePlayedGameList = allPlayedGameList.removeAt(position)
+
+
+
+
+
+    }
+
+    fun updatePlayedGameList(){
+        allPlayedGameList
     }
 
 }

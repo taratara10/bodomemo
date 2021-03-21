@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.playHistory.DragPlayedGameAdapter.PlayedGameViewHolder
@@ -40,7 +41,18 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
         return viewHolder.itemView
     }
 
+    private val onItemSwipeListener = object : OnItemSwipeListener<GameEntity> {
+        override fun onItemSwiped(position: Int, direction: OnItemSwipeListener.SwipeDirection, item: GameEntity): Boolean {
+            // Handle action of item swiped
+            // Return false to indicate that the swiped item should be removed from the adapter's data set (default behaviour)
+            // Return true to stop the swiped item from being automatically removed from the adapter's data set (in this case, it will be your responsibility to manually update the data set as necessary)
+            listener.onViewSwiped(position)
+            return false
+        }
+    }
+
     interface GameDetailEvents {
         fun onViewClicked(gameId: String?)
+        fun onViewSwiped(position: Int)
     }
 }

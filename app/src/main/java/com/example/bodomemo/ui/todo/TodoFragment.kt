@@ -85,5 +85,4 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         }
     }
 
-
 }

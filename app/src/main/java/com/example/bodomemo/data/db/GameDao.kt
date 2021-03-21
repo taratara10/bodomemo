@@ -51,8 +51,13 @@ interface GameDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun savePlayedGame(playAndGameCrossRef:  PlayAndGameCrossRef)
 
-    @Delete
-    suspend fun deletePlayedGame(playAndGameCrossRef: PlayAndGameCrossRef)
+//    @Delete
+//    suspend fun deletePlayedGame(playAndGameCrossRef: PlayAndGameCrossRef)
+
+    @Query("DELETE FROM playAndGameCrossRef WHERE playHistoryId = :playHistoryId")
+    suspend fun deletePlayedGame(playHistoryId: Int?)
+
+
 
     /**
      * PlayWithGame

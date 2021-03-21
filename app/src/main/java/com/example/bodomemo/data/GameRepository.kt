@@ -88,8 +88,8 @@ class GameRepository(application: Application) {
         gameDao.savePlayedGame(ref)
     }
 
-    fun deletePlayedGame(ref: PlayAndGameCrossRef) = runBlocking{
-        gameDao.deletePlayedGame(ref)
+    fun deletePlayedGame(playHistoryId: Int?) = runBlocking{
+        gameDao.deletePlayedGame(playHistoryId)
     }
 
     /**
