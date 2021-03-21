@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.data.db.PlayAndGameCrossRef
 import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.PlayAndGameCrossRefViewModel
 import com.example.bodomemo.ui.PlayHistoryViewModel
@@ -82,6 +83,7 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
             layoutManager = LinearLayoutManager(activity)
             adapter = dragPlayedGameAdapter
             orientation = DragDropSwipeRecyclerView.ListOrientation.VERTICAL_LIST_WITH_VERTICAL_DRAGGING
+            swipeListener = dragPlayedGameAdapter.onItemSwipeListener
             disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
             disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.DOWN)
             disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.UP)
@@ -209,17 +211,20 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
     override fun onViewSwiped(position:Int) {
 
-        val updatePlayedGameList = allPlayedGameList.removeAt(position)
+        //delete all PlayedGameCrossRef
+        playAndGameCrossRefViewModel.deleteAllPlayedGameById(selectedPlayHistoryId)
+        val updatePlayedGameList = ArrayList(allPlayedGameList).apply { removeAt(position) }
 
-        playAndGameCrossRefViewModel.deleteAllPlayedGameById()
+        //Re-Insert all game
+        updatePlayedGameList.forEach { gameEntity ->
+            val newReference = PlayAndGameCrossRef(
+                    referenceId = 0,
+                    playHistoryId = selectedPlayHistoryId,
+                    gameId = gameEntity.gameId
+            )
+            playAndGameCrossRefViewModel.savePlayedGame(newReference)
+        }
 
-
-
-
-    }
-
-    fun updatePlayedGameList(){
-        allPlayedGameList
     }
 
 }
