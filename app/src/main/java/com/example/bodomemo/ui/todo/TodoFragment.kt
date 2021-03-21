@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
@@ -23,7 +24,7 @@ import java.util.Collections.swap
 class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
 
     private lateinit var gameViewModel: GameViewModel
-    private lateinit var dragTodoAdapter: DragTodoAdapter
+    private var dragTodoAdapter: DragTodoAdapter = DragTodoAdapter(emptyList(), this)
     private lateinit var allTodoList: MutableList<GameEntity>
 
 
@@ -52,10 +53,15 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
             }
 
         })
-        dragTodoAdapter = DragTodoAdapter(emptyList(), this)
-        rv_todo.layoutManager = LinearLayoutManager(activity)
-        rv_todo?.adapter = dragTodoAdapter
-        rv_todo.dragListener = dragTodoAdapter.onItemDragListener
+
+        //set up recyclerView
+        rv_todo.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = dragTodoAdapter
+            dragListener = dragTodoAdapter.onItemDragListener
+            disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
+            disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
+        }
 
         //add to do btn
         root.btn_create_todo.setOnClickListener {
