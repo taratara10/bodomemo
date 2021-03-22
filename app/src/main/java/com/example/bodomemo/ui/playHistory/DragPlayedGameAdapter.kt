@@ -42,16 +42,22 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
     }
 
 
-
     val onItemSwipeListener = object : OnItemSwipeListener<GameEntity> {
         override fun onItemSwiped(position: Int, direction: OnItemSwipeListener.SwipeDirection, item: GameEntity): Boolean {
             // Handle action of item swiped
             // Return false to indicate that the swiped item should be removed from the adapter's data set (default behaviour)
             // Return true to stop the swiped item from being automatically removed from the adapter's data set (in this case, it will be your responsibility to manually update the data set as necessary)
-           // listener.onViewSwiped(position)
+            listener.onViewSwiped(position)
             return false
         }
     }
+
+
+    fun setAllPlayedGame(playedGameList: List<GameEntity>) {
+        this.dataSet = playedGameList
+        notifyDataSetChanged()
+    }
+
 
     interface GameDetailEvents {
         fun onViewClicked(gameId: String?)

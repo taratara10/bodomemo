@@ -47,26 +47,23 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         savedInstanceState: Bundle?
     ): View? {
 
-        setHasOptionsMenu(true)
-
         val root = inflater.inflate(R.layout.fragment_play_history_detail, container, false)
         val rv_played_game = root.rv_played_game_list
 
+        //set up viewModel
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
         playAndGameCrossRefViewModel = ViewModelProvider(this).get(PlayAndGameCrossRefViewModel::class.java)
 
         //navArgsのうちnullでないほうの値をセット
-        selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
-            ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
-                    ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
-                    ?: throw Exception("cannot get playHistoryId")
+        setPlayHistoryId()
         selectedPlayHistory = playHistoryViewModel.getPlayHistoryById(selectedPlayHistoryId)
 
 
+        //PlayedGames LiveData
         playHistoryViewModel.getPlayedGameById(selectedPlayHistoryId).observe(viewLifecycleOwner,{ playWithGames ->
             //set dataSet
             allPlayedGameList = playWithGames.gameList as MutableList<GameEntity>
-            rv_played_game.adapter = DragPlayedGameAdapter(allPlayedGameList,this)
+            dragPlayedGameAdapter.setAllPlayedGame(allPlayedGameList)
 
             //Switch EmptyView
             if (playWithGames.gameList.isNotEmpty()){
@@ -78,22 +75,17 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
 
         //recyclerView
-        dragPlayedGameAdapter = DragPlayedGameAdapter(emptyList(),this)
         rv_played_game.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = dragPlayedGameAdapter
-            orientation = DragDropSwipeRecyclerView.ListOrientation.VERTICAL_LIST_WITH_VERTICAL_DRAGGING
             swipeListener = dragPlayedGameAdapter.onItemSwipeListener
             disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
             disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.DOWN)
             disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.UP)
-
         }
 
 
-
-
-        //title editText
+        //search title editText
         val titleEditText = root.et_play_title_detail
         titleEditText.setText(selectedPlayHistory.title)
         titleEditText.addTextChangedListener(object :CustomTextWatcher{
@@ -112,7 +104,7 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
             setOnClickListener{ showDatePicker() }
         }
 
-        //add game
+        //add game list item
         root.play_history_detail_add_game.setOnClickListener {
             val action = PlayHistoryDetailFragmentDirections
                 .actionNavigationPlayHistoryDetailToNavigationPlayHistoryAddGame(selectedPlayHistoryId.toString())
@@ -133,19 +125,24 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         })
 
 
+        setHasOptionsMenu(true)
+
         return root
     }
+    //ここまでonCreate
+
 
     override fun onResume() {
         super.onResume()
-        selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
-            ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
-                    ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
-                    ?: throw Exception("cannot get playHistoryId")
-        Log.d("resume","${selectedPlayHistory}")
+        setPlayHistoryId()
     }
 
-
+    private fun setPlayHistoryId(){
+        selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
+                ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
+                        ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
+                        ?: throw Exception("cannot get playHistoryId")
+    }
 
     private fun showDatePicker() {
         val calender = Calendar.getInstance()
@@ -200,10 +197,6 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         return true
     }
 
-    interface CustomTextWatcher: TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-    }
 
     override fun onViewClicked(gameId: String?) {
         TODO("Not yet implemented")
@@ -227,4 +220,10 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
     }
 
+
+
+    interface CustomTextWatcher: TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
 }
