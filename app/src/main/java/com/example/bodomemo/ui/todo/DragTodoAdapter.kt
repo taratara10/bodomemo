@@ -60,6 +60,11 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
         }
     }
 
+    fun setTodoList(todoList: List<GameEntity>) {
+        this.dataSet = todoList
+        notifyDataSetChanged()
+    }
+
     /**
      * RecycleView touch event callbacks
      * */

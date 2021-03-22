@@ -43,7 +43,7 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         gameViewModel.getTodoList().observe(viewLifecycleOwner, Observer { todoList ->
             //set dataSet
             allTodoList = todoList
-            rv_todo.adapter = DragTodoAdapter(todoList, this)
+            dragTodoAdapter.setTodoList(allTodoList)
 
             //Switch EmptyView
             if (todoList.isNotEmpty()){
@@ -78,16 +78,18 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
     }
 
     override fun updatePosition(initialPosition: Int, finalPosition: Int, item: GameEntity) {
-
-        var position = 1
-        //change entity position
-        allTodoList.removeAt(initialPosition)
-        allTodoList.add(finalPosition, item)
-
-        allTodoList.forEach{ gameEntity ->
-            gameEntity.todoPosition = position
-            gameViewModel.updateGame(gameEntity)
-            position ++
+        //移動したときにallTodoListのpositionをすべてupdate
+        if (initialPosition != finalPosition){
+            //todoPosition default value is 0.
+            var position = 1
+            //change entity position
+            allTodoList.removeAt(initialPosition)
+            allTodoList.add(finalPosition, item)
+            allTodoList.forEach{ gameEntity ->
+                gameEntity.todoPosition = position
+                gameViewModel.updateGame(gameEntity)
+                position ++
+            }
         }
     }
 
