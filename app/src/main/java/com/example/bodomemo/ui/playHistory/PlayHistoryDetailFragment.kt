@@ -109,21 +109,20 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
             val action = PlayHistoryDetailFragmentDirections
                 .actionNavigationPlayHistoryDetailToNavigationPlayHistoryAddGame(selectedPlayHistoryId.toString())
             findNavController().navigate(action)
-
         }
 
         //memo
-        val memoEditText = root.et_play_history_detail_memo
-        memoEditText.setText(selectedPlayHistory.memo)
-        memoEditText.addTextChangedListener(object :CustomTextWatcher{
+        root.et_play_history_detail_memo.apply {
+            setText(selectedPlayHistory.memo)
+            addTextChangedListener(object :CustomTextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 if (validateFields()){
                     selectedPlayHistory.memo = s.toString()
                     updatePlayHistory(selectedPlayHistory)
-                }
-            }
-        })
-
+                    }
+               }
+            })
+        }
 
         setHasOptionsMenu(true)
 
@@ -203,7 +202,6 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
     }
 
     override fun onViewSwiped(position:Int) {
-
         //delete all PlayedGameCrossRef
         playAndGameCrossRefViewModel.deleteAllPlayedGameById(selectedPlayHistoryId)
         val updatePlayedGameList = ArrayList(allPlayedGameList).apply { removeAt(position) }
@@ -214,12 +212,11 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
                     referenceId = 0,
                     playHistoryId = selectedPlayHistoryId,
                     gameId = gameEntity.gameId
-            )
+                    )
             playAndGameCrossRefViewModel.savePlayedGame(newReference)
         }
 
     }
-
 
 
     interface CustomTextWatcher: TextWatcher {
