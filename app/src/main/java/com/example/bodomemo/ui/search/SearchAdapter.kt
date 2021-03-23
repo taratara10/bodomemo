@@ -106,8 +106,9 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     //評価準
     fun filterRating(){
-        gameList.sortedByDescending { it.rating } as MutableList<GameEntity>
+        gameList.sortByDescending { it.rating }
         notifyDataSetChanged()
+        Log.d("a","$gameList")
     }
 
     /**
