@@ -14,9 +14,9 @@ import kotlinx.android.synthetic.main.search_game_item.view.*
 
 class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
 
-    private var originalGameList: List<GameEntity> = arrayListOf()
-    private var gameList :List<GameEntity> = arrayListOf()
-    private var filteredGameList: List<GameEntity> = arrayListOf()
+    private var originalGameList: MutableList<GameEntity> = arrayListOf()
+    private var gameList :MutableList<GameEntity> = arrayListOf()
+    private var filteredGameList: MutableList<GameEntity> = arrayListOf()
     private val listener: DetailsEvents = detailsEvents
 
 
@@ -37,7 +37,9 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
         fun bind(game: GameEntity, listener: DetailsEvents) {
             itemView.search_game_title.text = game.title
             if (game.ownedCheck) itemView.image_search_bag.visibility = View.VISIBLE
+                    else itemView.image_search_bag.visibility = View.INVISIBLE
             if (game.favoriteCheck) itemView.image_search_fav.visibility = View.VISIBLE
+                    else itemView.image_search_fav.visibility = View.INVISIBLE
 
             itemView.search_adapter.setOnClickListener {
                 //safeArgs Intがnullサポートしてないので、stringで渡す
@@ -71,14 +73,14 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
             }
 
             override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-                filteredGameList = p1?.values as List<GameEntity>
+                filteredGameList = p1?.values as MutableList<GameEntity>
                 notifyDataSetChanged()
             }
         }
     }
 
 
-    fun setAllGames(gameItems: List<GameEntity>) {
+    fun setAllGames(gameItems: MutableList<GameEntity>) {
         this.originalGameList = gameItems
         this.gameList = originalGameList
         this.filteredGameList = gameItems
@@ -94,21 +96,22 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     //お気に入り
     fun filterFavorite(){
-        gameList = originalGameList.filter { it.favoriteCheck }
+        gameList.sortedWith( compareBy { it.favoriteCheck })
         filteredGameList = gameList
+        Log.d("a","${gameList} ")
         notifyDataSetChanged()
     }
 
     //持ってる
     fun filterOwned(){
-        gameList = originalGameList.filter { it.ownedCheck }
+        gameList.sortedBy { it.ownedCheck }
         filteredGameList = gameList
         notifyDataSetChanged()
     }
 
     //評価準
     fun filterRating(){
-        gameList = originalGameList.sortedByDescending { it.rating }
+        gameList = originalGameList.sortedByDescending { it.rating } as MutableList<GameEntity>
         filteredGameList = gameList
         notifyDataSetChanged()
     }

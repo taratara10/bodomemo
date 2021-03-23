@@ -8,7 +8,7 @@ import com.example.bodomemo.data.db.GameEntity
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository : GameRepository = GameRepository(application)
-    private val allGameList : LiveData<List<GameEntity>> = repository.getAllGamaList()
+    private val allGameList : LiveData<MutableList<GameEntity>> = repository.getAllGamaList()
     private val todoList : LiveData<MutableList<GameEntity>> = repository.getTodoList()
     var insertedGameId: Long = 0
 
@@ -24,7 +24,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteGame(game)
     }
 
-    fun getAllGameList() : LiveData<List<GameEntity>> {
+    fun getAllGameList() : LiveData<MutableList<GameEntity>> {
         return allGameList
     }
 

@@ -10,7 +10,7 @@ import kotlinx.coroutines.runBlocking
 class GameRepository(application: Application) {
 
     private val gameDao: GameDao
-    private val allGames:LiveData<List<GameEntity>>
+    private val allGames:LiveData<MutableList<GameEntity>>
     private val todoList:LiveData<MutableList<GameEntity>>
     private val allPlayHistory:LiveData<List<PlayHistoryEntity>>
 
@@ -45,7 +45,7 @@ class GameRepository(application: Application) {
         }
     }
 
-    fun getAllGamaList(): LiveData<List<GameEntity>> {
+    fun getAllGamaList(): LiveData<MutableList<GameEntity>> {
         return allGames
     }
 
