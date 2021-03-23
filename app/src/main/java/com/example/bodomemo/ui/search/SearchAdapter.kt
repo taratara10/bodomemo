@@ -36,6 +36,9 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: DetailsEvents) {
             itemView.search_game_title.text = game.title
+            if (game.ownedCheck) itemView.image_search_bag.visibility = View.VISIBLE
+            if (game.favoriteCheck) itemView.image_search_fav.visibility = View.VISIBLE
+
             itemView.search_adapter.setOnClickListener {
                 //safeArgs Intがnullサポートしてないので、stringで渡す
                 listener.onViewClicked(game.gameId.toString())
