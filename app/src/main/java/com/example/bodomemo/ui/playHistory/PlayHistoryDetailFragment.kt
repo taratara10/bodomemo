@@ -78,10 +78,9 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         rv_played_game.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = dragPlayedGameAdapter
+            dragListener = dragPlayedGameAdapter.onItemDragListener
             swipeListener = dragPlayedGameAdapter.onItemSwipeListener
             disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
-            disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.DOWN)
-            disableDragDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.UP)
         }
 
 
