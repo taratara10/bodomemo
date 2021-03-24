@@ -77,7 +77,7 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         gameViewModel.updateGame(gameEntity)
     }
 
-    override fun updatePosition(initialPosition: Int, finalPosition: Int, item: GameEntity) {
+    override fun onViewDropped(initialPosition: Int, finalPosition: Int, item: GameEntity) {
         //移動したときにallTodoListのpositionをすべてupdate
         if (initialPosition != finalPosition){
             //todoPosition default value is 0.

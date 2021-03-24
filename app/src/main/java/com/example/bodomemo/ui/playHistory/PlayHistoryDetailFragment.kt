@@ -215,9 +215,27 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
                     )
             playAndGameCrossRefViewModel.savePlayedGame(newReference)
         }
-
     }
 
+    override fun onViewDropped(initialPosition: Int, finalPosition: Int, item: GameEntity) {
+        //移動したときにallTodoListのpositionをすべてupdate
+        if (initialPosition != finalPosition){
+            //reset all CrossRef
+            playAndGameCrossRefViewModel.deleteAllPlayedGameById(selectedPlayHistoryId)
+
+            //re-insert all playedGame
+            allPlayedGameList.removeAt(initialPosition)
+            allPlayedGameList.add(finalPosition, item)
+            allPlayedGameList.forEach{ gameEntity ->
+                val newReference = PlayAndGameCrossRef(
+                        referenceId = 0,
+                        playHistoryId = selectedPlayHistoryId,
+                        gameId = gameEntity.gameId
+                )
+                playAndGameCrossRefViewModel.savePlayedGame(newReference)
+            }
+        }
+    }
 
     interface CustomTextWatcher: TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

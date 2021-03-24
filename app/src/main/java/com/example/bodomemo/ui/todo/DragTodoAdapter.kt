@@ -55,7 +55,7 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
         override fun onItemDragged(previousPosition: Int, newPosition: Int, item: GameEntity) {  }
 
         override fun onItemDropped(initialPosition: Int, finalPosition: Int, item: GameEntity) {
-           listener.updatePosition(initialPosition,finalPosition,item)
+           listener.onViewDropped(initialPosition,finalPosition,item)
 
         }
     }
@@ -70,6 +70,6 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
      * */
     interface TodoEvents {
         fun onCheckBoxClicked(gameEntity: GameEntity)
-        fun updatePosition(initialPosition: Int, finalPosition: Int,item:GameEntity)
+        fun onViewDropped(initialPosition: Int, finalPosition: Int,item:GameEntity)
     }
 }

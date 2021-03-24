@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
@@ -52,6 +53,17 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
         }
     }
 
+    val onItemDragListener = object : OnItemDragListener<GameEntity> {
+        override fun onItemDragged(previousPosition: Int, newPosition: Int, item: GameEntity) {
+            // Handle action of item being dragged from one position to another
+        }
+
+        override fun onItemDropped(initialPosition: Int, finalPosition: Int, item: GameEntity){
+            listener.onViewDropped(initialPosition,finalPosition,item)
+        }
+    }
+
+
 
     fun setAllPlayedGame(playedGameList: List<GameEntity>) {
         this.dataSet = playedGameList
@@ -62,5 +74,6 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
     interface GameDetailEvents {
         fun onViewClicked(gameId: String?)
         fun onViewSwiped(position: Int)
+        fun onViewDropped(initialPosition: Int, finalPosition: Int,item:GameEntity)
     }
 }
