@@ -31,20 +31,20 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_search, container, false)
+        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
         //Setting up RecyclerView
-        val search_game_list = root.rv_search_game_list
-        search_game_list.setEmptyView(root.play_history_detail_empty_view)
-        search_game_list?.layoutManager = LinearLayoutManager(activity)
         searchAdapter =  SearchAdapter(this)
-        search_game_list?.adapter = searchAdapter
+        root.rv_search_game_list.apply {
+            setEmptyView(root.play_history_detail_empty_view)
+            layoutManager = LinearLayoutManager(activity)
+            adapter = searchAdapter
+        }
 
         //set LiveData
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             searchAdapter.setAllGames(it)
-
             //画面遷移時にrecyclerViewを更新する　1回filter通さないと表示してくれない
             searchAdapter.filter.filter("")
         })
@@ -57,9 +57,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         spinner.onItemSelectedListener =spinnerListener
 
 
-        //検索した際にfilter
-        val et_search_game = root.et_game_detail_title
-        et_search_game.addTextChangedListener(object: CustomTextWatcher{
+        //search editText
+        root.et_game_detail_title.addTextChangedListener(object: CustomTextWatcher{
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 searchAdapter.filter.filter(s)
             }

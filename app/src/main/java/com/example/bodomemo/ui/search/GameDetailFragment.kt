@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.R.id.toolbar_action_delete
 import com.example.bodomemo.data.db.GameEntity
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_game_detail.view.*
 class GameDetailFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedGame:GameEntity
+    private lateinit var simpleListAdapter: SimpleListAdapter
     private val searchFragmentArgs: SearchFragmentArgs by navArgs()
     private val createNewGameFragmentArgs: CreateNewGameFragmentArgs by navArgs()
 
@@ -54,7 +56,6 @@ class GameDetailFragment: Fragment() {
         favoriteCheckBox.isChecked = selectedGame.favoriteCheck
         ownedCheckBox.isChecked = selectedGame.ownedCheck
         ratingBar.rating = selectedGame.rating.toFloat()
-
         ratingBar.setOnRatingBarChangeListener { r, rating, fromUser ->
             selectedGame.rating = rating.toInt()
             updateGame(selectedGame)            
@@ -86,6 +87,11 @@ class GameDetailFragment: Fragment() {
         ownedCheckBox.setOnClickListener {
             selectedGame.ownedCheck = ownedCheckBox.isChecked
             updateGame(selectedGame)
+        }
+
+        root.rv_game_detail_game_played.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = simpleListAdapter
         }
 
         setHasOptionsMenu(true)
