@@ -19,14 +19,12 @@ import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_game_detail.view.*
 
-class GameDetailFragment: Fragment() {
+class GameDetailFragment: Fragment(),SimpleListAdapter.GameAddEvents {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedGame:GameEntity
     private lateinit var simpleListAdapter: SimpleListAdapter
     private val searchFragmentArgs: SearchFragmentArgs by navArgs()
     private val createNewGameFragmentArgs: CreateNewGameFragmentArgs by navArgs()
-
-
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -35,7 +33,7 @@ class GameDetailFragment: Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_game_detail, container, false)
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-
+        simpleListAdapter = SimpleListAdapter(this)
         //searchFragment、createFragmentのうちnullでないほうの値をセット
         val selectedGameId = searchFragmentArgs.gameId?.toInt()
                 ?: createNewGameFragmentArgs.createdNewId?.toInt()
@@ -89,7 +87,12 @@ class GameDetailFragment: Fragment() {
             updateGame(selectedGame)
         }
 
+        gameViewModel.getGameWithPlayById(selectedGame.gameId).observe(viewLifecycleOwner,{
+            simpleListAdapter.setAllGames(it)
+        })
+        //playGame recyclerView
         root.rv_game_detail_game_played.apply {
+            setEmptyView(root.game_detail_empty_view)
             layoutManager = LinearLayoutManager(activity)
             adapter = simpleListAdapter
         }
@@ -135,5 +138,9 @@ class GameDetailFragment: Fragment() {
             return false
         }
         return true
+    }
+
+    override fun onViewClicked(gameId: String?) {
+        TODO("Not yet implemented")
     }
 }
