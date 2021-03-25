@@ -22,7 +22,6 @@ class GameRepository(application: Application) {
         allGames = gameDao.getAllGameList()
         todoList = gameDao.getTodoList()
         allPlayHistory = gameDao.getAllPlayHistory()
-
     }
 
     /**
@@ -98,5 +97,12 @@ class GameRepository(application: Application) {
 
     fun getPlayedGameById(playHistoryId: Int?): LiveData<PlayHistoryWithGames> = runBlocking {
         gameDao.getPlayedGameById(playHistoryId)
+    }
+    /**
+     * playWithGames
+     * */
+
+    fun getGameWithPlayById(gameId: Int?): LiveData<GamesWithPlayHistory> = runBlocking {
+        gameDao.getGameWithPlayById(gameId)
     }
 }
