@@ -31,9 +31,6 @@ class GameDetailFragment: Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-
-        setHasOptionsMenu(true)
-
         val root = inflater.inflate(R.layout.fragment_game_detail, container, false)
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
@@ -90,6 +87,8 @@ class GameDetailFragment: Fragment() {
             selectedGame.ownedCheck = ownedCheckBox.isChecked
             updateGame(selectedGame)
         }
+
+        setHasOptionsMenu(true)
 
         return root
     }

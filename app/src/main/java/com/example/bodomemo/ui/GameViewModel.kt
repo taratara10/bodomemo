@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.bodomemo.data.GameRepository
 import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.data.db.GamesWithPlayHistory
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -36,4 +37,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getGameById(gameId)
     }
 
+
+    fun getGameWithPlayById(gameId:Int?) : LiveData<GamesWithPlayHistory>{
+        return repository.getGameWithPlayById(gameId)
+    }
 }

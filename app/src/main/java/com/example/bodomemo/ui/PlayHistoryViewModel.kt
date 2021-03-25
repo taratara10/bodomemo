@@ -42,11 +42,6 @@ class PlayHistoryViewModel(application: Application) : AndroidViewModel(applicat
         return repository.getPlayedGameById(playHistoryId)
     }
 
-    fun getGameWithPlayById(gameId:Int?) : LiveData<GamesWithPlayHistory>{
-        return repository.getGameWithPlayById(gameId)
-    }
-
-
     //yyyy/MM/dd -> MilliSec
     fun convertDateToMilliSec(date: String): Long {
         val dataFormat = SimpleDateFormat("yyyy/MM/dd")
