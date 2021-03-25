@@ -44,7 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="面白さ"
+        android:text="・面白さ"
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/til_game_title_detail" />
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="お気に入り"
+        android:text="・お気に入り"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_rating_title" />
 
@@ -94,7 +94,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="持ってる"
+        android:text="・持ってる"
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_favorite" />
@@ -116,7 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="やりたいリストに追加"
+        android:text="・やりたいリストに追加"
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -137,7 +137,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="遊んだ履歴"
+        android:text="・遊んだ履歴"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_todo_title" />
 
@@ -165,8 +165,9 @@
         android:id="@+id/rv_game_detail_game_played"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_game_with_play_history" />
 
