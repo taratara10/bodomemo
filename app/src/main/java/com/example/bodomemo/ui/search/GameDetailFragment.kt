@@ -89,7 +89,9 @@ class GameDetailFragment: Fragment() {
         }
 
         gameViewModel.getGameWithPlayById(selectedGame.gameId).observe(viewLifecycleOwner,{
-            gameWithPlayHistoryAdapter.setAllPlayList(it.playHistoryList)
+            val playList = it.playHistoryList
+            gameWithPlayHistoryAdapter.setAllPlayList(playList)
+            root.tv_game_with_play_history_time.text = playList.size.toString()
         })
         //playGame recyclerView
         root.rv_game_detail_game_played.apply {
@@ -97,6 +99,7 @@ class GameDetailFragment: Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = gameWithPlayHistoryAdapter
         }
+
 
         setHasOptionsMenu(true)
 
