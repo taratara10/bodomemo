@@ -16,13 +16,14 @@ import com.example.bodomemo.R
 import com.example.bodomemo.R.id.toolbar_action_delete
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
+import com.example.bodomemo.ui.playHistory.PlayHistoryAdapter
 import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_game_detail.view.*
 
 class GameDetailFragment: Fragment(),SimpleListAdapter.GameAddEvents {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedGame:GameEntity
-    private lateinit var simpleListAdapter: SimpleListAdapter
+    private lateinit var playHistoryAdapter: PlayHistoryAdapter
     private val searchFragmentArgs: SearchFragmentArgs by navArgs()
     private val createNewGameFragmentArgs: CreateNewGameFragmentArgs by navArgs()
 
@@ -33,7 +34,7 @@ class GameDetailFragment: Fragment(),SimpleListAdapter.GameAddEvents {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_game_detail, container, false)
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-        simpleListAdapter = SimpleListAdapter(this)
+       // simpleListAdapter = SimpleListAdapter(this)
         //searchFragment、createFragmentのうちnullでないほうの値をセット
         val selectedGameId = searchFragmentArgs.gameId?.toInt()
                 ?: createNewGameFragmentArgs.createdNewId?.toInt()
