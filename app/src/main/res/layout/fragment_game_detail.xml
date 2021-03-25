@@ -104,27 +104,6 @@
         app:layout_constraintStart_toEndOf="@+id/tv_owned_title"
         app:layout_constraintTop_toTopOf="@+id/tv_owned_title" />
 
-
-    <!-- Play time -->
-    <TextView
-        android:id="@+id/tv_play_time_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="遊んだ回数"
-        app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_owned_title" />
-    <TextView
-        android:id="@+id/tv_play_time_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="0回"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_play_time_title"
-        app:layout_constraintStart_toEndOf="@+id/tv_play_time_title"
-        app:layout_constraintTop_toTopOf="@+id/tv_play_time_title" />
-
     <!--  To do  -->
     <TextView
         android:id="@+id/tv_edit_todo_title"
@@ -135,7 +114,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_play_time_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_owned_title" />
     <CheckBox
         android:id="@+id/cb_edit_todo_checked"
         android:layout_width="wrap_content"
@@ -145,8 +124,44 @@
         app:layout_constraintStart_toEndOf="@+id/tv_edit_todo_title"
         app:layout_constraintTop_toTopOf="@+id/tv_edit_todo_title" />
 
+    <!--  Rating  -->
+    <TextView
+        android:id="@+id/tv_game_with_play_history"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="遊んだ履歴"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_edit_todo_title" />
 
+    <com.example.bodomemo.EmptyRecyclerView
+        android:id="@+id/rv_game_detail_game_played"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_with_play_history" />
 
-<!--    Toast処理を実装してくれ-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/game_detail_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_with_play_history">
+
+        <TextView
+            android:id="@+id/tv_search_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="該当なし"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
