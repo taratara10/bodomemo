@@ -48,6 +48,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/til_game_title_detail" />
+
     <RatingBar
         android:id="@+id/rb_edit_rating"
         style="?android:attr/ratingBarStyleIndicator"
@@ -58,8 +59,8 @@
         android:layout_marginStart="32dp"
         android:isIndicator="false"
         android:numStars="5"
-        android:stepSize="1"
         android:rating="0"
+        android:stepSize="1"
         app:layout_constraintBottom_toBottomOf="@+id/tv_rating_title"
         app:layout_constraintStart_toEndOf="@+id/tv_rating_title"
         app:layout_constraintTop_toTopOf="@+id/tv_rating_title" />
@@ -74,6 +75,7 @@
         android:text="お気に入り"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_rating_title" />
+
     <CheckBox
         android:id="@+id/cb_edit_favorite_checked"
         android:layout_width="wrap_content"
@@ -95,6 +97,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_favorite" />
+
     <CheckBox
         android:id="@+id/cb_edit_owned_checked"
         android:layout_width="wrap_content"
@@ -115,6 +118,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_owned_title" />
+
     <CheckBox
         android:id="@+id/cb_edit_todo_checked"
         android:layout_width="wrap_content"
@@ -124,7 +128,7 @@
         app:layout_constraintStart_toEndOf="@+id/tv_edit_todo_title"
         app:layout_constraintTop_toTopOf="@+id/tv_edit_todo_title" />
 
-    <!--  Rating  -->
+    <!--  PlayHistory  -->
     <TextView
         android:id="@+id/tv_game_with_play_history"
         android:layout_width="0dp"
@@ -133,6 +137,26 @@
         android:text="遊んだ履歴"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_todo_title" />
+
+    <TextView
+        android:id="@+id/tv_game_with_play_history_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_game_with_play_history"
+        app:layout_constraintStart_toEndOf="@+id/tv_game_with_play_history"
+        app:layout_constraintTop_toTopOf="@+id/tv_game_with_play_history" />
+
+    <TextView
+        android:id="@+id/tv_game_with_play_history_time_unit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="回"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_game_with_play_history_time"
+        app:layout_constraintStart_toEndOf="@+id/tv_game_with_play_history_time"
+        app:layout_constraintTop_toTopOf="@+id/tv_game_with_play_history_time"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.example.bodomemo.EmptyRecyclerView
         android:id="@+id/rv_game_detail_game_played"
@@ -147,6 +171,7 @@
         android:id="@+id/game_detail_empty_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
