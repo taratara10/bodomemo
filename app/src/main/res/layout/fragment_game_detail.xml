@@ -103,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:button="@drawable/checkbox_bag_layout"
+        android:theme="@drawable/checkbox_bag_layout"
         app:layout_constraintBottom_toBottomOf="@+id/tv_owned_title"
         app:layout_constraintStart_toEndOf="@+id/tv_owned_title"
         app:layout_constraintTop_toTopOf="@+id/tv_owned_title" />
