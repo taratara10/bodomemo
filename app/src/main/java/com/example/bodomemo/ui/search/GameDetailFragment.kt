@@ -20,10 +20,10 @@ import com.example.bodomemo.ui.playHistory.PlayHistoryAdapter
 import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_game_detail.view.*
 
-class GameDetailFragment: Fragment(),SimpleListAdapter.GameAddEvents {
+class GameDetailFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedGame:GameEntity
-    private lateinit var playHistoryAdapter: PlayHistoryAdapter
+    private lateinit var gameWithPlayHistoryAdapter: GameWithPlayHistoryAdapter
     private val searchFragmentArgs: SearchFragmentArgs by navArgs()
     private val createNewGameFragmentArgs: CreateNewGameFragmentArgs by navArgs()
 
@@ -34,7 +34,7 @@ class GameDetailFragment: Fragment(),SimpleListAdapter.GameAddEvents {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_game_detail, container, false)
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-       // simpleListAdapter = SimpleListAdapter(this)
+        gameWithPlayHistoryAdapter = GameWithPlayHistoryAdapter()
         //searchFragment、createFragmentのうちnullでないほうの値をセット
         val selectedGameId = searchFragmentArgs.gameId?.toInt()
                 ?: createNewGameFragmentArgs.createdNewId?.toInt()
@@ -89,13 +89,13 @@ class GameDetailFragment: Fragment(),SimpleListAdapter.GameAddEvents {
         }
 
         gameViewModel.getGameWithPlayById(selectedGame.gameId).observe(viewLifecycleOwner,{
-            simpleListAdapter.setAllGames(it)
+            gameWithPlayHistoryAdapter.setAllPlayList(it.playHistoryList)
         })
         //playGame recyclerView
         root.rv_game_detail_game_played.apply {
             setEmptyView(root.game_detail_empty_view)
             layoutManager = LinearLayoutManager(activity)
-            adapter = simpleListAdapter
+            adapter = gameWithPlayHistoryAdapter
         }
 
         setHasOptionsMenu(true)
@@ -141,7 +141,4 @@ class GameDetailFragment: Fragment(),SimpleListAdapter.GameAddEvents {
         return true
     }
 
-    override fun onViewClicked(gameId: String?) {
-        TODO("Not yet implemented")
-    }
 }

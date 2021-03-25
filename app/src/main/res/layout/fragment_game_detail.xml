@@ -184,7 +184,7 @@
             android:id="@+id/tv_search_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="該当なし"
+            android:text="まだ遊んだ記録がありません！"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
