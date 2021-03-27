@@ -17,6 +17,7 @@ import com.example.bodomemo.R.id.toolbar_action_delete
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
 import com.example.bodomemo.ui.playHistory.PlayHistoryAdapter
+import com.example.bodomemo.ui.playHistory.PlayHistoryDetailFragmentArgs
 import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_game_detail.view.*
 
@@ -26,6 +27,7 @@ class GameDetailFragment: Fragment() {
     private lateinit var gameWithPlayHistoryAdapter: GameWithPlayHistoryAdapter
     private val searchFragmentArgs: SearchFragmentArgs by navArgs()
     private val createNewGameFragmentArgs: CreateNewGameFragmentArgs by navArgs()
+    private val playHistoryDetailFragmentArgs: PlayHistoryDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -39,6 +41,7 @@ class GameDetailFragment: Fragment() {
         val selectedGameId = searchFragmentArgs.gameId?.toInt()
                 ?: createNewGameFragmentArgs.createdNewId?.toInt()
                 ?: createNewGameFragmentArgs.gameId?.toInt()
+                ?: playHistoryDetailFragmentArgs.gameId?.toInt()
                 ?: throw Exception("cannot get gameId")
 
         val gameTitleEditText = root.et_game_title_detail
@@ -98,6 +101,16 @@ class GameDetailFragment: Fragment() {
             setEmptyView(root.game_detail_empty_view)
             layoutManager = LinearLayoutManager(activity)
             adapter = gameWithPlayHistoryAdapter
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            val playHistoryId = playHistoryDetailFragmentArgs.playHistoryId ?: null
+            if (playHistoryId != null){
+                val action = GameDetailFragmentDirections
+                        .actionNavigationGameDetailToNavigationPlayHistoryDetail(playHistoryId)
+                findNavController().navigate(action)
+            }
+            findNavController().popBackStack()
         }
 
 
