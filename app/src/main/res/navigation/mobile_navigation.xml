@@ -11,7 +11,6 @@
         android:name="com.example.bodomemo.ui.todo.TodoFragment"
         android:label="やりたいリスト(To Do)"
         tools:layout="@layout/fragment_todo" >
-
         <action
             android:id="@+id/action_navigation_todo_to_navigation_add_todo"
             app:destination="@id/navigation_add_todo" />
@@ -23,7 +22,6 @@
         android:name="com.example.bodomemo.ui.todo.AddTodoFragment"
         android:label="やりたいリストに追加"
         tools:layout="@layout/fragment_add_todo" >
-
         <action
             android:id="@+id/action_navigation_add_todo_to_navigation_todo"
             app:destination="@id/navigation_todo" />
@@ -41,7 +39,6 @@
         <action
             android:id="@+id/action_navigation_search_to_navigation_create_game"
             app:destination="@id/navigation_create_game" />
-
         <argument
             android:name="gameId"
             android:defaultValue="@null"
@@ -72,12 +69,15 @@
             app:argType="string"/>
     </fragment>
 
-<!--  game detail  -->
+    <!--  game detail  -->
     <fragment
         android:id="@+id/navigation_game_detail"
         android:name="com.example.bodomemo.ui.search.GameDetailFragment"
         android:label="GameDetailFragment"
         tools:layout="@layout/fragment_game_detail">
+        <action
+            android:id="@+id/action_navigation_game_detail_to_navigation_play_history_detail"
+            app:destination="@id/navigation_play_history_detail" />
         <argument
             android:name="gameId"
             android:defaultValue="@null"
@@ -88,13 +88,16 @@
             android:defaultValue="@null"
             app:nullable="true"
             app:argType="string"/>
+        <argument
+            android:name="playHistoryId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
 
 
-    <!--
-        Play history
-        -->
+    <!--   Play history     -->
     <fragment
         android:id="@+id/navigation_play_history"
         android:name="com.example.bodomemo.ui.playHistory.PlayHistoryFragment"
@@ -113,6 +116,7 @@
             app:argType="string"/>
     </fragment>
 
+<!--  create PlayHistory  -->
     <fragment
         android:id="@+id/navigation_create_play_history"
         android:name="com.example.bodomemo.ui.playHistory.CreateNewPlayHistoryFragment"
@@ -128,6 +132,7 @@
             app:argType="string"/>
     </fragment>
 
+<!--  PlayHistory detail  -->
     <fragment
         android:id="@+id/navigation_play_history_detail"
         android:name="com.example.bodomemo.ui.playHistory.PlayHistoryDetailFragment"
@@ -148,8 +153,14 @@
             android:defaultValue="@null"
             app:nullable="true"
             app:argType="string"/>
+        <argument
+            android:name="gameId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
+<!--  add playedGame  -->
     <fragment
         android:id="@+id/navigation_play_history_add_game"
         android:name="com.example.bodomemo.ui.playHistory.PlayHistoryAddGameFragment"
