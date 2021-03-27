@@ -19,6 +19,7 @@ import com.example.bodomemo.data.db.PlayAndGameCrossRef
 import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.PlayAndGameCrossRefViewModel
 import com.example.bodomemo.ui.PlayHistoryViewModel
+import com.example.bodomemo.ui.search.GameDetailFragmentArgs
 import com.example.bodomemo.ui.search.SimpleListAdapter
 import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 import kotlinx.android.synthetic.main.fragment_play_history_detail.*
@@ -37,6 +38,7 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
     private val playHistoryFragmentArgs: PlayHistoryFragmentArgs by navArgs()
     private val createNewPlayHistoryFragmentArgs: CreateNewPlayHistoryFragmentArgs by navArgs()
     private val playHistoryAddGameFragmentArgs: PlayHistoryAddGameFragmentArgs by navArgs()
+    private val gameDetailFragmentArgs: GameDetailFragmentArgs by navArgs()
 
     private var dragPlayedGameAdapter = DragPlayedGameAdapter(emptyList(),this)
     private var playHistoryDate: Long = 0
@@ -139,6 +141,7 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
         selectedPlayHistoryId = playHistoryFragmentArgs.playHistoryId?.toInt()
                 ?: createNewPlayHistoryFragmentArgs.createdPlayHistoryId?.toInt()
                         ?: playHistoryAddGameFragmentArgs.playHistoryId?.toInt()
+                        ?: gameDetailFragmentArgs.playHistoryId?.toInt()
                         ?: throw Exception("cannot get playHistoryId")
     }
 
@@ -197,8 +200,14 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
 
     override fun onViewClicked(gameId: String?) {
-        TODO("Not yet implemented")
+        if (gameId != null){
+            val action = PlayHistoryDetailFragmentDirections
+                    .actionNavigationPlayHistoryDetailToNavigationGameDetail(gameId,selectedPlayHistoryId.toString())
+            findNavController().navigate(action)
+        }
+
     }
+
 
     override fun onViewSwiped(position:Int) {
         //delete all PlayedGameCrossRef
