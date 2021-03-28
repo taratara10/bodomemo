@@ -9,9 +9,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListene
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.playHistory.DragPlayedGameAdapter.PlayedGameViewHolder
-import kotlinx.android.synthetic.main.played_game_drag_item.view.*
-import kotlinx.android.synthetic.main.simple_list_item.view.*
-import kotlinx.android.synthetic.main.simple_list_item.view.simple_list_adapter
+import kotlinx.android.synthetic.main.game_drag_item.view.*
 
 class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetailEvents: GameDetailEvents)
         : DragDropSwipeAdapter<GameEntity, PlayedGameViewHolder>(dataSet) {
@@ -28,7 +26,7 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayedGameViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.played_game_drag_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.game_drag_item, parent, false)
         return PlayedGameViewHolder(view)
     }
 
