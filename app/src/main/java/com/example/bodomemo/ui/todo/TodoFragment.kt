@@ -17,6 +17,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
+import kotlinx.android.synthetic.main.fragment_todo.*
 import kotlinx.android.synthetic.main.fragment_todo.view.*
 import java.util.*
 import java.util.Collections.swap
@@ -48,8 +49,10 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
             //Switch EmptyView
             if (todoList.isNotEmpty()){
                 todo_empty_view.visibility = View.GONE
+                tv_todo_swipe_explain.visibility = View.VISIBLE
             }else{
                 todo_empty_view.visibility = View.VISIBLE
+                tv_todo_swipe_explain.visibility = View.GONE
             }
 
         })
