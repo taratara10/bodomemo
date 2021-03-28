@@ -33,7 +33,6 @@ class AddTodoAdapter(checkEvents: CheckEvents): RecyclerView.Adapter<AddTodoAdap
         fun bind(game: GameEntity, listener: CheckEvents) {
             itemView.tv_todo_item_title.text = game.title
             itemView.cb_todo_checked.isChecked = game.todoCheck
-            itemView.image_todo_drag.visibility = View.INVISIBLE
             itemView.cb_todo_checked.setOnClickListener {
                 game.todoCheck = itemView.cb_todo_checked.isChecked
                 listener.onCheckBoxClicked(game)

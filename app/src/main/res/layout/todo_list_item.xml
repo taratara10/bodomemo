@@ -48,17 +48,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="ボードゲーム名" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_todo_drag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-
-            android:src="@drawable/ic_baseline_drag_handle_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <!--        <TextView-->
         <!--            android:id="@+id/textView2"-->
         <!--            android:layout_width="wrap_content"-->
