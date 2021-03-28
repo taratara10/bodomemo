@@ -11,4 +11,5 @@
     <color name="favorite">#FFF23560</color>
     <color name="bag">#8BC34A</color>
     <color name="checkbox_off">#535251</color>
+    <color name="archive">#00796B</color>
 </resources>
