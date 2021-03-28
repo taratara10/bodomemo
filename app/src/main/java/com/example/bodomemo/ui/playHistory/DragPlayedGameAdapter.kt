@@ -9,7 +9,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListene
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.playHistory.DragPlayedGameAdapter.PlayedGameViewHolder
-import kotlinx.android.synthetic.main.game_drag_item.view.*
+import kotlinx.android.synthetic.main.drag_game_item.view.*
 
 class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetailEvents: GameDetailEvents)
         : DragDropSwipeAdapter<GameEntity, PlayedGameViewHolder>(dataSet) {
@@ -18,15 +18,15 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
 
     class PlayedGameViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: GameDetailEvents) {
-            itemView.tv_played_game_drag_title.text = game.title
-            itemView.played_game_drag_adapter.setOnClickListener {
+            itemView.tv_drag_game_title.text = game.title
+            itemView.drag_game_adapter.setOnClickListener {
                 listener.onViewClicked(game.gameId.toString())
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayedGameViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.game_drag_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.drag_game_item, parent, false)
         return PlayedGameViewHolder(view)
     }
 
@@ -39,7 +39,7 @@ class DragPlayedGameAdapter (dataSet: List<GameEntity> = emptyList(), gameDetail
 
     override fun getViewToTouchToStartDraggingItem(item: GameEntity,viewHolder: PlayedGameViewHolder,position: Int
     ): View? {
-        return viewHolder.itemView.image_played_game_drag
+        return viewHolder.itemView.imgae_drag_game_handle
     }
 
 

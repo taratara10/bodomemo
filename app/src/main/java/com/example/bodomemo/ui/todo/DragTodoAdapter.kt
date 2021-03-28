@@ -12,6 +12,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.util.DragDropSwipeDiffCallb
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.playHistory.DragPlayedGameAdapter
+import kotlinx.android.synthetic.main.drag_game_item.view.*
 import kotlinx.android.synthetic.main.todo_list_item.view.*
 
 class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEvents)
@@ -21,21 +22,12 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
 
     class DragTodoViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: TodoEvents) {
-            itemView.tv_todo_item_title.text = game.title
-            //to_do_check = true のものを空のcheckBox(false)で表したい
-            itemView.cb_todo_checked.isChecked = !game.todoCheck
-
-
-            itemView.cb_todo_checked.setOnClickListener {
-                val checked:Boolean = !itemView.cb_todo_checked.isChecked
-                game.todoCheck = checked
-                listener.onCheckBoxClicked(game)
-            }
+            itemView.tv_drag_game_title.text = game.title
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DragTodoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.todo_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.drag_game_item, parent, false)
         return DragTodoViewHolder(view)
     }
 
@@ -48,7 +40,7 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
 
     override fun getViewToTouchToStartDraggingItem(item: GameEntity, holder: DragTodoViewHolder, position: Int): View? {
         // We return the view holder's view on which the user has to touch to drag the item
-        return holder.itemView
+        return holder.itemView.imgae_drag_game_handle
     }
 
      val onItemDragListener = object : OnItemDragListener<GameEntity> {

@@ -7,17 +7,16 @@
     tools:context=".ui.todo.TodoFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_todo_swipe_explain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="プレイ回数"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="←にスワイプで完了"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/todo_empty_view"
@@ -45,7 +44,7 @@
             android:id="@+id/tv_todo_empty_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="⊕から追加しましょう！"
+            android:text="⊕から遊びたいゲームを追加しましょう！"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +56,10 @@
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp">
 
         <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
             android:id="@+id/rv_drag_todo_list"
@@ -65,7 +67,6 @@
             android:layout_height="match_parent"
             app:item_layout="@layout/todo_list_item"
             />
-
     </FrameLayout>
 
 
