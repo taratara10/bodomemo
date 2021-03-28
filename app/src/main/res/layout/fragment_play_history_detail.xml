@@ -80,7 +80,10 @@
             app:layout_constraintBottom_toTopOf="@+id/til_play_history_detail_memo"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/play_history_detail_add_game" />
+            app:layout_constraintTop_toBottomOf="@+id/play_history_detail_add_game"
+                app:behind_swiped_item_bg_color="@color/archive"
+                app:behind_swiped_item_icon="@drawable/ic_baseline_archive_24"
+                app:behind_swiped_item_icon_margin="8dp"/>
 
     <!--  addGameAdapter View  -->
         <androidx.constraintlayout.widget.ConstraintLayout

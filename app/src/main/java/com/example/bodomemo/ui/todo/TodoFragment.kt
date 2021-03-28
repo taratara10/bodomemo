@@ -64,9 +64,6 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
             dragListener = dragTodoAdapter.onItemDragListener
             swipeListener = dragTodoAdapter.onItemSwipeListener
             disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
-            behindSwipedItemIconDrawableId = R.drawable.ic_baseline_archive_24
-            behindSwipedItemBackgroundColor = R.color.archive
-            behindSwipedItemIconMargin = 16F
         }
 
         //add to do btn
