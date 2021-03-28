@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.ernestoyaquello.dragdropswiperecyclerview.util.DragDropSwipeDiffCallback
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
@@ -52,6 +53,16 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
         }
     }
 
+    val onItemSwipeListener = object : OnItemSwipeListener<GameEntity> {
+        override fun onItemSwiped(position: Int, direction: OnItemSwipeListener.SwipeDirection, item: GameEntity): Boolean {
+            // Handle action of item swiped
+            // Return false to indicate that the swiped item should be removed from the adapter's data set (default behaviour)
+            // Return true to stop the swiped item from being automatically removed from the adapter's data set (in this case, it will be your responsibility to manually update the data set as necessary)
+            listener.onViewSwiped(position)
+            return false
+        }
+    }
+
     fun setTodoList(todoList: List<GameEntity>) {
         this.dataSet = todoList
         notifyDataSetChanged()
@@ -61,7 +72,7 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
      * RecycleView touch event callbacks
      * */
     interface TodoEvents {
-        fun onCheckBoxClicked(gameEntity: GameEntity)
         fun onViewDropped(initialPosition: Int, finalPosition: Int,item:GameEntity)
+        fun onViewSwiped(position: Int)
     }
 }

@@ -62,8 +62,8 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
             layoutManager = LinearLayoutManager(activity)
             adapter = dragTodoAdapter
             dragListener = dragTodoAdapter.onItemDragListener
+            swipeListener = dragTodoAdapter.onItemSwipeListener
             disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
-            disableSwipeDirection(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
         }
 
         //add to do btn
@@ -75,9 +75,10 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
     }
 
 
-
-    override fun onCheckBoxClicked(gameEntity: GameEntity) {
-        gameViewModel.updateGame(gameEntity)
+    override fun onViewSwiped(position: Int) {
+        val selectedGame = allTodoList[position]
+        selectedGame.todoCheck = false
+        gameViewModel.updateGame(selectedGame)
     }
 
     override fun onViewDropped(initialPosition: Int, finalPosition: Int, item: GameEntity) {
