@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_todo"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="todo" />
+        android:icon="@drawable/ic_baseline_bookmark_24"
+        android:title="やりたいリスト" />
 
     <item
         android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Search" />
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="検索" />
 
     <item
         android:id="@+id/navigation_play_history"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="PlayHistory" />
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="プレイ履歴" />
 
 </menu>
