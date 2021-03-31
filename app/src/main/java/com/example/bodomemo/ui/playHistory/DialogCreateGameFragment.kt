@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.bodomemo.R
@@ -25,45 +26,39 @@ class DialogCreateGameFragment:DialogFragment() {
                         // Add action buttons
                 setTitle("ゲームを追加する")
                 setPositiveButton("追加", DialogInterface.OnClickListener { dialog, id ->
-                    if (validateFields()) {
-                        listener.onDialogPositiveClick(DialogFragment())
-                    }
+//                    if (validateFields()) {
+//                        listener.onDialogPositiveClick(DialogFragment())
+//                    }
+
+                    Log.d("a","ok")
                 })
 
                 setNegativeButton("キャンセル", DialogInterface.OnClickListener { dialog, id ->
                     getDialog()?.cancel()
                 })
             }
-
             return builder.create()
     }
 
 
 
     companion object {
-        fun newInstance(fragment: Fragment): DialogCreateGameFragment {
-            val instance = DialogCreateGameFragment()
-            instance.setTargetFragment(fragment,0)
-            return instance
-        }
+        fun newInstance() = DialogCreateGameFragment()
     }
 
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        newInstance(this)
         try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
-            listener = this.targetFragment as DialogListener
+            if(targetFragment != null){
+                listener = newInstance().targetFragment as DialogListener
+            }
         } catch (e: ClassCastException) {
             // The activity doesn't implement the interface, throw exception
             throw ClassCastException((context.toString() +
                     " must implement NoticeDialogListener"))
         }
-//        listener = context as DialogListener
-//        //set EditText
-//        et_dialog_game_title.setText(gameTitle)
     }
 
     private fun validateFields(): Boolean {
