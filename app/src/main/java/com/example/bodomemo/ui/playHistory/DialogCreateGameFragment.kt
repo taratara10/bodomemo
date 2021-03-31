@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.bodomemo.R
@@ -22,6 +23,7 @@ class DialogCreateGameFragment:DialogFragment() {
 
 
             builder.apply {
+
                 setView(inflater.inflate(R.layout.dialog_add_new_game, null))
                         // Add action buttons
                 setTitle("ゲームを追加する")

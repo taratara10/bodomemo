@@ -175,7 +175,29 @@
             android:defaultValue="@null"
             app:nullable="true"
             app:argType="string"/>
+        <argument
+            android:name="gameTitle"
+            android:defaultValue=""
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_navigation_play_history_add_game_to_navigation_create_game_dialog"
+            app:destination="@id/navigation_create_game_dialog" />
     </fragment>
+
+<!--  add game dialog  -->
+    <dialog
+        android:id="@+id/navigation_create_game_dialog"
+        android:name="com.example.bodomemo.ui.playHistory.DialogCreateGameFragment"
+        tools:layout="@layout/dialog_add_new_game">
+
+        <action
+            android:id="@+id/action_navigation_create_game_dialog_to_navigation_play_history_add_game"
+            app:destination="@id/navigation_play_history_add_game" />
+        <argument
+            android:name="gameTitle"
+            android:defaultValue=""
+            app:argType="string"/>
+    </dialog>
 
 
 </navigation>
