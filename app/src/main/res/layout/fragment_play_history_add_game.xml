@@ -22,7 +22,7 @@
             android:id="@+id/et_play_history_add_game_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ボードゲーム名"
+            android:hint="ゲーム検索"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
