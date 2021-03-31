@@ -91,6 +91,7 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents, D
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment) {
+
         et_dialog_game_title.text
     }
 

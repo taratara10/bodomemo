@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.bodomemo.R
 import kotlinx.android.synthetic.main.dialog_add_new_game.*
+import kotlinx.android.synthetic.main.fragment_create_new_game.*
 
 class DialogCreateGameFragment:DialogFragment() {
     internal lateinit var listener: DialogListener
@@ -21,8 +22,10 @@ class DialogCreateGameFragment:DialogFragment() {
             builder.setView(inflater.inflate(R.layout.dialog_add_new_game, null))
                     // Add action buttons
                     .setPositiveButton("追加",DialogInterface.OnClickListener { dialog, id ->
-                                listener.onDialogPositiveClick(this)
-                            })
+                        if (validateFields()) {
+                            listener.onDialogPositiveClick(this)
+                        }
+                    })
                     .setNegativeButton("キャンセル",DialogInterface.OnClickListener { dialog, id ->
                                 getDialog()?.cancel()
                             })
@@ -36,6 +39,15 @@ class DialogCreateGameFragment:DialogFragment() {
         listener = context as DialogListener
         //set EditText
         et_dialog_game_title.setText(gameTitle)
+    }
+
+    private fun validateFields(): Boolean {
+        if (et_dialog_game_title.text?.isEmpty() == true) {
+            til_dialog_title.error = "pleaseEnterTitle"
+            et_dialog_game_title.requestFocus()
+            return false
+        }
+        return true
     }
 
     interface DialogListener {
