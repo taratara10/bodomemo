@@ -6,8 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.SimpleAdapter
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,9 +20,8 @@ import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.GameViewModel
 import com.example.bodomemo.ui.PlayAndGameCrossRefViewModel
 import com.example.bodomemo.ui.search.SimpleListAdapter
-import com.example.bodomemo.ui.todo.AddTodoFragment
+import kotlinx.android.synthetic.main.dialog_add_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
-import kotlinx.android.synthetic.main.fragment_play_history_add_game.*
 import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 
 class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
@@ -44,11 +42,12 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
         gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
         //setting up recyclerView
-        val game_list = root.rv_play_history_add_game_list
         simpleListAdapter = SimpleListAdapter(this)
-        game_list.setEmptyView(root.play_history_add_game_empty_view)
-        game_list.layoutManager = LinearLayoutManager(activity)
-        game_list.adapter = simpleListAdapter
+        root.rv_play_history_add_game_list.apply {
+            setEmptyView(root.play_history_add_game_empty_view)
+            layoutManager = LinearLayoutManager(activity)
+            adapter = simpleListAdapter
+        }
 
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             simpleListAdapter.setAllGames(it)
@@ -61,7 +60,12 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
             }
         })
 
-
+        //add game btn
+        root.btn_play_history_add_game.setOnClickListener {
+            val gameTitle = root.et_play_history_add_game_title.text?.toString() ?: ""
+            val action = PlayHistoryAddGameFragmentDirections.actionNavigationPlayHistoryAddGameToNavigationCreateGameDialog(gameTitle)
+            findNavController().navigate(action)
+        }
 
 
 
@@ -74,7 +78,6 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
     }
 
     //recyclerView item click events
-    //CrossRefにINSERTして、playHistoryIdを渡す
     override fun onViewClicked(gameId: String?) {
         if(gameId != null) {
             val newReference = PlayAndGameCrossRef(
@@ -89,4 +92,10 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
         findNavController().navigate(action)
     }
 
+
+
+    private fun navigateCreateGameDialog() {
+        val newFragment = DialogCreateGameFragment()
+        newFragment.show(childFragmentManager, "newGame")
+    }
 }
