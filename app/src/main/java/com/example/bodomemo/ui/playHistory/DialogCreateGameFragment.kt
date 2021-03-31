@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
@@ -19,7 +20,8 @@ import kotlinx.android.synthetic.main.dialog_add_new_game.view.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 
 class DialogCreateGameFragment:DialogFragment() {
-    lateinit var gameViewModel: GameViewModel
+    private lateinit var gameViewModel: GameViewModel
+    private val addGameFragmentArgs:PlayHistoryAddGameFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val builder = AlertDialog.Builder(activity)
@@ -32,6 +34,7 @@ class DialogCreateGameFragment:DialogFragment() {
             builder.apply {
                 setView(root)
                 setTitle("ゲームを追加する")
+                root.et_dialog_game_title.setText(addGameFragmentArgs.gameTitle)
                 //add btn
                 setPositiveButton("追加", DialogInterface.OnClickListener { _, _ ->
                     if (gameTitle?.isEmpty() == false) {

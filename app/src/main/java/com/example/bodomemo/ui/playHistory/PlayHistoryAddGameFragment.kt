@@ -62,10 +62,9 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
 
         //add game btn
         root.btn_play_history_add_game.setOnClickListener {
-            //todo bundleを詰める
-           // navigateCreateGameDialog()
-            findNavController().navigate(PlayHistoryAddGameFragmentDirections.actionNavigationPlayHistoryAddGameToNavigationCreateGameDialog())
-
+            val gameTitle = root.et_play_history_add_game_title.text?.toString() ?: ""
+            val action = PlayHistoryAddGameFragmentDirections.actionNavigationPlayHistoryAddGameToNavigationCreateGameDialog(gameTitle)
+            findNavController().navigate(action)
         }
 
 
