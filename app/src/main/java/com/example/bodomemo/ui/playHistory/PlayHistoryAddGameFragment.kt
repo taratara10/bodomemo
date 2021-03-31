@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.dialog_add_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 
-class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents, DialogCreateGameFragment.DialogListener{
+class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
     private lateinit var playAndGameCrossRefViewModel: PlayAndGameCrossRefViewModel
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedPlayHistory: PlayHistoryEntity
@@ -63,7 +63,8 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents, D
         //add game btn
         root.btn_play_history_add_game.setOnClickListener {
             //todo bundleを詰める
-            navigateCreateGameDialog()
+           // navigateCreateGameDialog()
+            findNavController().navigate(PlayHistoryAddGameFragmentDirections.actionNavigationPlayHistoryAddGameToNavigationCreateGameDialog())
 
         }
 
@@ -92,10 +93,7 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents, D
         findNavController().navigate(action)
     }
 
-    override fun onDialogPositiveClick(dialog: DialogFragment) {
-        val newGame = GameEntity(gameId = 0, title = et_dialog_game_title.text.toString())
-        gameViewModel.saveGame(newGame)
-    }
+
 
     private fun navigateCreateGameDialog() {
         val newFragment = DialogCreateGameFragment()

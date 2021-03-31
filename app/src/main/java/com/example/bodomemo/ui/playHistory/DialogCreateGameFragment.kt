@@ -6,73 +6,52 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.bodomemo.R
+import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.dialog_add_new_game.*
+import kotlinx.android.synthetic.main.dialog_add_new_game.view.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 
 class DialogCreateGameFragment:DialogFragment() {
-    internal lateinit var listener: DialogListener
-    var gameTitle:String = ""
+    lateinit var gameViewModel: GameViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val builder = AlertDialog.Builder(activity)
             val inflater = requireActivity().layoutInflater
+            val root = inflater.inflate(R.layout.dialog_add_new_game, null)
+            val gameTitle = root.et_dialog_game_title.text
+
 
 
             builder.apply {
-
-                setView(inflater.inflate(R.layout.dialog_add_new_game, null))
-                        // Add action buttons
+                setView(root)
                 setTitle("ゲームを追加する")
-                setPositiveButton("追加", DialogInterface.OnClickListener { dialog, id ->
-//                    if (validateFields()) {
-//                        listener.onDialogPositiveClick(DialogFragment())
-//                    }
-
-                    Log.d("a","ok")
+                //add btn
+                setPositiveButton("追加", DialogInterface.OnClickListener { _, _ ->
+                    if (gameTitle?.isEmpty() == false) {
+                        val newGame = GameEntity(gameId = 0, title = gameTitle.toString())
+                        gameViewModel.saveGame(newGame)
+                    }
                 })
 
-                setNegativeButton("キャンセル", DialogInterface.OnClickListener { dialog, id ->
-                    getDialog()?.cancel()
+                setNegativeButton("キャンセル", DialogInterface.OnClickListener { _, _ ->
+                    dialog?.cancel()
                 })
             }
+
             return builder.create()
     }
 
 
-
-    companion object {
-        fun newInstance() = DialogCreateGameFragment()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
     }
 
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        try {
-            if(targetFragment != null){
-                listener = newInstance().targetFragment as DialogListener
-            }
-        } catch (e: ClassCastException) {
-            // The activity doesn't implement the interface, throw exception
-            throw ClassCastException((context.toString() +
-                    " must implement NoticeDialogListener"))
-        }
-    }
-
-    private fun validateFields(): Boolean {
-        if (et_dialog_game_title.text?.isEmpty() == true) {
-            til_dialog_title.error = "pleaseEnterTitle"
-            et_dialog_game_title.requestFocus()
-            return false
-        }
-        return true
-    }
-
-    interface DialogListener {
-        fun onDialogPositiveClick(dialog: DialogFragment)
-    }
 }
