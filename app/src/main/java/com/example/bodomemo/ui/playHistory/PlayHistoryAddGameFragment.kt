@@ -55,7 +55,11 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
             }
         })
 
-        root.btn_play_history_add_game.setOnClickListener {  navigateCreateGameDialog()      }
+        root.btn_play_history_add_game.setOnClickListener {
+            //todo bundleを詰める
+            navigateCreateGameDialog()
+
+        }
 
 
 
@@ -68,7 +72,6 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
     }
 
     //recyclerView item click events
-    //CrossRefにINSERTして、playHistoryIdを渡す
     override fun onViewClicked(gameId: String?) {
         if(gameId != null) {
             val newReference = PlayAndGameCrossRef(
@@ -83,7 +86,7 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
         findNavController().navigate(action)
     }
 
-    fun navigateCreateGameDialog() {
+    private fun navigateCreateGameDialog() {
         val newFragment = DialogCreateGameFragment()
         newFragment.show(childFragmentManager, "newGame")
     }
