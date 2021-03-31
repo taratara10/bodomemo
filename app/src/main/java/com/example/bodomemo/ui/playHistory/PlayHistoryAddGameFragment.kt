@@ -14,12 +14,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
+import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.data.db.PlayAndGameCrossRef
 import com.example.bodomemo.data.db.PlayHistoryEntity
 import com.example.bodomemo.ui.GameViewModel
 import com.example.bodomemo.ui.PlayAndGameCrossRefViewModel
 import com.example.bodomemo.ui.search.SimpleListAdapter
 import kotlinx.android.synthetic.main.dialog_add_new_game.*
+import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 
 class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents, DialogCreateGameFragment.DialogListener{
@@ -91,8 +93,8 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents, D
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment) {
-
-        et_dialog_game_title.text
+        val newGame = GameEntity(gameId = 0, title = et_dialog_game_title.text.toString())
+        gameViewModel.saveGame(newGame)
     }
 
     private fun navigateCreateGameDialog() {
