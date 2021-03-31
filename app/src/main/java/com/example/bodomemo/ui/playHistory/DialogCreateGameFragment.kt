@@ -7,17 +7,17 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.bodomemo.R
+import kotlinx.android.synthetic.main.dialog_add_new_game.*
 
 class DialogCreateGameFragment:DialogFragment() {
     internal lateinit var listener: DialogListener
+    var gameTitle:String = ""
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
 
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
             builder.setView(inflater.inflate(R.layout.dialog_add_new_game, null))
                     // Add action buttons
                     .setPositiveButton("追加",DialogInterface.OnClickListener { dialog, id ->
@@ -34,6 +34,8 @@ class DialogCreateGameFragment:DialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as DialogListener
+        //set EditText
+        et_dialog_game_title.setText(gameTitle)
     }
 
     interface DialogListener {
