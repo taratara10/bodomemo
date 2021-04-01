@@ -43,7 +43,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         }
 
         //set LiveData
-        gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
+        gameViewModel.getAllGameWithPlayList().observe(viewLifecycleOwner, Observer {
             searchAdapter.setAllGames(it)
             //画面遷移時にrecyclerViewを更新する　1回filter通さないと表示してくれない
             searchAdapter.filter.filter("")

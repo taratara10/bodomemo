@@ -10,6 +10,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.data.db.GamesWithPlayHistory
 import kotlinx.android.synthetic.main.search_game_item.view.*
 
 class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
@@ -79,9 +80,10 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     }
 
 
-    fun setAllGames(gameItems: MutableList<GameEntity>) {
-        this.gameList = gameItems
-        this.filteredGameList = gameItems
+    fun setAllGames(list: MutableList<GamesWithPlayHistory>) {
+        val gameEntityList = list.map { value -> value.gameEntity } as MutableList<GameEntity>
+        this.gameList = gameEntityList
+        this.filteredGameList = gameEntityList
         notifyDataSetChanged()
     }
 

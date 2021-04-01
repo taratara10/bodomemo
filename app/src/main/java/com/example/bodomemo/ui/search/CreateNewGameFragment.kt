@@ -36,7 +36,7 @@ class CreateNewGameFragment : Fragment(), SearchAdapter.DetailsEvents {
         searchAdapter =  SearchAdapter(this)
         search_game_list?.adapter = searchAdapter
 
-        gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
+        gameViewModel.getAllGameWithPlayList().observe(viewLifecycleOwner, Observer {
             searchAdapter.setAllGames(it)
         })
 
