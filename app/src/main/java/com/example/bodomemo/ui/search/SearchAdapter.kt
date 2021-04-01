@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.search_game_item.view.*
 class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
 
     private var gameList :MutableList<GameEntity> = arrayListOf()
-    private var gameWithPlayList: MutableList<GamesWithPlayHistory> = arrayListOf()
     private var filteredGameList: MutableList<GameEntity> = arrayListOf()
+    private var gamesWithPlayHistory: MutableList<GamesWithPlayHistory> = arrayListOf()
     private val listener: DetailsEvents = detailsEvents
 
 
@@ -82,8 +82,8 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
 
     fun setAllGames(list: MutableList<GamesWithPlayHistory>) {
-        gameWithPlayList = list
-        this.gameList = gameWithPlayList.map { it.gameEntity } as MutableList<GameEntity>
+        gamesWithPlayHistory = list
+        this.gameList = list.map { it.gameEntity } as MutableList<GameEntity>
         this.filteredGameList = gameList
         notifyDataSetChanged()
     }
@@ -92,6 +92,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     fun filterAllGame(){
         gameList.sortByDescending { it.title }
         filteredGameList = gameList
+        gamesWithPlayHistory.forEach { listener.updatePlayTime(it) }
         notifyDataSetChanged()
     }
 
@@ -115,7 +116,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     //プレイ回数
     fun filterPlayNumber(){
-        gameList = gameWithPlayList.sortedByDescending { it.playHistoryList.size }.map { it.gameEntity } as MutableList<GameEntity>
+        gameList.sortedByDescending { it.playTime }
         notifyDataSetChanged()
     }
 
@@ -124,6 +125,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
      * */
     interface DetailsEvents {
         fun onViewClicked(gameId: String?)
+        fun updatePlayTime(gamesWithPlayHistory: GamesWithPlayHistory)
     }
 
 }

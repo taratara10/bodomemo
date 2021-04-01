@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.data.db.GamesWithPlayHistory
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.view.*
@@ -94,6 +95,8 @@ class CreateNewGameFragment : Fragment(), SearchAdapter.DetailsEvents {
             findNavController().navigate(action)
         }
     }
+
+    override fun updatePlayTime(gamesWithPlayHistory: GamesWithPlayHistory) {    }
 
 
 }
