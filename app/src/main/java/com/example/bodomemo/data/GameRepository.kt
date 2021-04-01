@@ -13,6 +13,7 @@ class GameRepository(application: Application) {
     private val allGames:LiveData<MutableList<GameEntity>>
     private val todoList:LiveData<MutableList<GameEntity>>
     private val allPlayHistory:LiveData<List<PlayHistoryEntity>>
+    private val allGameWithPlayList: LiveData<MutableList<GamesWithPlayHistory>>
 
 
     init {
@@ -22,6 +23,7 @@ class GameRepository(application: Application) {
         allGames = gameDao.getAllGameList()
         todoList = gameDao.getTodoList()
         allPlayHistory = gameDao.getAllPlayHistory()
+        allGameWithPlayList = gameDao.getAllGameWithPlayList()
     }
 
     /**
@@ -104,5 +106,9 @@ class GameRepository(application: Application) {
 
     fun getGameWithPlayById(gameId: Int?): LiveData<GamesWithPlayHistory> = runBlocking {
         gameDao.getGameWithPlayById(gameId)
+    }
+
+    fun getAllGameWithPlayList(): LiveData<MutableList<GamesWithPlayHistory>> {
+        return allGameWithPlayList
     }
 }
