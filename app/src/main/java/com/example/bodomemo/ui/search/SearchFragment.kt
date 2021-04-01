@@ -99,6 +99,8 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
                 2 -> { searchAdapter.filterOwned() }
                 //rating
                 3 -> { searchAdapter.filterRating()}
+                //play number
+                4 -> {searchAdapter.filterPlayNumber()}
             }
             //検索フィールドを毎回空にする
             et_game_detail_title.setText("")

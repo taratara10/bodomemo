@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.search_game_item.view.*
 class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
 
     private var gameList :MutableList<GameEntity> = arrayListOf()
+    private var gameWithPlayList: MutableList<GamesWithPlayHistory> = arrayListOf()
     private var filteredGameList: MutableList<GameEntity> = arrayListOf()
     private val listener: DetailsEvents = detailsEvents
 
@@ -81,9 +82,9 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
 
     fun setAllGames(list: MutableList<GamesWithPlayHistory>) {
-        val gameEntityList = list.map { value -> value.gameEntity } as MutableList<GameEntity>
-        this.gameList = gameEntityList
-        this.filteredGameList = gameEntityList
+        gameWithPlayList = list
+        this.gameList = gameWithPlayList.map { it.gameEntity } as MutableList<GameEntity>
+        this.filteredGameList = gameList
         notifyDataSetChanged()
     }
 
@@ -110,7 +111,12 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     fun filterRating(){
         gameList.sortByDescending { it.rating }
         notifyDataSetChanged()
-        Log.d("a","$gameList")
+    }
+
+    //プレイ回数
+    fun filterPlayNumber(){
+        gameList = gameWithPlayList.sortedByDescending { it.playHistoryList.size }.map { it.gameEntity } as MutableList<GameEntity>
+        notifyDataSetChanged()
     }
 
     /**
