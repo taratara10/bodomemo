@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="新しく追加"
+        android:backgroundTint="@color/deep_orange_800"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/til_new_game_title" />
