@@ -117,14 +117,13 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     //プレイ回数
     fun filterPlayNumber(){
-        gamesWithPlayHistory.forEach { listener.updatePlayTime(it) }
-        gameList.sortedByDescending { it.playTime }
+        gameList.sortByDescending { it.playTime }
         notifyDataSetChanged()
     }
 
     //未プレイ
     fun filterUnPlayed(){
-        gameList.sortedBy { it.playTime }
+        gameList.sortBy { it.playTime }
         notifyDataSetChanged()
     }
 
