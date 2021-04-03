@@ -36,8 +36,8 @@ class GameWithPlayHistoryAdapter: RecyclerView.Adapter<GameWithPlayHistoryAdapte
         }
     }
 
-    fun setAllPlayList(playList: List<PlayHistoryEntity>) {
-        this.playList = playList
+    fun setAllPlayList(list: List<PlayHistoryEntity>) {
+        this.playList = list.sortedByDescending { it.date }
         notifyDataSetChanged()
     }
 
