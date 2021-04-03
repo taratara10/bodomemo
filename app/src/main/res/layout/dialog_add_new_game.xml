@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/dialog_divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:background="@color/deep_orange_800"
             app:layout_constraintTop_toTopOf="parent" />
 

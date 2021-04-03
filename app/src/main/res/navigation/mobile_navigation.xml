@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/navigation_add_todo"
         android:name="com.example.bodomemo.ui.todo.AddTodoFragment"
-        android:label="やりたいリストに追加"
+        android:label="やりたいリストを追加"
         tools:layout="@layout/fragment_add_todo" >
         <action
             android:id="@+id/action_navigation_add_todo_to_navigation_todo"
@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.bodomemo.ui.search.SearchFragment"
-        android:label="Search"
+        android:label="ボードゲーム検索"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_navigation_search_to_navigation_game_detail"
@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/navigation_create_game"
         android:name="com.example.bodomemo.ui.search.CreateNewGameFragment"
-        android:label="Create todo"
+        android:label="新しいボードゲームを作成"
         tools:layout="@layout/fragment_create_new_game">
         <action
             android:id="@+id/action_navigation_create_game_to_navigation_game_detail"
@@ -73,7 +73,7 @@
     <fragment
         android:id="@+id/navigation_game_detail"
         android:name="com.example.bodomemo.ui.search.GameDetailFragment"
-        android:label="GameDetailFragment"
+        android:label="ボードゲーム詳細"
         tools:layout="@layout/fragment_game_detail">
         <action
             android:id="@+id/action_navigation_game_detail_to_navigation_play_history_detail"
@@ -101,7 +101,7 @@
     <fragment
         android:id="@+id/navigation_play_history"
         android:name="com.example.bodomemo.ui.playHistory.PlayHistoryFragment"
-        android:label="PlayHistory"
+        android:label="プレイ履歴"
         tools:layout="@layout/fragment_play_history" >
         <action
             android:id="@+id/action_navigation_play_history_to_navigation_create_play_history"
@@ -120,6 +120,7 @@
     <fragment
         android:id="@+id/navigation_create_play_history"
         android:name="com.example.bodomemo.ui.playHistory.CreateNewPlayHistoryFragment"
+        android:label="プレイ履歴を作成"
         tools:layout="@layout/fragment_create_new_play_history">
         <action
             android:id="@+id/action_navigation_create_play_history_to_navigation_play_history_detail"
@@ -136,6 +137,7 @@
     <fragment
         android:id="@+id/navigation_play_history_detail"
         android:name="com.example.bodomemo.ui.playHistory.PlayHistoryDetailFragment"
+        android:label="プレイ履歴"
         tools:layout="@layout/fragment_play_history_detail">
         <action
             android:id="@+id/action_navigation_play_history_detail_to_navigation_game_detail"
@@ -164,6 +166,7 @@
     <fragment
         android:id="@+id/navigation_play_history_add_game"
         android:name="com.example.bodomemo.ui.playHistory.PlayHistoryAddGameFragment"
+        android:label="遊んだゲームを追加する"
         tools:layout="@layout/fragment_play_history_add_game">
         <action
             android:id="@+id/action_navigation_play_history_add_game_to_navigation_play_history_detail"
