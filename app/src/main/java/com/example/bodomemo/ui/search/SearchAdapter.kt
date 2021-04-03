@@ -37,6 +37,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: DetailsEvents) {
             itemView.search_game_title.text = game.title
+            itemView.search_adapter_plat_time.text = game.playTime.toString()
             if (game.ownedCheck) itemView.image_search_bag.visibility = View.VISIBLE
                     else itemView.image_search_bag.visibility = View.INVISIBLE
             if (game.favoriteCheck) itemView.image_search_fav.visibility = View.VISIBLE
@@ -116,6 +117,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     //プレイ回数
     fun filterPlayNumber(){
+        gamesWithPlayHistory.forEach { listener.updatePlayTime(it) }
         gameList.sortedByDescending { it.playTime }
         notifyDataSetChanged()
     }
