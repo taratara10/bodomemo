@@ -120,6 +120,12 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
         notifyDataSetChanged()
     }
 
+    //未プレイ
+    fun filterUnPlayed(){
+        gameList.sortedBy { it.playTime }
+        notifyDataSetChanged()
+    }
+
     /**
      * RecycleView touch event callbacks
      * */
