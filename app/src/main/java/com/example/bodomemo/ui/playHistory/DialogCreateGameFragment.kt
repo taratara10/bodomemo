@@ -33,7 +33,7 @@ class DialogCreateGameFragment:DialogFragment() {
 
             builder.apply {
                 setView(root)
-                setTitle("ゲームを追加する")
+                setTitle("新しいゲームを作成する")
                 root.et_dialog_game_title.setText(addGameFragmentArgs.gameTitle)
                 //add btn
                 setPositiveButton("追加", DialogInterface.OnClickListener { _, _ ->

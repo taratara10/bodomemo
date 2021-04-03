@@ -25,6 +25,7 @@ abstract class GameDatabase: RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(context,
                             GameDatabase::class.java,
                             "game_db")
+                            //todo version down
                             .fallbackToDestructiveMigration()
                             .build()
                 }

@@ -97,8 +97,6 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
             gameViewModel.updateGame(gameEntity)
             Log.d("if","実行された${playTime}/${gameEntity.playTime}")
         }
-
-        Log.d("click","clicked!")
     }
 
 
