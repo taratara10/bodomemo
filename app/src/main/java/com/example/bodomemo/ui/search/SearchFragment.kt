@@ -17,6 +17,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
+import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.data.db.GamesWithPlayHistory
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
@@ -43,7 +45,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         }
 
         //set LiveData
-        gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
+        gameViewModel.getAllGameWithPlayList().observe(viewLifecycleOwner, Observer {
             searchAdapter.setAllGames(it)
             //画面遷移時にrecyclerViewを更新する　1回filter通さないと表示してくれない
             searchAdapter.filter.filter("")
@@ -73,6 +75,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     }
 
     override fun onViewClicked(gameId: String?) {
+        Log.d("click","clicked! ${gameId}")
         if (gameId != null){
             val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
             findNavController().navigate(action)
@@ -84,6 +87,18 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
         return spinner
+    }
+
+    override fun updatePlayTime(gamesWithPlayHistory: GamesWithPlayHistory){
+        val playTime = gamesWithPlayHistory.playHistoryList.size
+        val gameEntity = gamesWithPlayHistory.gameEntity
+        if (playTime != gameEntity.playTime) {
+            gameEntity.playTime = playTime
+            gameViewModel.updateGame(gameEntity)
+            Log.d("if","実行された${playTime}/${gameEntity.playTime}")
+        }
+
+        Log.d("click","clicked!")
     }
 
 
@@ -99,6 +114,10 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
                 2 -> { searchAdapter.filterOwned() }
                 //rating
                 3 -> { searchAdapter.filterRating()}
+                //play number
+                4 -> { searchAdapter.filterPlayNumber()}
+                //unPlayed
+                5 -> { searchAdapter.filterUnPlayed()}
             }
             //検索フィールドを毎回空にする
             et_game_detail_title.setText("")

@@ -11,6 +11,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val repository : GameRepository = GameRepository(application)
     private val allGameList : LiveData<MutableList<GameEntity>> = repository.getAllGamaList()
     private val todoList : LiveData<MutableList<GameEntity>> = repository.getTodoList()
+    private val allGamesWithPlayList: LiveData<MutableList<GamesWithPlayHistory>> = repository.getAllGameWithPlayList()
     var insertedGameId: Long = 0
 
     fun saveGame(game : GameEntity){
@@ -37,8 +38,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getGameById(gameId)
     }
 
-
     fun getGameWithPlayById(gameId:Int?) : LiveData<GamesWithPlayHistory>{
         return repository.getGameWithPlayById(gameId)
     }
+
+    fun getAllGameWithPlayList(): LiveData<MutableList<GamesWithPlayHistory>>{
+        return allGamesWithPlayList
+    }
+
 }

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.data.db.GamesWithPlayHistory
 import com.example.bodomemo.ui.GameViewModel
 import kotlinx.android.synthetic.main.fragment_create_new_game.*
 import kotlinx.android.synthetic.main.fragment_create_new_game.view.*
@@ -30,19 +31,21 @@ class CreateNewGameFragment : Fragment(), SearchAdapter.DetailsEvents {
         val root = inflater.inflate(R.layout.fragment_create_new_game, container, false)
 
         //Setting up RecyclerView
-        val search_game_list = root.rv_new_game_search_game_list
-        search_game_list.setEmptyView(root.create_empty_view)
-        search_game_list?.layoutManager = LinearLayoutManager(activity)
         searchAdapter =  SearchAdapter(this)
-        search_game_list?.adapter = searchAdapter
 
-        gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
+        root.rv_new_game_search_game_list.apply {
+            setEmptyView(root.create_empty_view)
+            layoutManager = LinearLayoutManager(activity)
+            adapter = searchAdapter
+        }
+
+
+        gameViewModel.getAllGameWithPlayList().observe(viewLifecycleOwner, Observer {
             searchAdapter.setAllGames(it)
         })
 
         //EditText filter recycleView item
-        val et_search_title = root.et_new_game_title
-        et_search_title.addTextChangedListener(object : CustomTextWatcher {
+        root.et_new_game_title.addTextChangedListener(object : CustomTextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 searchAdapter.filter.filter(s)
             }
@@ -92,6 +95,8 @@ class CreateNewGameFragment : Fragment(), SearchAdapter.DetailsEvents {
             findNavController().navigate(action)
         }
     }
+
+    override fun updatePlayTime(gamesWithPlayHistory: GamesWithPlayHistory) {    }
 
 
 }

@@ -95,6 +95,7 @@ class GameDetailFragment: Fragment() {
             val playList = it.playHistoryList
             gameWithPlayHistoryAdapter.setAllPlayList(playList)
             root.tv_game_with_play_history_time.text = playList.size.toString()
+            it.gameEntity.rating
         })
         //playGame recyclerView
         root.rv_game_detail_game_played.apply {

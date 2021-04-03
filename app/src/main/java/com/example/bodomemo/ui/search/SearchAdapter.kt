@@ -10,12 +10,14 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
+import com.example.bodomemo.data.db.GamesWithPlayHistory
 import kotlinx.android.synthetic.main.search_game_item.view.*
 
 class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
 
     private var gameList :MutableList<GameEntity> = arrayListOf()
     private var filteredGameList: MutableList<GameEntity> = arrayListOf()
+    private var gamesWithPlayHistory: MutableList<GamesWithPlayHistory> = arrayListOf()
     private val listener: DetailsEvents = detailsEvents
 
 
@@ -79,9 +81,10 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     }
 
 
-    fun setAllGames(gameItems: MutableList<GameEntity>) {
-        this.gameList = gameItems
-        this.filteredGameList = gameItems
+    fun setAllGames(list: MutableList<GamesWithPlayHistory>) {
+        gamesWithPlayHistory = list
+        this.gameList = list.map { it.gameEntity } as MutableList<GameEntity>
+        this.filteredGameList = gameList
         notifyDataSetChanged()
     }
 
@@ -89,6 +92,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     fun filterAllGame(){
         gameList.sortByDescending { it.title }
         filteredGameList = gameList
+        gamesWithPlayHistory.forEach { listener.updatePlayTime(it) }
         notifyDataSetChanged()
     }
 
@@ -108,7 +112,18 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     fun filterRating(){
         gameList.sortByDescending { it.rating }
         notifyDataSetChanged()
-        Log.d("a","$gameList")
+    }
+
+    //プレイ回数
+    fun filterPlayNumber(){
+        gameList.sortedByDescending { it.playTime }
+        notifyDataSetChanged()
+    }
+
+    //未プレイ
+    fun filterUnPlayed(){
+        gameList.sortedBy { it.playTime }
+        notifyDataSetChanged()
     }
 
     /**
@@ -116,6 +131,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
      * */
     interface DetailsEvents {
         fun onViewClicked(gameId: String?)
+        fun updatePlayTime(gamesWithPlayHistory: GamesWithPlayHistory)
     }
 
 }
