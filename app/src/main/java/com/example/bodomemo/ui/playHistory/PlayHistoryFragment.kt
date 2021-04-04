@@ -1,6 +1,8 @@
 package com.example.bodomemo.ui.playHistory
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bodomemo.R
 import com.example.bodomemo.ui.PlayHistoryViewModel
+import com.example.bodomemo.ui.search.SearchFragment
 import com.example.bodomemo.ui.search.SearchFragmentDirections
 import kotlinx.android.synthetic.main.fragment_play_history.view.*
 
@@ -30,6 +33,13 @@ class PlayHistoryFragment : Fragment(), PlayHistoryAdapter.DetailsEvents {
         playHistoryViewModel = ViewModelProvider(this).get(PlayHistoryViewModel::class.java)
         playHistoryAdapter = PlayHistoryAdapter(this)
 
+        //search play title
+        root.et_play_history_search.addTextChangedListener(object: SearchFragment.CustomTextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                playHistoryAdapter.filter.filter(s)
+            }
+        })
+
         //setting up recyclerView
         root.rv_play_history.apply {
             setEmptyView(root.play_history_empty_view)
@@ -39,6 +49,7 @@ class PlayHistoryFragment : Fragment(), PlayHistoryAdapter.DetailsEvents {
 
         playHistoryViewModel.getAllPlayHistory().observe(viewLifecycleOwner, {
             playHistoryAdapter.setAllPlayList(it)
+            playHistoryAdapter.filter.filter("")
         })
 
         root.btn_create_play_history.setOnClickListener {
@@ -54,5 +65,10 @@ class PlayHistoryFragment : Fragment(), PlayHistoryAdapter.DetailsEvents {
             val action = PlayHistoryFragmentDirections.actionNavigationPlayHistoryToNavigationPlayHistoryDetail(playHistoryId)
             findNavController().navigate(action)
         }
+    }
+
+    interface CustomTextWatcher: TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun afterTextChanged(s: Editable?) {}
     }
 }
