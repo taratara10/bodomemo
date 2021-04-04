@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CheckboxTodo" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorAccent">@color/deep_orange_500</item>
+        <item name="android:textColorSecondary">@color/checkbox_off</item>
+    </style>
+</resources>

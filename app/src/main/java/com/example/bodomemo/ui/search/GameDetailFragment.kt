@@ -49,6 +49,7 @@ class GameDetailFragment: Fragment() {
         val favoriteCheckBox = root.cb_edit_favorite_checked
         val ownedCheckBox = root.cb_edit_owned_checked
         val ratingBar = root.rb_edit_rating
+        val gameMemo = root.et_game_detail_memo
 
 
         //  set content
@@ -57,6 +58,7 @@ class GameDetailFragment: Fragment() {
         todoCheckBox.isChecked = selectedGame.todoCheck
         favoriteCheckBox.isChecked = selectedGame.favoriteCheck
         ownedCheckBox.isChecked = selectedGame.ownedCheck
+        gameMemo.setText(selectedGame.gameMemo)
         ratingBar.rating = selectedGame.rating.toFloat()
         ratingBar.setOnRatingBarChangeListener { r, rating, fromUser ->
             selectedGame.rating = rating.toInt()
@@ -69,6 +71,16 @@ class GameDetailFragment: Fragment() {
                 if (validateFields()){
                 selectedGame.title = s.toString()
                 updateGame(selectedGame)
+                }
+            }
+        })
+
+        //gameMemo
+        gameMemo.addTextChangedListener(object: CustomTextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (validateFields()) {
+                    selectedGame.gameMemo = s.toString()
+                    updateGame(selectedGame)
                 }
             }
         })
@@ -97,6 +109,7 @@ class GameDetailFragment: Fragment() {
             root.tv_game_with_play_history_time.text = playList.size.toString()
             it.gameEntity.rating
         })
+
         //playGame recyclerView
         root.rv_game_detail_game_played.apply {
             setEmptyView(root.game_detail_empty_view)

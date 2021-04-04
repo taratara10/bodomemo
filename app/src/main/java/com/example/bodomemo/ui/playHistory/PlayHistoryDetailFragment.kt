@@ -114,11 +114,11 @@ class PlayHistoryDetailFragment:Fragment(),DragPlayedGameAdapter.GameDetailEvent
 
         //memo
         root.et_play_history_detail_memo.apply {
-            setText(selectedPlayHistory.memo)
+            setText(selectedPlayHistory.playMemo)
             addTextChangedListener(object :CustomTextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 if (validateFields()){
-                    selectedPlayHistory.memo = s.toString()
+                    selectedPlayHistory.playMemo = s.toString()
                     updatePlayHistory(selectedPlayHistory)
                     }
                }

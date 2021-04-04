@@ -12,7 +12,8 @@ data class GameEntity(
         @ColumnInfo(name = "owned_check") var ownedCheck: Boolean = false,
         @ColumnInfo(name = "favorite_check") var favoriteCheck: Boolean = false,
         @ColumnInfo(name = "todo_position") var todoPosition: Int = 0,
-        @ColumnInfo(name = "play_time") var playTime: Int = 0
+        @ColumnInfo(name = "play_time") var playTime: Int = 0,
+        @ColumnInfo(name = "game_memo") var gameMemo:String = "",
 )
 
 @Entity(tableName = "playHistoryEntity")
@@ -20,7 +21,7 @@ data class PlayHistoryEntity(
         @PrimaryKey(autoGenerate = true) val playHistoryId: Int,
         @ColumnInfo(name = "title") var title: String = "",
         @ColumnInfo(name = "date") var date: Long,
-        @ColumnInfo(name = "memo") var memo: String = "",
+        @ColumnInfo(name = "memo") var playMemo: String = "",
 )
 
 

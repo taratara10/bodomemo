@@ -12,6 +12,8 @@
         android:id="@+id/cb_todo_checked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:button="@drawable/ic_baseline_bookmark_24"
+        android:theme="@style/CheckboxTodo"
         android:gravity="center"
         android:scaleX="1.5"
         android:scaleY="1.5"
