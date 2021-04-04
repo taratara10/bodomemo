@@ -116,6 +116,8 @@
         android:id="@+id/cb_edit_todo_checked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:button="@drawable/ic_baseline_bookmark_24"
+        android:theme="@style/CheckboxTodo"
         android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_edit_todo_title"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_todo_title"
