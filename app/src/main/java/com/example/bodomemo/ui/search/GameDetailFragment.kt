@@ -18,6 +18,7 @@ import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.ui.GameViewModel
 import com.example.bodomemo.ui.playHistory.PlayHistoryAdapter
 import com.example.bodomemo.ui.playHistory.PlayHistoryDetailFragmentArgs
+import com.example.bodomemo.ui.todo.TodoFragmentArgs
 import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_game_detail.view.*
 
@@ -25,6 +26,7 @@ class GameDetailFragment: Fragment() {
     private lateinit var gameViewModel: GameViewModel
     private lateinit var selectedGame:GameEntity
     private lateinit var gameWithPlayHistoryAdapter: GameWithPlayHistoryAdapter
+    private val todoFragmentArgs:TodoFragmentArgs by navArgs()
     private val searchFragmentArgs: SearchFragmentArgs by navArgs()
     private val createNewGameFragmentArgs: CreateNewGameFragmentArgs by navArgs()
     private val playHistoryDetailFragmentArgs: PlayHistoryDetailFragmentArgs by navArgs()
@@ -42,6 +44,7 @@ class GameDetailFragment: Fragment() {
                 ?: createNewGameFragmentArgs.createdNewId?.toInt()
                 ?: createNewGameFragmentArgs.gameId?.toInt()
                 ?: playHistoryDetailFragmentArgs.gameId?.toInt()
+                ?: todoFragmentArgs.gameId?.toInt()
                 ?: throw Exception("cannot get gameId")
 
         val gameTitleEditText = root.et_game_title_detail

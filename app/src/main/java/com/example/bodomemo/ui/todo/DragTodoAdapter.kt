@@ -24,6 +24,9 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
     class DragTodoViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: TodoEvents) {
             itemView.tv_drag_game_title.text = game.title
+            itemView.drag_game_adapter.setOnClickListener {
+                listener.onViewClicked(game.gameId.toString())
+            }
         }
     }
 
@@ -74,5 +77,6 @@ class DragTodoAdapter(dataSet: List<GameEntity> = emptyList(),todoEvents: TodoEv
     interface TodoEvents {
         fun onViewDropped(initialPosition: Int, finalPosition: Int,item:GameEntity)
         fun onViewSwiped(position: Int)
+        fun onViewClicked(gameId:String?)
     }
 }

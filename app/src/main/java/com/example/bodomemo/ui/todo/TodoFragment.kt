@@ -81,6 +81,13 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         gameViewModel.updateGame(selectedGame)
     }
 
+    override fun onViewClicked(gameId: String?) {
+        if (gameId != null){
+            val action = TodoFragmentDirections.actionNavigationTodoToNavigationGameDetail(gameId)
+            findNavController().navigate(action)
+        }
+    }
+
     override fun onViewDropped(initialPosition: Int, finalPosition: Int, item: GameEntity) {
         //移動したときにallTodoListのpositionをすべてupdate
         if (initialPosition != finalPosition){
