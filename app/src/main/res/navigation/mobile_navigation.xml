@@ -14,6 +14,14 @@
         <action
             android:id="@+id/action_navigation_todo_to_navigation_add_todo"
             app:destination="@id/navigation_add_todo" />
+        <action
+            android:id="@+id/action_navigation_todo_to_navigation_game_detail"
+            app:destination="@id/navigation_game_detail" />
+        <argument
+            android:name="gameId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
 <!--  add to do  -->
