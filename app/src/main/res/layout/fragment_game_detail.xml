@@ -192,7 +192,8 @@
         android:id="@+id/til_game_detail_memo"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -202,6 +203,7 @@
             android:id="@+id/et_game_detail_memo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:minHeight="100dp"
             android:gravity="top"
             android:hint="一言メモ"
             android:inputType="textMultiLine|textFilter" />

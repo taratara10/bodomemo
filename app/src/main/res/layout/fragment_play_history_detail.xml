@@ -126,7 +126,7 @@
                 android:id="@+id/til_play_history_detail_memo"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -137,6 +137,7 @@
                     android:id="@+id/et_play_history_detail_memo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:minHeight="200dp"
                     android:gravity="top"
                     android:hint="メモ"
                     android:inputType="textMultiLine|textFilter" />
