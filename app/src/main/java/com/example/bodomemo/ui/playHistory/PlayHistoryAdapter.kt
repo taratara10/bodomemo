@@ -3,6 +3,8 @@ package com.example.bodomemo.ui.playHistory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
@@ -10,9 +12,10 @@ import com.example.bodomemo.data.db.PlayHistoryEntity
 import kotlinx.android.synthetic.main.play_history_list_item.view.*
 import java.text.SimpleDateFormat
 
-class PlayHistoryAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<PlayHistoryAdapter.PlayHistoryViewHolder>() {
+class PlayHistoryAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<PlayHistoryAdapter.PlayHistoryViewHolder>() ,Filterable{
 
-    private var playList :List<PlayHistoryEntity> = arrayListOf()
+    private var playList :MutableList<PlayHistoryEntity> = arrayListOf()
+    private var filteredPlayList :MutableList<PlayHistoryEntity> = arrayListOf()
     private val listener: DetailsEvents = detailsEvents
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayHistoryViewHolder {
@@ -22,10 +25,10 @@ class PlayHistoryAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<Pl
 
 
     override fun onBindViewHolder(holder: PlayHistoryViewHolder, position: Int) {
-        holder.bind(playList[position], listener)
+        holder.bind(filteredPlayList[position], listener)
     }
 
-    override fun getItemCount(): Int = playList.size
+    override fun getItemCount(): Int = filteredPlayList.size
 
     class PlayHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(playHistory: PlayHistoryEntity, listener: DetailsEvents) {
@@ -43,8 +46,41 @@ class PlayHistoryAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<Pl
         }
     }
 
-    fun setAllPlayList(playList: List<PlayHistoryEntity>) {
-        this.playList = playList
+
+    /**
+     * Search Filter implementation
+     * */
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(p0: CharSequence?): FilterResults {
+                val charString = p0.toString()
+                filteredPlayList = if (charString.isEmpty()) {
+                    playList
+                } else {
+                    val filteredList = arrayListOf<PlayHistoryEntity>()
+                    for (row in playList) {
+                        if (row.title.toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row)
+                        }
+                    }
+                    filteredList
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = filteredPlayList
+                return filterResults
+            }
+
+            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+                filteredPlayList = p1?.values as MutableList<PlayHistoryEntity>
+                notifyDataSetChanged()
+            }
+        }
+    }
+
+    fun setAllPlayList(list: MutableList<PlayHistoryEntity>) {
+        this.playList = list
+        this.filteredPlayList = list
         notifyDataSetChanged()
     }
 
