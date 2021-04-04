@@ -75,7 +75,6 @@ class AddTodoAdapter(checkEvents: CheckEvents): RecyclerView.Adapter<AddTodoAdap
     fun setAllGames(gameItems: List<GameEntity>) {
         this.gameList = gameItems
         this.filteredGameList = gameItems
-        notifyDataSetChanged()
     }
 
 

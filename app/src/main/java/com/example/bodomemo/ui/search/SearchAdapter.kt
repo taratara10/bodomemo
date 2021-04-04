@@ -93,37 +93,37 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
         gameList.sortByDescending { it.title }
         filteredGameList = gameList
         gamesWithPlayHistory.forEach { listener.updatePlayTime(it) }
-        notifyDataSetChanged()
+
     }
 
     //お気に入り
     fun filterFavorite(){
         gameList.sortByDescending { it.favoriteCheck }
-        notifyDataSetChanged()
+
     }
 
     //持ってる
     fun filterOwned(){
         gameList.sortByDescending { it.ownedCheck }
-        notifyDataSetChanged()
+
     }
 
     //評価準
     fun filterRating(){
         gameList.sortByDescending { it.rating }
-        notifyDataSetChanged()
+
     }
 
     //プレイ回数
     fun filterPlayNumber(){
         gameList.sortByDescending { it.playTime }
-        notifyDataSetChanged()
+
     }
 
     //未プレイ
     fun filterUnPlayed(){
         gameList.sortBy { it.playTime }
-        notifyDataSetChanged()
+
     }
 
     /**

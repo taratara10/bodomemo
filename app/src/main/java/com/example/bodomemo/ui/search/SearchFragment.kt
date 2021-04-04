@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -16,6 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bodomemo.R
 import com.example.bodomemo.data.db.GameEntity
 import com.example.bodomemo.data.db.GamesWithPlayHistory
@@ -63,6 +65,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         root.et_game_detail_title.addTextChangedListener(object: CustomTextWatcher{
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 searchAdapter.filter.filter(s)
+
             }
         })
 
@@ -122,6 +125,14 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
         }
         override fun onNothingSelected(parent: AdapterView<*>?) {}
+    }
+    private fun runLayoutAnimation(recyclerView: RecyclerView) {
+        val context = recyclerView.context
+        val controller = AnimationUtils.loadLayoutAnimation(context, R.anim.fall_down)
+
+        recyclerView.layoutAnimation = controller
+        recyclerView.adapter!!.notifyDataSetChanged()
+        recyclerView.scheduleLayoutAnimation()
     }
 
     interface CustomTextWatcher: TextWatcher {
