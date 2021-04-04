@@ -30,6 +30,7 @@
         android:id="@+id/rv_play_history_add_game_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layoutAnimation="@anim/fall_down"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
