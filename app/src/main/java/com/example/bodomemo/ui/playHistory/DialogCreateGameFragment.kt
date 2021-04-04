@@ -27,17 +27,17 @@ class DialogCreateGameFragment:DialogFragment() {
             val builder = AlertDialog.Builder(activity)
             val inflater = requireActivity().layoutInflater
             val root = inflater.inflate(R.layout.dialog_add_new_game, null)
-            val gameTitle = root.et_dialog_game_title.text
-
+            var gameTitle = addGameFragmentArgs.gameTitle
 
 
             builder.apply {
                 setView(root)
                 setTitle("新しいゲームを作成する")
-                root.et_dialog_game_title.setText(addGameFragmentArgs.gameTitle)
+                root.et_dialog_game_title.setText(gameTitle)
                 //add btn
                 setPositiveButton("追加", DialogInterface.OnClickListener { _, _ ->
-                    if (gameTitle?.isEmpty() == false) {
+                    gameTitle = root.et_dialog_game_title.text.toString()
+                    if (gameTitle.isNotEmpty()) {
                         val newGame = GameEntity(gameId = 0, title = gameTitle.toString())
                         gameViewModel.saveGame(newGame)
                     }
