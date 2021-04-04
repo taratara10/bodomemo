@@ -14,7 +14,7 @@ import java.util.*
 class PlayHistoryViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository : GameRepository = GameRepository(application)
-    private val allPlayHistory : LiveData<List<PlayHistoryEntity>> = repository.getAllPlayHistory()
+    private val allPlayHistory : LiveData<MutableList<PlayHistoryEntity>> = repository.getAllPlayHistory()
     var insertedPlayHistoryId: Long = 0
 
     fun savePlayHistory(playHistory: PlayHistoryEntity){
@@ -29,7 +29,7 @@ class PlayHistoryViewModel(application: Application) : AndroidViewModel(applicat
         repository.deletePlayHistory(playHistory)
     }
 
-    fun getAllPlayHistory() : LiveData<List<PlayHistoryEntity>> {
+    fun getAllPlayHistory() : LiveData<MutableList<PlayHistoryEntity>> {
         return allPlayHistory
     }
 
