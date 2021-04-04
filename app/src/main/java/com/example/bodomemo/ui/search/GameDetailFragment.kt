@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.*
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
@@ -54,6 +55,7 @@ class GameDetailFragment: Fragment() {
         val ratingBar = root.rb_edit_rating
         val gameMemo = root.et_game_detail_memo
 
+        val animation = AnimationUtils.loadAnimation(activity,R.anim.icon_animation)
 
         //  set content
         selectedGame = gameViewModel.getGameById(selectedGameId)
@@ -63,7 +65,7 @@ class GameDetailFragment: Fragment() {
         ownedCheckBox.isChecked = selectedGame.ownedCheck
         gameMemo.setText(selectedGame.gameMemo)
         ratingBar.rating = selectedGame.rating.toFloat()
-        ratingBar.setOnRatingBarChangeListener { r, rating, fromUser ->
+        ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
             selectedGame.rating = rating.toInt()
             updateGame(selectedGame)            
         }
@@ -90,21 +92,25 @@ class GameDetailFragment: Fragment() {
 
         //favorite
         favoriteCheckBox.setOnClickListener {
+            it.startAnimation(animation)
             selectedGame.favoriteCheck = favoriteCheckBox.isChecked
-            updateGame(selectedGame)
-        }
-
-        //to do
-        todoCheckBox.setOnClickListener {
-            selectedGame.todoCheck = todoCheckBox.isChecked
             updateGame(selectedGame)
         }
 
         //owned
         ownedCheckBox.setOnClickListener {
+            it.startAnimation(animation)
             selectedGame.ownedCheck = ownedCheckBox.isChecked
             updateGame(selectedGame)
         }
+
+        //to do
+        todoCheckBox.setOnClickListener {
+            it.startAnimation(animation)
+            selectedGame.todoCheck = todoCheckBox.isChecked
+            updateGame(selectedGame)
+        }
+
 
         gameViewModel.getGameWithPlayById(selectedGame.gameId).observe(viewLifecycleOwner,{
             val playList = it.playHistoryList
