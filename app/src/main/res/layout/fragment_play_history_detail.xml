@@ -49,6 +49,41 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+            <!--  addGameAdapter View  -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/play_history_detail_add_game"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_rounded_corner_add"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/til_play_date_select">
+
+                <TextView
+                    android:id="@+id/simple_list_game_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="遊んだゲームを追加 / スワイプで削除"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/simple_list_game_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/simple_list_game_title"
+                    app:srcCompat="@drawable/ic_baseline_add_24" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
     <!--  empty View  -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/play_history_detail_empty_view"
@@ -77,6 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/til_play_history_detail_memo"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -85,41 +121,6 @@
                 app:behind_swiped_item_icon="@drawable/ic_baseline_archive_24"
                 app:behind_swiped_item_icon_margin="8dp"/>
 
-    <!--  addGameAdapter View  -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/play_history_detail_add_game"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/shape_rounded_corner_add"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/til_play_date_select">
-
-            <TextView
-                android:id="@+id/simple_list_game_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="遊んだゲームを追加 / スワイプで削除"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/simple_list_game_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/simple_list_game_title"
-                app:srcCompat="@drawable/ic_baseline_add_24" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 <!--  memo   -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_play_history_detail_memo"
