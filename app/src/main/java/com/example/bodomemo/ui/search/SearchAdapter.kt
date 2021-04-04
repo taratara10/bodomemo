@@ -85,7 +85,6 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
         gamesWithPlayHistory = list
         this.gameList = list.map { it.gameEntity } as MutableList<GameEntity>
         this.filteredGameList = gameList
-        notifyDataSetChanged()
     }
 
     //すべてのゲーム
@@ -93,37 +92,31 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
         gameList.sortByDescending { it.title }
         filteredGameList = gameList
         gamesWithPlayHistory.forEach { listener.updatePlayTime(it) }
-
     }
 
     //お気に入り
     fun filterFavorite(){
         gameList.sortByDescending { it.favoriteCheck }
-
     }
 
     //持ってる
     fun filterOwned(){
         gameList.sortByDescending { it.ownedCheck }
-
     }
 
     //評価準
     fun filterRating(){
         gameList.sortByDescending { it.rating }
-
     }
 
     //プレイ回数
     fun filterPlayNumber(){
         gameList.sortByDescending { it.playTime }
-
     }
 
     //未プレイ
     fun filterUnPlayed(){
         gameList.sortBy { it.playTime }
-
     }
 
     /**

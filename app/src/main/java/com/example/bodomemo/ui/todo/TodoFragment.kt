@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
 import com.example.bodomemo.R
@@ -54,7 +56,6 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
                 todo_empty_view.visibility = View.VISIBLE
                 tv_todo_swipe_explain.visibility = View.GONE
             }
-
         })
 
         //set up recyclerView
@@ -71,9 +72,9 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
             findNavController().navigate(R.id.action_navigation_todo_to_navigation_add_todo)
         }
 
+        runLayoutAnimation(rv_todo)
         return root
     }
-
 
     override fun onViewSwiped(position: Int) {
         val selectedGame = allTodoList[position]
@@ -103,5 +104,12 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
             }
         }
     }
+    private fun runLayoutAnimation(recyclerView: RecyclerView) {
+        val context = recyclerView.context
+        val controller = AnimationUtils.loadLayoutAnimation(context, R.anim.fall_down)
 
+        recyclerView.layoutAnimation = controller
+        recyclerView.adapter!!.notifyDataSetChanged()
+        recyclerView.scheduleLayoutAnimation()
+    }
 }

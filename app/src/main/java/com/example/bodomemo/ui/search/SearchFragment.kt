@@ -65,7 +65,6 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         root.et_game_detail_title.addTextChangedListener(object: CustomTextWatcher{
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 searchAdapter.filter.filter(s)
-
             }
         })
 
@@ -107,6 +106,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     private val spinnerListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             when(position){
+
                 //すべて選択
                 0 -> { searchAdapter.filterAllGame() }
                 //favorite
@@ -120,9 +120,10 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
                 //unPlayed
                 5 -> { searchAdapter.filterUnPlayed()}
             }
-            //検索フィールドを毎回空にする
-            et_game_detail_title.setText("")
 
+            //検索フィールドを空にして、animation
+            et_game_detail_title.text?.clear()
+            runLayoutAnimation(rv_search_game_list)
         }
         override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
