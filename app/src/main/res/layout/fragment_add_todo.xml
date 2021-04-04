@@ -11,9 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
         android:text="やりたいリストに追加"
-        app:layout_constraintBottom_toTopOf="@+id/rv_add_todo_list"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tl_search_game_title_todo" />
 
@@ -60,13 +58,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_add_todo_explain"
         tools:listitem="@layout/todo_list_item" />
 
+<!--  empty View  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/add_todo_empty_view"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rv_search_game_list"
-        app:layout_constraintStart_toStartOf="@+id/rv_search_game_list"
+        app:layout_constraintEnd_toEndOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_add_todo_explain">
 
         <TextView

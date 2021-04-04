@@ -49,7 +49,8 @@ class AddTodoFragment:Fragment() ,AddTodoAdapter.CheckEvents{
         })
 
         //Search filter
-        root.et_search_game_title_todo.addTextChangedListener(object: CustomTextWatcher {
+        et_search_game = root.et_search_game_title_todo
+        et_search_game.addTextChangedListener(object: CustomTextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 addTodoAdapter.filter.filter(s)
             }
