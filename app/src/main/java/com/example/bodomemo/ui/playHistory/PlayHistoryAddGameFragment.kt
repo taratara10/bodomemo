@@ -51,6 +51,9 @@ class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
 
         gameViewModel.getAllGameList().observe(viewLifecycleOwner, Observer {
             simpleListAdapter.setAllGames(it)
+            //dialogから戻ってきたときに、検索する
+            val gameTitle = root.et_play_history_add_game_title.text.toString()
+            simpleListAdapter.filter.filter(gameTitle)
         })
 
         //Search filter
