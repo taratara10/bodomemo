@@ -80,6 +80,7 @@ class  TodoFragment : Fragment(), DragTodoAdapter.TodoEvents {
         val selectedGame = allTodoList[position]
         selectedGame.todoCheck = false
         gameViewModel.updateGame(selectedGame)
+        Toast.makeText(activity,"完了しました！",Toast.LENGTH_SHORT).show()
     }
 
     override fun onViewClicked(gameId: String?) {
