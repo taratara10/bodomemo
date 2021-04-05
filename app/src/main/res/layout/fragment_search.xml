@@ -33,6 +33,15 @@
         app:layout_constraintTop_toBottomOf="@+id/til_game_title_detail"
         tools:listitem="すべて" />
 
+    <TextView
+        android:id="@+id/tv_search_play_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="プレイ回数"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/sp_filter_select" />
     <com.example.bodomemo.EmptyRecyclerView
         android:id="@+id/rv_search_game_list"
         android:layout_width="0dp"
@@ -43,7 +52,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/sp_filter_select"
-        tools:listitem="@layout/search_game_item" />
+        tools:listitem="@layout/search_game_item" >
+    </com.example.bodomemo.EmptyRecyclerView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -60,9 +70,10 @@
         app:layout_constraintGuide_end="24dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/play_history_detail_empty_view"
+        android:id="@+id/search_empty_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rv_search_game_list"
         app:layout_constraintStart_toStartOf="@+id/rv_search_game_list"

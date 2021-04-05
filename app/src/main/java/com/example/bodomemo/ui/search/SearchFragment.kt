@@ -29,6 +29,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
 
     private lateinit var gameViewModel: GameViewModel
     private lateinit var searchAdapter: SearchAdapter
+    private var displayRating = false
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -41,7 +42,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         //Setting up RecyclerView
         searchAdapter =  SearchAdapter(this)
         root.rv_search_game_list.apply {
-            setEmptyView(root.play_history_detail_empty_view)
+            setEmptyView(root.search_empty_view)
             layoutManager = LinearLayoutManager(activity)
             adapter = searchAdapter
         }
@@ -51,6 +52,7 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
             searchAdapter.setAllGames(it)
             //画面遷移時にrecyclerViewを更新する　1回filter通さないと表示してくれない
             searchAdapter.filter.filter("")
+            toggleExplainTextVisibility()
         })
 
         // Set spinner layout
@@ -77,7 +79,6 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
     }
 
     override fun onViewClicked(gameId: String?) {
-        Log.d("click","clicked! ${gameId}")
         if (gameId != null){
             val action = SearchFragmentDirections.actionNavigationSearchToNavigationGameDetail(gameId)
             findNavController().navigate(action)
@@ -101,6 +102,22 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
         }
     }
 
+    fun toggleExplainTextVisibility(){
+        if (search_empty_view.visibility == View.GONE){
+            tv_search_play_time_title.visibility = View.GONE
+        } else {
+            tv_search_play_time_title.visibility = View.VISIBLE
+        }
+    }
+
+    fun toggleExplainText(){
+        if (displayRating){
+            tv_search_play_time_title.text = "評価点"
+        }else{
+            tv_search_play_time_title.text = "プレイ回数"
+        }
+
+    }
 
     //Spinner.OnItemSelectedListener
     private val spinnerListener = object : AdapterView.OnItemSelectedListener {
@@ -108,19 +125,37 @@ class SearchFragment : Fragment(), SearchAdapter.DetailsEvents{
             when(position){
 
                 //すべて選択
-                0 -> { searchAdapter.filterAllGame() }
+                0 -> {
+                    searchAdapter.filterAllGame()
+                    displayRating = false
+                }
                 //favorite
-                1 -> { searchAdapter.filterFavorite() }
+                1 -> {
+                    searchAdapter.filterFavorite()
+                    displayRating =false
+                }
                 //owned
-                2 -> { searchAdapter.filterOwned() }
+                2 -> {
+                    searchAdapter.filterOwned()
+                    displayRating =false
+                 }
                 //rating
-                3 -> { searchAdapter.filterRating()}
+                3 -> {
+                    searchAdapter.filterRating()
+                    displayRating =true
+                }
                 //play number
-                4 -> { searchAdapter.filterPlayNumber()}
+                4 -> {
+                    searchAdapter.filterPlayNumber()
+                    displayRating =false
+                }
                 //unPlayed
-                5 -> { searchAdapter.filterUnPlayed()}
+                5 -> {
+                    searchAdapter.filterUnPlayed()
+                    displayRating =false
+                }
             }
-
+            toggleExplainText()
             //検索フィールドを空にして、animation
             et_game_detail_title.text?.clear()
             runLayoutAnimation(rv_search_game_list)
