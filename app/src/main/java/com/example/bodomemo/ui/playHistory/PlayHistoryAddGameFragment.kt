@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.fragment_play_history_add_game.view.*
 class PlayHistoryAddGameFragment: Fragment(), SimpleListAdapter.GameAddEvents{
     private lateinit var playAndGameCrossRefViewModel: PlayAndGameCrossRefViewModel
     private lateinit var gameViewModel: GameViewModel
-    private lateinit var selectedPlayHistory: PlayHistoryEntity
     private lateinit var simpleListAdapter: SimpleListAdapter
     private val playHistoryDetailFragmentArgs: PlayHistoryDetailFragmentArgs by navArgs()
 

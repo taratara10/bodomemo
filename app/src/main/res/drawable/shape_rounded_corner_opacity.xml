@@ -9,7 +9,7 @@
                 android:topLeftRadius="5dp"
                 />
             <solid
-                android:color="@color/background"
+                android:color="@color/sub_background"
                 />
         </shape>
     </item>

@@ -20,6 +20,12 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     private var gamesWithPlayHistory: MutableList<GamesWithPlayHistory> = arrayListOf()
     private val listener: DetailsEvents = detailsEvents
 
+    private var isFavorite = false
+    private var isOwned = false
+    private var isRating = false
+    private var isPlayed = false
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.search_game_item, parent, false)
@@ -33,19 +39,29 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     override fun getItemCount(): Int = filteredGameList.size
 
-    class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    inner class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: GameEntity, listener: DetailsEvents) {
+            val bg = R.drawable.shape_rounded_corner
+            val clearBg = R.drawable.shape_rounded_corner_opacity
+
             itemView.search_game_title.text = game.title
             itemView.search_adapter_plat_time.text = game.playTime.toString()
-            if (game.ownedCheck) itemView.image_search_bag.visibility = View.VISIBLE
-                    else itemView.image_search_bag.visibility = View.INVISIBLE
-            if (game.favoriteCheck) itemView.image_search_fav.visibility = View.VISIBLE
-                    else itemView.image_search_fav.visibility = View.INVISIBLE
-
             itemView.search_adapter.setOnClickListener {
-                //safeArgs Intがnullサポートしてないので、stringで渡す
                 listener.onViewClicked(game.gameId.toString())
             }
+
+            //set icon visibility
+            if (game.ownedCheck) itemView.image_search_bag.visibility = View.VISIBLE
+                else itemView.image_search_bag.visibility = View.INVISIBLE
+            if (game.favoriteCheck) itemView.image_search_fav.visibility = View.VISIBLE
+                else itemView.image_search_fav.visibility = View.INVISIBLE
+
+            //change adapter background
+            itemView.setBackgroundResource(bg)
+            if (this@SearchAdapter.isFavorite) if (!game.favoriteCheck) itemView.setBackgroundResource(clearBg)
+            if (this@SearchAdapter.isOwned) if (!game.ownedCheck) itemView.setBackgroundResource(clearBg)
+            if (this@SearchAdapter.isPlayed) if (game.playTime != 0) itemView.setBackgroundResource(clearBg)
+
         }
     }
 
@@ -92,21 +108,28 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
         gameList.sortByDescending { it.title }
         filteredGameList = gameList
         gamesWithPlayHistory.forEach { listener.updatePlayTime(it) }
+        resetFilterStatus()
     }
 
     //お気に入り
     fun filterFavorite(){
         gameList.sortByDescending { it.favoriteCheck }
+        resetFilterStatus()
+        isFavorite = true
     }
 
     //持ってる
     fun filterOwned(){
         gameList.sortByDescending { it.ownedCheck }
+        resetFilterStatus()
+        isOwned = true
     }
 
     //評価準
     fun filterRating(){
         gameList.sortByDescending { it.rating }
+        resetFilterStatus()
+        isRating = true
     }
 
     //プレイ回数
@@ -117,6 +140,15 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     //未プレイ
     fun filterUnPlayed(){
         gameList.sortBy { it.playTime }
+        resetFilterStatus()
+        isRating = true
+    }
+
+    private fun resetFilterStatus(){
+        isFavorite =false
+        isOwned = false
+        isPlayed = false
+        isRating = false
     }
 
     /**
