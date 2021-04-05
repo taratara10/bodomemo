@@ -45,7 +45,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
             val clearBg = R.drawable.shape_rounded_corner_opacity
 
             itemView.search_game_title.text = game.title
-            itemView.search_adapter_plat_time.text = game.playTime.toString()
+            itemView.search_adapter_play_time.text = game.playTime.toString()
             itemView.search_adapter.setOnClickListener {
                 listener.onViewClicked(game.gameId.toString())
             }
@@ -61,6 +61,15 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
             if (this@SearchAdapter.isFavorite) if (!game.favoriteCheck) itemView.setBackgroundResource(clearBg)
             if (this@SearchAdapter.isOwned) if (!game.ownedCheck) itemView.setBackgroundResource(clearBg)
             if (this@SearchAdapter.isPlayed) if (game.playTime != 0) itemView.setBackgroundResource(clearBg)
+
+            //display playTime
+            if (this@SearchAdapter.isRating){
+                itemView.search_adapter_play_time.text = game.rating.toString()
+                itemView.search_adapter_number.text = "/ 5点"
+            }else{
+                itemView.search_adapter_play_time.text = game.playTime.toString()
+                itemView.search_adapter_number.text = "回"
+            }
 
         }
     }
@@ -135,13 +144,14 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
     //プレイ回数
     fun filterPlayNumber(){
         gameList.sortByDescending { it.playTime }
+        resetFilterStatus()
     }
 
     //未プレイ
     fun filterUnPlayed(){
         gameList.sortBy { it.playTime }
         resetFilterStatus()
-        isRating = true
+        isPlayed = true
     }
 
     private fun resetFilterStatus(){
