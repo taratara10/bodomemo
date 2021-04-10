@@ -13,7 +13,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.bodomemo"
+        applicationId "jp.co.bodomemo"
         minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
@@ -35,6 +35,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
 }
 
 dependencies {
