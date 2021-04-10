@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 <!--game title-->
     <com.google.android.material.textfield.TextInputLayout
@@ -24,7 +24,7 @@
             android:id="@+id/et_game_title_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ボードゲーム名"
+            android:hint="@string/search_game"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -34,7 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="・面白さ"
+        android:text="@string/detail_rating_title"
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/til_game_title_detail" />
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="・お気に入り"
+        android:text="@string/detail_favorite_title"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_rating_title" />
 
@@ -84,7 +84,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="・持ってる"
+        android:text="@string/detail_owned_title"
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_favorite" />
@@ -106,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="・やりたいリストに追加"
+        android:text="@string/detail_todo_title"
         app:layout_constraintEnd_toEndOf="@+id/tv_favorite"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -129,7 +129,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="・遊んだ履歴"
+        android:text="@string/detail_play_time_title"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_todo_title" />
 
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="0"
+        android:text="@string/_0"
         app:layout_constraintBottom_toBottomOf="@+id/tv_game_with_play_history"
         app:layout_constraintStart_toEndOf="@+id/tv_game_with_play_history"
         app:layout_constraintTop_toTopOf="@+id/tv_game_with_play_history" />
@@ -147,7 +147,7 @@
         android:id="@+id/tv_game_with_play_history_time_unit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="回"
+        android:text="@string/_time"
         app:layout_constraintBottom_toBottomOf="@+id/tv_game_with_play_history_time"
         app:layout_constraintStart_toEndOf="@+id/tv_game_with_play_history_time"
         app:layout_constraintTop_toTopOf="@+id/tv_game_with_play_history_time"
@@ -169,7 +169,7 @@
                     android:id="@+id/tv_search_empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="まだ遊んだ記録がありません！"
+                    android:text="@string/no_play_history"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -205,7 +205,7 @@
             android:layout_height="match_parent"
             android:minHeight="100dp"
             android:gravity="top"
-            android:hint="一言メモ"
+            android:hint="@string/game_memo"
             android:inputType="textMultiLine|textFilter" />
     </com.google.android.material.textfield.TextInputLayout>
 

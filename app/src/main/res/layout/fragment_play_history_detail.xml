@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
     <!--  title  -->
         <com.google.android.material.textfield.TextInputLayout
@@ -24,7 +24,7 @@
                 android:id="@+id/et_play_title_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ゲーム会名、遊んだ場所"
+                android:hint="@string/play_history_title"
                 android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:focusable="false"
-                android:hint="遊んだ日付"
+                android:hint="@string/play_history_date"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -67,7 +67,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="遊んだゲームを追加 / スワイプで削除"
+                    android:text="@string/add_played_game_description"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent"
@@ -98,7 +98,7 @@
                 android:id="@+id/tv_search_empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="該当なし"
+                android:text="@string/no_item"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +139,7 @@
                     android:layout_height="match_parent"
                     android:minHeight="200dp"
                     android:gravity="top"
-                    android:hint="メモ"
+                    android:hint="@string/memo"
                     android:inputType="textMultiLine|textFilter" />
             </com.google.android.material.textfield.TextInputLayout>
 

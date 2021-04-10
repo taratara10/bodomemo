@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:text="=で並べ替え / ←にスワイプで完了"
+        android:text="@string/todo_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +34,8 @@
             android:id="@+id/tv_todo_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="アイテムがありません"
-            android:textSize="20dp"
+            android:text="@string/empty_view_title"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
             android:id="@+id/tv_todo_empty_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="⊕から遊びたいゲームを追加しましょう！"
+            android:text="@string/empty_view_sub_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,8 +54,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- layout/view_layout.xml -->
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="24dp"
@@ -85,5 +84,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/empty_view_sub_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

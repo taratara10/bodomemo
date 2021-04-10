@@ -19,7 +19,7 @@
             android:id="@+id/et_new_play_history_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="タイトル、遊んだ場所"
+            android:hint="@string/play_history_title"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,14 +43,10 @@
             android:id="@+id/et_create_play_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="遊んだ日付"
+            android:hint="@string/play_history_date"
             android:focusable="false"
             android:inputType="text" />
-
     </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -79,7 +75,7 @@
         android:id="@+id/btn_save_play_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="追加する"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"

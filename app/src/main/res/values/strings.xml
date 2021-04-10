@@ -3,4 +3,32 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="_0">0</string>
+    <string name="_time">回</string>
+    <string name="todo_description">=で並べ替え / ←にスワイプで完了</string>
+    <string name="empty_view_title">アイテムがありません</string>
+    <string name="empty_view_sub_title">⊕から遊びたいゲームを追加しましょう！</string>
+    <string name="search_game">ボードゲーム検索</string>
+    <string name="no_item">該当なし</string>
+    <string name="play_time_description">プレイ回数</string>
+
+    <string name="play_history_title">ゲーム会名、遊んだ場所</string>
+    <string name="play_history_date">遊んだ日付</string>
+
+    <string name="add_played_game_description">遊んだゲームを追加 / スワイプで削除</string>
+    <string name="memo">メモ</string>
+    <string name="create_game_description">タップして追加 / ⊕で入力したゲーム名を新規登録</string>
+    <string name="game_memo">一言メモ</string>
+    <string name="no_play_history">まだ遊んだ記録がありません！</string>
+    <string name="detail_play_time_title">・遊んだ履歴</string>
+    <string name="detail_todo_title">・やりたいリストに追加</string>
+    <string name="detail_owned_title">・持ってる</string>
+    <string name="detail_favorite_title">・お気に入り</string>
+    <string name="detail_rating_title">・面白さ</string>
+    <string name="add">追加する</string>
+    <string name="new_game_title">新しいボードゲーム名</string>
+    <string name="add_new">新しく追加</string>
+    <string name="already_created">既にあるゲーム</string>
+    <string name="add_todo_description">やりたいリストに追加</string>
+    <string name="game_title">ゲーム名</string>
 </resources>

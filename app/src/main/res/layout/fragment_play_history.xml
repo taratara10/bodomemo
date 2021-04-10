@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +18,7 @@
             android:id="@+id/et_play_history_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="タイトル検索"
+            android:hint="@string/search_game"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,8 +64,8 @@
             android:id="@+id/tv_play_history_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="アイテムがありません"
-            android:textSize="20dp"
+            android:text="@string/empty_view_title"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +75,7 @@
             android:id="@+id/tv_play_history_empty_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="⊕から追加しましょう！"
+            android:text="@string/empty_view_sub_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
