@@ -114,7 +114,7 @@ class SearchAdapter (detailsEvents: DetailsEvents): RecyclerView.Adapter<SearchA
 
     //すべてのゲーム
     fun filterAllGame(){
-        gameList.sortByDescending { it.title }
+        gameList.sortBy { it.title }
         filteredGameList = gameList
         gamesWithPlayHistory.forEach { listener.updatePlayTime(it) }
         resetFilterStatus()
